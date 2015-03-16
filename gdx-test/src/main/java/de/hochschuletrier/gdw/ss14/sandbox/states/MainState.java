@@ -1,12 +1,15 @@
 package de.hochschuletrier.gdw.ss14.sandbox.states;
 
-import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
-import de.hochschuletrier.gdw.ss14.sandbox.SandboxGame;
+import com.badlogic.gdx.graphics.Texture;
 
+import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
+import de.hochschuletrier.gdw.ss14.sandbox.SandboxGame;
 
 public class MainState extends SandboxGame {
 
+    private AssetManagerX assetManager;
+    
     @Override
     public void dispose() {
         // TODO Auto-generated method stub
@@ -15,7 +18,8 @@ public class MainState extends SandboxGame {
 
     @Override
     public void init(AssetManagerX assetManager) {
-        System.out.println("MainStates wurde aufgerufen!");
+        
+        this.assetManager = assetManager;
         
     }
 
@@ -26,7 +30,7 @@ public class MainState extends SandboxGame {
     }
     
     public void render() {
-        // DrawUtil.batch.draw(r, position.x - hw, position.y - hh, hw, hh, w, h, scale, scale, angle + angleAdd);
+        DrawUtil.batch.draw(assetManager.getTexture("logo"), 100, 150);
     }
 
 }
