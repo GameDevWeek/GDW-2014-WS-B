@@ -1,11 +1,13 @@
 package de.hochschuletrier.gdw.ws1415.game.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Pool.Poolable;
 
 public class TextureComponent extends Component implements Poolable {
 
-	public String texture;
+	public Texture texture;
+	public float scale = 1f;
 
 	@Override
 	public void reset() {
