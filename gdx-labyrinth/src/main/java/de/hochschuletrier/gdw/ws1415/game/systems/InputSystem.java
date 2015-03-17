@@ -13,15 +13,17 @@ public class InputSystem extends IteratingSystem {
     public InputSystem(int priority) {
         super(Family.all(InputComponent.class).get(), priority);
     }
-
+    
     @Override
+    public void update (float deltaTime) {
+        super.update(deltaTime);
+        Input_Puffer.click.clear();
+    }
+
     protected void processEntity(Entity entity, float deltaTime) {
         // check if something was clicked !! 
         for(int i = 0; i < Input_Puffer.click.size(); i++) {
             System.out.println(Input_Puffer.click.get(i));
         }
-        
-        
-    }
-    
+    }    
 }

@@ -9,6 +9,9 @@ public class InputManager {
     }
     
     public InputManager() {
+    }
+    
+    public void init() {
         // default listener
         this.setMouceKeyboardListener();
     }
