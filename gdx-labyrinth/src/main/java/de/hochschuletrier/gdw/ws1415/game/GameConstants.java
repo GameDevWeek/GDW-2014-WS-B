@@ -3,12 +3,9 @@ package de.hochschuletrier.gdw.ws1415.game;
 public class GameConstants {
 
     // Priorities for entity systems
-    public static final int PRIORITY_PHYSIX = 0;
-    public static final int PRIORITY_ENTITIES = 10;
-    public static final int PRIORITY_ANIMATIONS = 20;
-    public static final int PRIORITY_DEBUG_WORLD = 30;
-    public static final int PRIORITY_HUD = 40;
-    public static final int PRIORITY_REMOVE_ENTITIES = 1000;
+    public static final int PRIORITY_INPUT = 0;
+    public static final int PRIORITY_RENDERING = 20;
+    
 
     // PooledEngine parameters
     public static final int ENTITY_POOL_INITIAL_SIZE = 32;
