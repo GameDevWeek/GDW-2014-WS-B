@@ -2,40 +2,14 @@ package de.hochschuletrier.gdw.ws1415.game;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-import de.hochschuletrier.gdw.commons.devcon.cvar.CVarBool;
-import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
-import de.hochschuletrier.gdw.commons.gdx.input.hotkey.Hotkey;
-import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyModifier;
-import de.hochschuletrier.gdw.commons.gdx.physix.PhysixBodyDef;
-import de.hochschuletrier.gdw.commons.gdx.physix.PhysixComponentAwareContactListener;
-import de.hochschuletrier.gdw.commons.gdx.physix.PhysixFixtureDef;
-import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixBodyComponent;
-import de.hochschuletrier.gdw.commons.gdx.physix.components.PhysixModifierComponent;
-import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixDebugRenderSystem;
-import de.hochschuletrier.gdw.commons.gdx.physix.systems.PhysixSystem;
 import de.hochschuletrier.gdw.ws1415.Main;
-import de.hochschuletrier.gdw.ws1415.game.components.AnimationComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.ImpactSoundComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.TriggerComponent;
-import de.hochschuletrier.gdw.ws1415.game.contactlisteners.ImpactSoundListener;
-import de.hochschuletrier.gdw.ws1415.game.contactlisteners.TriggerListener;
-import de.hochschuletrier.gdw.ws1415.game.systems.AnimationRenderSystem;
+import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.RenderingSystem;
-import de.hochschuletrier.gdw.ws1415.game.systems.UpdatePositionSystem;
-import de.hochschuletrier.gdw.ws1415.game.utils.PhysixUtil;
-
-import java.util.function.Consumer;
 
 public class Game {
 
@@ -47,6 +21,8 @@ public class Game {
 	// systems
 	private final RenderingSystem renderingSystem = new RenderingSystem(
 			GameConstants.PRIORITY_RENDERING);
+	
+	private final InputSystem inputSystem = new InputSystem(GameConstants.PRIORITY_INPUT);
 
 
 	public Game() {
@@ -66,6 +42,7 @@ public class Game {
 
 	private void addSystems() {
 		engine.addSystem(renderingSystem);
+		engine.addSystem(inputSystem);
 	}
 
 	public void update(float delta) {
