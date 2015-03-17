@@ -181,6 +181,14 @@ public class Main extends StateBasedGame {
     @Override
     public void resume() {
     }
+    
+    public AssetManagerX getAssetManager() {
+        return assetManager;
+    }
+    
+    public Skin getSkin(){
+        return skin;
+    }
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
