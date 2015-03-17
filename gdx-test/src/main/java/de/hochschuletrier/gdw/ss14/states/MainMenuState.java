@@ -38,11 +38,14 @@ public class MainMenuState extends BaseGameState implements InputProcessor {
 //        music.play();
         
         Skin skin = Main.getInstance().getSkin();
-       // final MenuPageRoot menuPageRoot = new MenuPageRoot(skin, menuManager, MenuPageRoot.Type.STARTSCREEN);
-        //menuManager.addLayer(menuPageRoot);
         
-        menuManager.addLayer(new DecoImage(assetManager.getTexture("logo")));
-       // menuManager.pushPage(menuPageRoot);
+        
+        final MenuPageRoot menuPageRoot = new MenuPageRoot(skin, menuManager, MenuPageRoot.Type.MAINMENU);
+        menuManager.addLayer(menuPageRoot);
+        
+        //menuManager.addLayer(new DecoImage(assetManager.getTexture("logo")));
+        
+        menuManager.pushPage(menuPageRoot);
         
         Main.getInstance().addScreenListener(menuManager);
 
@@ -94,11 +97,12 @@ public class MainMenuState extends BaseGameState implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Main main = Main.getInstance();
-        if(!main.isTransitioning()) {
-            main.changeState(new GameplayState(assetManager), new SplitHorizontalTransition(500), null);
-        }
-        return true;
+//        Main main = Main.getInstance();
+//        if(!main.isTransitioning()) {
+//            main.changeState(new GameplayState(assetManager), new SplitHorizontalTransition(500), null);
+//        }
+//        return true;
+        return false;
     }
 
     @Override

@@ -1,5 +1,8 @@
 package de.hochschuletrier.gdw.ss14.menu;
 
+import java.awt.event.ActionEvent;
+
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -25,14 +28,26 @@ public class MenuPage extends Group {
         setVisible(false);
     }
     
-    protected final void addLeftAlignedButton(int x, int y, int width, int height, String text, Runnable runnable) {
-        TextButton button = addButton(x, y, width, height, text, runnable, "mainMenu");
-        button.getLabel().setAlignment(Align.left);
+    protected final void addLeftAlignedButton(int x, int y, int width, int height, DecoImage button, Runnable runnable) {
+        //TextButton button = addButton(x, y, width, height, text, runnable, "mainMenu");
+        //button.getLabel().setAlignment(Align.left);
+        button.setPosition(x, y);
+        addActor(button);
+    }
+    
+    protected final void addCenteredImage(int x, int y, int width, int height, DecoImage button, Runnable runnable){
+        button.setPosition(x + width , y - height / 2);
+        //button.setAlign(Align.center);
+        addActor(button);
     }
     
     protected final void addCenteredButton(int x, int y, int width, int height, String text, Runnable runnable) {
         TextButton button = addButton(x - width / 2, y - height / 2, width, height, text, runnable, "mainMenu");
         button.getLabel().setAlignment(Align.center);
+    }
+    protected final void addCenteredExitButton(int x, int y, int width, int height, DecoImage button, Runnable runnable) {
+        button.setPosition(x - width , y - height );
+        addActor(button);        
     }
 
     protected final TextButton addButton(int x, int y, int width, int height, String text, Runnable runnable, String style) {

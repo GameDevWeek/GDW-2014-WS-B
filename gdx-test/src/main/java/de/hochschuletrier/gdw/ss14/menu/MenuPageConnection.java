@@ -11,7 +11,7 @@ public class MenuPageConnection extends MenuPage{
     //private static final Logger logger = LoggerFactory.getLogger(MenuPageConnection.class);
     
     public enum Type {
-        MAINMENU("crosshair", "Starten");
+        OPTIONMENU("crosshair", "Optionen");
 
         public final String image;
         public final String acceptText;
