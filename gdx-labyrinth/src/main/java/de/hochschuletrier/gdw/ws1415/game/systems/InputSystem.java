@@ -23,7 +23,7 @@ public class InputSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         // check if something was clicked !! 
         for(int i = 0; i < Input_Puffer.click.size(); i++) {
-            System.out.println(Input_Puffer.click.get(i));
+            // TODO Schreiben was bei einem click passiert, der auf einem Entity mit InputComponente ist !
         }
     }    
 }
