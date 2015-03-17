@@ -88,7 +88,6 @@ public class Game extends InputAdapter {
 
 		Main.inputMultiplexer.addProcessor(this);
 
-		createTile(500f, 500f, assetManager);
 	}
 
 	private void addSystems() {
@@ -127,6 +126,9 @@ public class Game extends InputAdapter {
 	}
 
 	public void createTile(float x, float y, AssetManagerX assetManager) {
+
+		System.out.println("test");
+
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(PositionComponent.class));
 		entity.add(engine.createComponent(TileComponent.class));
@@ -135,8 +137,10 @@ public class Game extends InputAdapter {
 		entity.getComponent(TextureComponent.class).texture = assetManager
 				.getTexture("cross");
 
-		entity.getComponent(PositionComponent.class).x = 500f;
-		entity.getComponent(PositionComponent.class).y = 500f;
+		entity.getComponent(PositionComponent.class).x = x;
+		entity.getComponent(PositionComponent.class).y = y;
+
+		engine.addEntity(entity);
 
 	}
 
