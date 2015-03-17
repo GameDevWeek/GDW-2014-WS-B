@@ -1,6 +1,7 @@
 package de.hochschuletrier.gdw.ws1415.game.input;
 
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector2;
 
 public class Game_Input_Processor implements InputProcessor {
 
@@ -24,7 +25,7 @@ public class Game_Input_Processor implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        
+        Input_Puffer.click.add(new Vector2(screenX, screenY));
         return false;
     }
 
