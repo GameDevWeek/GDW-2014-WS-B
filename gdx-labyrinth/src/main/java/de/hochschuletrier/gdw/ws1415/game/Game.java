@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.PooledEngine;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.Main;
-import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
@@ -42,6 +41,8 @@ public class Game {
 	public void init(AssetManagerX assetManager) {
 
 		addSystems();
+		
+		LvlGenerator.generate(assetManager, engine);
 
 		// LevelGeneration
 		for (int y = 0; y < 7; y++) {
