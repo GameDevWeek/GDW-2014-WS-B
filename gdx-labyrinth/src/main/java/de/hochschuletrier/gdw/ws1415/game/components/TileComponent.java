@@ -14,3 +14,4 @@ public class TileComponent extends Component implements Pool.Poolable {
 	}
 
 }
+
