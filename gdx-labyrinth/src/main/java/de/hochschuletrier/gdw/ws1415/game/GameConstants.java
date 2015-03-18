@@ -4,6 +4,7 @@ public class GameConstants {
 
     // Priorities for entity systems
     public static final int PRIORITY_INPUT = 0;
+    public static final int PRIORITY_RENDERING_BACKGROUND = 19;
     public static final int PRIORITY_RENDERING = 20;
     
 

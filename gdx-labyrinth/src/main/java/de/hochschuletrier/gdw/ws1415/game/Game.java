@@ -2,6 +2,7 @@ package de.hochschuletrier.gdw.ws1415.game;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
@@ -10,9 +11,11 @@ import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
+import de.hochschuletrier.gdw.ws1415.game.systems.BackgroundRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.PlayerInformationRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.RenderingSystem;
+import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
 public class Game {
 
@@ -28,6 +31,7 @@ public class Game {
 			GameConstants.PRIORITY_INPUT);
 	private final PlayerInformationRenderingSystem playerInformationRenderingSystem = new PlayerInformationRenderingSystem(GameConstants.PRIORITY_RENDERING);
 
+	private final BackgroundRenderingSystem backgroundRenderingSystem = new BackgroundRenderingSystem(GameConstants.PRIORITY_RENDERING_BACKGROUND);
 	// Manager
 	private final InputManager inputManager = new InputManager();
 
@@ -40,7 +44,10 @@ public class Game {
 	}
 
 	public void init(AssetManagerX assetManager) {
-
+	    
+	    GameBoardInformation.ARROWS_WIDTH = (int) Math.ceil((Gdx.graphics.getWidth() - GameBoardInformation.TILDE_FIELD) / 2);
+	    GameBoardInformation.ARROWS_HEIGHT = (int) Math.ceil((Gdx.graphics.getHeight() - GameBoardInformation.TILDE_FIELD / 2) / 2);
+	    
 		addSystems();
 		
 		// LvlGenerator.generate(assetManager, engine);
@@ -58,6 +65,7 @@ public class Game {
 		engine.addSystem(renderingSystem);
 		engine.addSystem(inputSystem);
 		engine.addSystem(playerInformationRenderingSystem);
+		engine.addSystem(backgroundRenderingSystem);
 	}
 
 	public void update(float delta) {

@@ -2,26 +2,42 @@ package de.hochschuletrier.gdw.ws1415.game;
 
 import java.util.Random;
 
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
+import de.hochschuletrier.gdw.ws1415.game.components.BackgroundComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.TileType;
+import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
 public class LvlGenerator {
 
 	private static Random rnd = new Random();
 	private static Random rnd2 = new Random();
+	
+	private static float map_x = 0;
+	private static float map_y = 0;
 
 	public static void generate(AssetManagerX assetManager, PooledEngine engine) {
+	    
+	    map_x = Gdx.graphics.getWidth() * GameBoardInformation.GAME_MENU_WIDTH + GameBoardInformation.ARROWS_WIDTH + 50;
+	    map_y = GameBoardInformation.ARROWS_HEIGHT;
+	    
+	    Entity entity = engine.createEntity();
+	    entity.add(engine.createComponent(BackgroundComponent.class));
+	    entity.add(engine.createComponent(PositionComponent.class));
+	    
+	    entity.getComponent(BackgroundComponent.class).texture = assetManager.getTexture("gameBackgroundStone");
+	    entity.getComponent(PositionComponent.class).x = map_x;
+	    entity.getComponent(PositionComponent.class).y = map_y;
+	    
+	    engine.addEntity(entity);
+	    
 		// LevelGeneration
 		for (int y = 0; y < 7; y++) {
 			for (int x = 0; x < 7; x++) {
@@ -45,23 +61,31 @@ public class LvlGenerator {
 		switch (random) {
 
 		case 0:
-			createTile(engine, assetManager.getTexture("background"), x, y,
-					assetManager.getTexture("cross"));
+			createTile(engine, assetManager.getTexture("backgroundStone"), x, y,
+					// assetManager.getTexture("cross"), 
+					assetManager.getTexture("crossStone")
+					);
 			break;
 		case 1:
-			createTile(engine, assetManager.getTexture("background"), x, y,
-					assetManager.getTexture("tShapePurple"),
-					assetManager.getTexture("tShapeYellow"));
+			createTile(engine, assetManager.getTexture("backgroundStone"), x, y,
+					// assetManager.getTexture("tShapePurple"),
+					// assetManager.getTexture("tShapeYellow"),
+			        assetManager.getTexture("tShapeStone")
+			        );
 			break;
 		case 2:
-			createTile(engine, assetManager.getTexture("background"), x, y,
-					assetManager.getTexture("lShapeGreen"),
-					assetManager.getTexture("lShapeBrown"));
+			createTile(engine, assetManager.getTexture("backgroundStone"), x, y,
+					// assetManager.getTexture("lShapeGreen"),
+					// assetManager.getTexture("lShapeBrown")
+			        assetManager.getTexture("lShapeStone")
+			        );
 			break;
 		case 3:
-			createTile(engine, assetManager.getTexture("background"), x, y,
-					assetManager.getTexture("straightRed"),
-					assetManager.getTexture("straightWhite"));
+			createTile(engine, assetManager.getTexture("backgroundStone"), x, y,
+					// assetManager.getTexture("straightRed"),
+					// assetManager.getTexture("straightWhite"),
+					assetManager.getTexture("straightStone")
+			        );
 			break;
 		}
 	}
@@ -82,22 +106,23 @@ public class LvlGenerator {
 
 		entity.getComponent(TextureComponent.class).texture = texture[tmp];
 		entity.getComponent(TextureComponent.class).background = background;
+		
 		switch (rotation) {
 		case 0:
-			entity.getComponent(PositionComponent.class).x = x * 50f + 350f;
-			entity.getComponent(PositionComponent.class).y = y * 50f + 100f;
+			entity.getComponent(PositionComponent.class).x = map_x + x * 50f;
+			entity.getComponent(PositionComponent.class).y = map_y + y * 50f;
 			break;
 		case 1:
-			entity.getComponent(PositionComponent.class).x = x * 50f + 400f;
-			entity.getComponent(PositionComponent.class).y = y * 50f + 100f;
+			entity.getComponent(PositionComponent.class).x = map_x + x * 50f + 50;
+			entity.getComponent(PositionComponent.class).y = map_y + y * 50f;
 			break;
 		case 2:
-			entity.getComponent(PositionComponent.class).x = x * 50f + 400f;
-			entity.getComponent(PositionComponent.class).y = y * 50f + 150f;
+			entity.getComponent(PositionComponent.class).x = map_x + x * 50f + 50;
+			entity.getComponent(PositionComponent.class).y = map_y + y * 50f + 50f;
 			break;
 		case 3:
-			entity.getComponent(PositionComponent.class).x = x * 50f + 350f;
-			entity.getComponent(PositionComponent.class).y = y * 50f + 150f;
+			entity.getComponent(PositionComponent.class).x = map_x + x * 50f;
+			entity.getComponent(PositionComponent.class).y = map_y + y * 50f + 50f;
 			break;
 		}
 
