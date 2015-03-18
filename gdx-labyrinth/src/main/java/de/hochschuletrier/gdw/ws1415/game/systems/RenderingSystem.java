@@ -21,10 +21,16 @@ public class RenderingSystem extends IteratingSystem {
 	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
 
-		DrawUtil.draw(entity.getComponent(TextureComponent.class).texture, 
-		        entity.getComponent(PositionComponent.class).x, 
-		        entity.getComponent(PositionComponent.class).y, 0, 0, 100.0f, 100.0f,
-	            1.0f, 1.0f, 90.0f);
-	}
+		DrawUtil.draw(entity.getComponent(TextureComponent.class).background,
+				entity.getComponent(PositionComponent.class).x,
+				entity.getComponent(PositionComponent.class).y, 0, 0, 100f,
+				100f, 0.5f, 0.5f,
+				entity.getComponent(PositionComponent.class).rotation);
 
+		DrawUtil.draw(entity.getComponent(TextureComponent.class).texture,
+				entity.getComponent(PositionComponent.class).x,
+				entity.getComponent(PositionComponent.class).y, 0, 0, 100.0f,
+				100.0f, 0.5f, 0.5f,
+				entity.getComponent(PositionComponent.class).rotation);
+	}
 }

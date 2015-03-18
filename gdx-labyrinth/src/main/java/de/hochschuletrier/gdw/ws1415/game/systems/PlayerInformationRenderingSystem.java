@@ -15,6 +15,8 @@ import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 
 public class PlayerInformationRenderingSystem extends IteratingSystem {
 
+    private BitmapFont font = new BitmapFont(true);
+    
 	@SuppressWarnings("unchecked")
 	public PlayerInformationRenderingSystem(int priority) {
 		super(Family.all(PlayerInformationComponent.class).get(), priority);
@@ -33,7 +35,8 @@ public class PlayerInformationRenderingSystem extends IteratingSystem {
 
 		DrawUtil.fillRect(box_pos_x, box_pos_y, box_width, box_height,
 				box_color);
-
+		
+		font.draw(DrawUtil.batch, "TEST", box_pos_x + 20, box_pos_y + 20);
 	}
 
 }
