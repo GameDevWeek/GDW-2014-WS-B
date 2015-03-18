@@ -13,8 +13,9 @@ public class RenderingSystem extends IteratingSystem {
 
 	@SuppressWarnings("unchecked")
 	public RenderingSystem(int priority) {
-		super(Family.all(PositionComponent.class, TileComponent.class).get(),
-				priority);
+		super(
+				Family.all(PositionComponent.class, TextureComponent.class)
+						.get(), priority);
 	}
 
 	@Override
