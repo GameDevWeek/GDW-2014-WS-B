@@ -5,12 +5,18 @@ import com.badlogic.ashley.core.PooledEngine;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.Main;
+<<<<<<< HEAD
+import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
+=======
 import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
 import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
+>>>>>>> 9257bbeb072e1087ca72fc7acfc065d12ebb35bb
 import de.hochschuletrier.gdw.ws1415.game.systems.RenderingSystem;
 
 public class Game {
@@ -60,13 +66,16 @@ public class Game {
 		entity.add(engine.createComponent(PositionComponent.class));
 		entity.add(engine.createComponent(TileComponent.class));
 		entity.add(engine.createComponent(TextureComponent.class));
-
+		
+		// input test
+		entity.add(engine.createComponent(InputComponent.class));
+		
 		entity.getComponent(TextureComponent.class).texture = assetManager
 				.getTexture("cross");
 
 		entity.getComponent(PositionComponent.class).x = 500f;
 		entity.getComponent(PositionComponent.class).y = 500f;
-		
+
 		engine.addEntity(entity);
 	}
 }
