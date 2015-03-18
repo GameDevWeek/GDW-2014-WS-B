@@ -5,10 +5,8 @@ import com.badlogic.ashley.core.PooledEngine;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.Main;
-import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
 import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.RenderingSystem;
@@ -40,9 +38,10 @@ public class Game {
 	public void init(AssetManagerX assetManager) {
 
 		addSystems();
+		
+		// LvlGenerator.generate(assetManager, engine);
 
-		createTile(assetManager, 500f, 500f);
-		createArrow(assetManager, 50f, 50f, 90f);
+		
 
 		inputManager.init();
 	}
@@ -57,20 +56,7 @@ public class Game {
 		engine.update(delta);
 	}
 
-	public void createTile(AssetManagerX assetManager, float x, float y) {
-		Entity entity = engine.createEntity();
-		entity.add(engine.createComponent(PositionComponent.class));
-		entity.add(engine.createComponent(TileComponent.class));
-		entity.add(engine.createComponent(TextureComponent.class));
-
-		entity.getComponent(TextureComponent.class).texture = assetManager
-				.getTexture("cross");
-
-		entity.getComponent(PositionComponent.class).x = x;
-		entity.getComponent(PositionComponent.class).y = y;
-
-		engine.addEntity(entity);
-	}
+	
 
 	public void createArrow(AssetManagerX assetManager, float x, float y,
 			float rotation) {
