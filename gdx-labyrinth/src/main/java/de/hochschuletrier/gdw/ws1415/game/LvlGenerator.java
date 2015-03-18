@@ -2,19 +2,16 @@ package de.hochschuletrier.gdw.ws1415.game;
 
 import java.util.Random;
 
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
+import de.hochschuletrier.gdw.ws1415.game.components.BackgroundComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.TileType;
 
 public class LvlGenerator {
 
@@ -22,6 +19,13 @@ public class LvlGenerator {
 	private static Random rnd2 = new Random();
 
 	public static void generate(AssetManagerX assetManager, PooledEngine engine) {
+	    
+	    Entity entity = engine.createEntity();
+	    entity.add(engine.createComponent(BackgroundComponent.class));
+	    
+	    entity.getComponent(BackgroundComponent.class).texture = assetManager.getTexture("gameBackgroundStone");
+	    engine.addEntity(entity);
+	    
 		// LevelGeneration
 		for (int y = 0; y < 7; y++) {
 			for (int x = 0; x < 7; x++) {
@@ -45,23 +49,31 @@ public class LvlGenerator {
 		switch (random) {
 
 		case 0:
-			createTile(engine, assetManager.getTexture("background"), x, y,
-					assetManager.getTexture("cross"));
+			createTile(engine, assetManager.getTexture("backgroundStone"), x, y,
+					// assetManager.getTexture("cross"), 
+					assetManager.getTexture("crossStone")
+					);
 			break;
 		case 1:
-			createTile(engine, assetManager.getTexture("background"), x, y,
-					assetManager.getTexture("tShapePurple"),
-					assetManager.getTexture("tShapeYellow"));
+			createTile(engine, assetManager.getTexture("backgroundStone"), x, y,
+					// assetManager.getTexture("tShapePurple"),
+					// assetManager.getTexture("tShapeYellow"),
+			        assetManager.getTexture("tShapeStone")
+			        );
 			break;
 		case 2:
-			createTile(engine, assetManager.getTexture("background"), x, y,
-					assetManager.getTexture("lShapeGreen"),
-					assetManager.getTexture("lShapeBrown"));
+			createTile(engine, assetManager.getTexture("backgroundStone"), x, y,
+					// assetManager.getTexture("lShapeGreen"),
+					// assetManager.getTexture("lShapeBrown")
+			        assetManager.getTexture("lShapeStone")
+			        );
 			break;
 		case 3:
-			createTile(engine, assetManager.getTexture("background"), x, y,
-					assetManager.getTexture("straightRed"),
-					assetManager.getTexture("straightWhite"));
+			createTile(engine, assetManager.getTexture("backgroundStone"), x, y,
+					// assetManager.getTexture("straightRed"),
+					// assetManager.getTexture("straightWhite"),
+					assetManager.getTexture("straightStone")
+			        );
 			break;
 		}
 	}

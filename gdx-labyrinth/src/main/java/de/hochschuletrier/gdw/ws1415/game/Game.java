@@ -10,6 +10,7 @@ import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
+import de.hochschuletrier.gdw.ws1415.game.systems.BackgroundRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.PlayerInformationRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.RenderingSystem;
@@ -28,6 +29,7 @@ public class Game {
 			GameConstants.PRIORITY_INPUT);
 	private final PlayerInformationRenderingSystem playerInformationRenderingSystem = new PlayerInformationRenderingSystem(GameConstants.PRIORITY_RENDERING);
 
+	private final BackgroundRenderingSystem backgroundRenderingSystem = new BackgroundRenderingSystem(GameConstants.PRIORITY_RENDERING_BACKGROUND);
 	// Manager
 	private final InputManager inputManager = new InputManager();
 
@@ -58,6 +60,7 @@ public class Game {
 		engine.addSystem(renderingSystem);
 		engine.addSystem(inputSystem);
 		engine.addSystem(playerInformationRenderingSystem);
+		engine.addSystem(backgroundRenderingSystem);
 	}
 
 	public void update(float delta) {

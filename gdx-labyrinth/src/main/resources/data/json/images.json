@@ -6,5 +6,12 @@
     "straightWhite": "data/images/TILE-straight2.png",
     "tShapePurple": "data/images/TILE-T1.png",
     "tShapeYellow": "data/images/TILE-T2.png",
-    "background": "data/images/TILE-background.png"
+    "background": "data/images/TILE-background.png",
+    "straightStone": "data/images/I.png",
+    "lShapeStone": "data/images/L.png",
+    "tShapeStone": "data/images/T.png",
+    "crossStone": "data/images/PLUS.png",
+    "backgroundStone": "data/images/backgroundStone.png", 
+    "gameBackgroundStone": "data/images/Labyrinthbackground.png"
+    
 }
