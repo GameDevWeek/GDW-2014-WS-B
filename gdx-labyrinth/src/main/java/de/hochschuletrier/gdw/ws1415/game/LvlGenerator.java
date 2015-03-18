@@ -5,6 +5,8 @@ import java.util.Random;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
@@ -111,5 +113,9 @@ public class LvlGenerator {
 		entity.getComponent(PositionInLevelComponent.class).y = (int) y;
 		System.out.println(random + "    " + random2);
 		engine.addEntity(entity);
+	}
+	
+	private static void createTile(Engine engine, Texture texture, float x, float y, Float rotation) {
+	    
 	}
 }
