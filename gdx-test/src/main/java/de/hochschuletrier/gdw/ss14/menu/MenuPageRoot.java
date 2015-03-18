@@ -2,6 +2,7 @@ package de.hochschuletrier.gdw.ss14.menu;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -33,17 +34,17 @@ public class MenuPageRoot extends MenuPage {
         DecoImage options = new DecoImage(assetManager.getTexture("optionen_button"));
         DecoImage credits = new DecoImage(assetManager.getTexture("credits_button"));
         DecoImage exit = new DecoImage(assetManager.getTexture("beenden_button"));
-        TextField text = new TextField("logo", skin);
+        //TextField text = new TextField("logo", skin);
         
         if(type == Type.MAINMENU){
             addPageEntry(menuManager, x, y - yStep * (i++), start, new MenuPageConnection(skin, menuManager, MenuPageConnection.Type.OPTIONMENU));
             addPageEntry(menuManager, x, y - yStep * (++i), options, new MenuPageConnection(skin, menuManager, MenuPageConnection.Type.OPTIONMENU));
             addPageEntry(menuManager, x, y - yStep * (i+2), credits, new MenuPageConnection(skin, menuManager, MenuPageConnection.Type.OPTIONMENU));
             //addPageEntry(menuManager, x, y - yStep * (i+2), credits, new MenuPageCredits(skin, menuManager));
-            addActor(text);
-            text.setBounds(x, y, 30, 50);
-            addPageEntry(menuManager, x, y - yStep * (i+4), exit, new MenuPageConnection(skin, menuManager, MenuPageConnection.Type.OPTIONMENU));
-            //addCenteredExitButton(menuManager.getWidth()-250, 50, 20, 100, exit, () -> System.exit(-1));
+            //addActor(text);
+            //text.setBounds(x, y, 330, 500);
+            //addPageEntry(menuManager, x, y - yStep * (i+4), exit, new MenuPageConnection(skin, menuManager, MenuPageConnection.Type.OPTIONMENU));
+            addCenteredExitButton(menuManager.getWidth()-250, 50, 20, 100, exit, () -> System.exit(0));
         }
     }
 

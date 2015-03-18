@@ -47,18 +47,10 @@ public class MenuPage extends Group {
         button.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("TEST");
+                //System.out.println("TEST");
                 return true;
             }
         });
-        
-//        button.addListener(new InputListener() {
-//            @Override
-//            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                System.out.println("TEST");
-//                return true;
-//            }
-//        });
     }
 
     protected final void addCenteredButton(int x, int y, int width, int height, String text, Runnable runnable) {
@@ -68,7 +60,16 @@ public class MenuPage extends Group {
     
     protected final void addCenteredExitButton(int x, int y, int width, int height, DecoImage button, Runnable runnable) {
         button.setPosition(x - width , y - height );
-        addActor(button); 
+        
+        addActor(button);
+        button.setTouchable(Touchable.enabled);
+        button.addListener(new InputListener(){
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                System.exit(0);
+                return true;
+            }
+        });
         
         
     }
