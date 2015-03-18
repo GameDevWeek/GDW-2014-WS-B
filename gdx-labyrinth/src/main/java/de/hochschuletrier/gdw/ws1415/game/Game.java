@@ -5,10 +5,12 @@ import com.badlogic.ashley.core.PooledEngine;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.Main;
+import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
 import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
+import de.hochschuletrier.gdw.ws1415.game.systems.PlayerInformationRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.RenderingSystem;
 
 public class Game {
@@ -23,6 +25,7 @@ public class Game {
 			GameConstants.PRIORITY_RENDERING);
 	private final InputSystem inputSystem = new InputSystem(
 			GameConstants.PRIORITY_INPUT);
+	private final PlayerInformationRenderingSystem playerInformationRenderingSystem = new PlayerInformationRenderingSystem(GameConstants.PRIORITY_RENDERING);
 
 	// Manager
 	private final InputManager inputManager = new InputManager();
@@ -41,7 +44,7 @@ public class Game {
 		
 		// LvlGenerator.generate(assetManager, engine);
 
-		
+		playerTest();
 
 		inputManager.init();
 	}
@@ -49,6 +52,7 @@ public class Game {
 	private void addSystems() {
 		engine.addSystem(renderingSystem);
 		engine.addSystem(inputSystem);
+		engine.addSystem(playerInformationRenderingSystem);
 	}
 
 	public void update(float delta) {
@@ -71,7 +75,12 @@ public class Game {
 		entity.getComponent(PositionComponent.class).y = y;
 
 		engine.addEntity(entity);
-
+	}
+	
+	public void playerTest() {
+	    Entity entity = engine.createEntity();
+	    entity.add(engine.createComponent(PlayerInformationComponent.class));
+	    engine.addEntity(entity);
 	}
 
 }

@@ -10,7 +10,7 @@ public class PlayerInformationComponent extends Component implements Pool.Poolab
 	
 	@Override
 	public void reset() {
-		
+		this.name = null;
 	}
 
 }
