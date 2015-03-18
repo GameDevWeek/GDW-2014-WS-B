@@ -41,9 +41,17 @@ public class LvlGenerator {
 		// randomTile
 		// double random = Math.random();
 		// double random2 = Math.random();
-
 		int random = rnd.nextInt(3);
-		int random2 = rnd2.nextInt(1);
+
+		switch (random) {
+
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+
+		}
+
 		if (random == 0) {
 			System.out.println("cross");
 			entity.getComponent(TileComponent.class).tileType = TileType.cross;
