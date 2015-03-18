@@ -1,8 +1,10 @@
 {
-    "cross": "data/images/TestTile1111.png",
-    "lShape": "data/images/TestTile0101.png",
-    "tShape": "data/images/TestTile0111.png",
-    "minus": "data/images/TestTile1100.png",
-    "arrow": "data/images/ArrowLeft.png",
-    "grid": "data/images/Grid.png"
+    "cross": "data/images/TILE-open.png",
+    "lShapeGreen": "data/images/TILE-L1.png",
+    "lShapeBrown": "data/images/TILE-L2.png",
+    "straightRed": "data/images/TILE-straight1.png",
+    "straightWhite": "data/images/TILE-straight2.png",
+    "tShapePurple": "data/images/TILE-T1.png",
+    "tShapeYellow": "data/images/TILE-T2.png",
+    "background": "data/images/TILE-background.png"
 }
