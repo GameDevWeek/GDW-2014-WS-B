@@ -2,6 +2,7 @@ package de.hochschuletrier.gdw.ws1415.game;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.graphics.Color;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.Main;
@@ -44,7 +45,10 @@ public class Game {
 		
 		// LvlGenerator.generate(assetManager, engine);
 
-		playerTest();
+		playerTest("Hugo Ignatz", Color.BLUE, 1);
+		playerTest("Willie Witzig", Color.RED, 2);
+		playerTest("Tom Ate", Color.YELLOW, 3);
+		playerTest("Peter Silie", Color.GREEN, 4);
 
 		inputManager.init();
 	}
@@ -77,9 +81,14 @@ public class Game {
 		engine.addEntity(entity);
 	}
 	
-	public void playerTest() {
+	public void playerTest(String name, Color color, int playerNumber) {
 	    Entity entity = engine.createEntity();
 	    entity.add(engine.createComponent(PlayerInformationComponent.class));
+	  
+	    entity.getComponent(PlayerInformationComponent.class).name = name;
+	    entity.getComponent(PlayerInformationComponent.class).color = color;
+	    entity.getComponent(PlayerInformationComponent.class).playerNumber = playerNumber;
+	    
 	    engine.addEntity(entity);
 	}
 
