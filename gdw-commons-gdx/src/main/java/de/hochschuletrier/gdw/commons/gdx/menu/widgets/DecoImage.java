@@ -1,12 +1,20 @@
 package de.hochschuletrier.gdw.commons.gdx.menu.widgets;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.Scaling;
+
 
 /**
  *
@@ -23,7 +31,7 @@ public class DecoImage extends Image {
         
         setBounds(0, 0, texture.getWidth(), texture.getHeight());
         setOrigin(texture.getWidth() / 2, texture.getHeight() / 2);
-        setTouchable(Touchable.disabled);
+        setTouchable(Touchable.disabled); 
     }
     
     public void setTexture(Texture texture) {

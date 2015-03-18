@@ -1,10 +1,9 @@
 package de.hochschuletrier.gdw.ss14.menu;
 
-import java.awt.event.ActionEvent;
-
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -19,6 +18,7 @@ public class MenuPage extends Group {
     protected Main main = Main.getInstance();
     protected AssetManagerX assetManager = main.getAssetManager();
     protected final Skin skin;
+    protected int buttonCount = 0;
     
     public MenuPage(Skin skin, String background){
         super();
@@ -39,15 +39,38 @@ public class MenuPage extends Group {
         button.setPosition(x + width , y - height / 2);
         //button.setAlign(Align.center);
         addActor(button);
+        
+        //button.mouseClicked(MouseEvent.MOUSE_CLICKED, buttonCount);
+        //buttonCount++;
+        
+        button.setTouchable(Touchable.enabled);
+        button.addListener(new InputListener(){
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("TEST");
+                return true;
+            }
+        });
+        
+//        button.addListener(new InputListener() {
+//            @Override
+//            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                System.out.println("TEST");
+//                return true;
+//            }
+//        });
     }
-    
+
     protected final void addCenteredButton(int x, int y, int width, int height, String text, Runnable runnable) {
         TextButton button = addButton(x - width / 2, y - height / 2, width, height, text, runnable, "mainMenu");
         button.getLabel().setAlignment(Align.center);
     }
+    
     protected final void addCenteredExitButton(int x, int y, int width, int height, DecoImage button, Runnable runnable) {
         button.setPosition(x - width , y - height );
-        addActor(button);        
+        addActor(button); 
+        
+        
     }
 
     protected final TextButton addButton(int x, int y, int width, int height, String text, Runnable runnable, String style) {
