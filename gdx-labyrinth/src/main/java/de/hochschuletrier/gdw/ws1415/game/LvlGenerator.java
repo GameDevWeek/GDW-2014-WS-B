@@ -5,6 +5,7 @@ import java.util.Random;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
@@ -40,90 +41,71 @@ public class LvlGenerator {
 		entity.add(engine.createComponent(TileComponent.class));
 		entity.add(engine.createComponent(TextureComponent.class));
 
-		// randomTile
-		// double random = Math.random();
-		// double random2 = Math.random();
-		int random = rnd.nextInt(3);
-
+		int random = rnd.nextInt(4);
 		switch (random) {
 
 		case 0:
+			createTile(engine, assetManager.getTexture("background"), x, y,
+					assetManager.getTexture("cross"));
+			break;
 		case 1:
+			createTile(engine, assetManager.getTexture("background"), x, y,
+					assetManager.getTexture("tShapePurple"),
+					assetManager.getTexture("tShapeYellow"));
+			break;
 		case 2:
+			createTile(engine, assetManager.getTexture("background"), x, y,
+					assetManager.getTexture("lShapeGreen"),
+					assetManager.getTexture("lShapeBrown"));
+			break;
 		case 3:
-
+			createTile(engine, assetManager.getTexture("background"), x, y,
+					assetManager.getTexture("straightRed"),
+					assetManager.getTexture("straightWhite"));
+			break;
 		}
+	}
 
-		if (random == 0) {
-			System.out.println("cross");
-			entity.getComponent(TileComponent.class).tileType = TileType.cross;
-			entity.getComponent(TextureComponent.class).texture = assetManager
-					.getTexture("cross");
-		} else if (random == 1) {
+	private static void createTile(PooledEngine engine, Texture background,
+			float x, float y, Texture... texture) {
 
-			System.out.println("straight");
-			entity.getComponent(TileComponent.class).tileType = TileType.straight;
-			if (random2 == 0) {
-				entity.getComponent(TextureComponent.class).texture = assetManager
-						.getTexture("straightRed");
-			} else {
-				entity.getComponent(TextureComponent.class).texture = assetManager
-						.getTexture("straightWhite");
-			}
-		} else if (random == 2) {
+		Entity entity = engine.createEntity();
+		int tmp = rnd.nextInt(texture.length);
 
-			System.out.println("lShape");
-			entity.getComponent(TileComponent.class).tileType = TileType.lShape;
-			if (random2 == 0) {
-				entity.getComponent(TextureComponent.class).texture = assetManager
-						.getTexture("lShapeGreen");
-			} else {
-				entity.getComponent(TextureComponent.class).texture = assetManager
-						.getTexture("lShapeBrown");
-			}
-		} else {
-			System.out.println("tShape");
-			entity.getComponent(TileComponent.class).tileType = TileType.tShape;
-			if (random2 == 0) {
-				entity.getComponent(TextureComponent.class).texture = assetManager
-						.getTexture("tShapePurple");
-			} else {
-				entity.getComponent(TextureComponent.class).texture = assetManager
-						.getTexture("tShapeYellow");
-			}
-		}
+		entity.add(engine.createComponent(PositionComponent.class));
+		entity.add(engine.createComponent(TextureComponent.class));
+		entity.add(engine.createComponent(TileComponent.class));
 
-		entity.getComponent(TextureComponent.class).background = assetManager
-				.getTexture("background");
+		int rotation = rnd.nextInt(4);
 
-		entity.getComponent(PositionComponent.class).x = x * 50 + 350f;
-		entity.getComponent(PositionComponent.class).y = y * 50 + 100f;
+		entity.getComponent(PositionComponent.class).rotation = rotation * 90f;
 
-		random = rnd.nextInt(3);
-
-		if (random == 0) {
-			entity.getComponent(PositionComponent.class).rotation = 0f;
-		} else if (random == 1) {
-			entity.getComponent(PositionComponent.class).rotation = 90f;
-			entity.getComponent(PositionComponent.class).x += 50;
-		} else if (random == 2) {
-			entity.getComponent(PositionComponent.class).rotation = 180;
-			entity.getComponent(PositionComponent.class).x += 50;
-			entity.getComponent(PositionComponent.class).y += 50;
-		} else {
-			entity.getComponent(PositionComponent.class).rotation = 270f;
-
-			entity.getComponent(PositionComponent.class).y += 50;
+		entity.getComponent(TextureComponent.class).texture = texture[tmp];
+		entity.getComponent(TextureComponent.class).background = background;
+		switch (rotation) {
+		case 0:
+			entity.getComponent(PositionComponent.class).x = x * 50f + 350f;
+			entity.getComponent(PositionComponent.class).y = y * 50f + 100f;
+			break;
+		case 1:
+			entity.getComponent(PositionComponent.class).x = x * 50f + 400f;
+			entity.getComponent(PositionComponent.class).y = y * 50f + 100f;
+			break;
+		case 2:
+			entity.getComponent(PositionComponent.class).x = x * 50f + 400f;
+			entity.getComponent(PositionComponent.class).y = y * 50f + 150f;
+			break;
+		case 3:
+			entity.getComponent(PositionComponent.class).x = x * 50f + 350f;
+			entity.getComponent(PositionComponent.class).y = y * 50f + 150f;
+			break;
 		}
 
 		entity.add(engine.createComponent(PositionInLevelComponent.class));
 		entity.getComponent(PositionInLevelComponent.class).x = (int) x;
 		entity.getComponent(PositionInLevelComponent.class).y = (int) y;
-		System.out.println(random + "    " + random2);
+
 		engine.addEntity(entity);
-	}
-	
-	private static void createTile(Engine engine, Texture texture, float x, float y, Float rotation) {
-	    
+
 	}
 }
