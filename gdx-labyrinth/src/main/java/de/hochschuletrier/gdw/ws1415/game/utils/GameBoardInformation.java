@@ -13,9 +13,12 @@ public class GameBoardInformation {
     final public static float GAME_NEXT_TILE = 0.3f;
     final public static float GAME_PLAYER_INFORMATION = 0.7f;
     
-    // TILE-FIELD
-    final public static float ARROWS = 0.2f; // 2x !!!!!
-    final public static float TILDE_FIELD = 0.6f;
+    // ARROWS WIDTH IN PIXLE
+    public static int ARROWS_WIDTH = 0; // 2x !!!!!
+    public static int ARROWS_HEIGHT = 0;
+    
+    // TITLE-FIELD IN PIXLE !!
+    final public static int TILDE_FIELD = 700;
     
     final public static float NUMBER_OF_TILE = 7;
 }

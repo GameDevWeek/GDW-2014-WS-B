@@ -190,6 +190,9 @@ public class Main extends StateBasedGame {
         cfg.vSyncEnabled = true;
         cfg.foregroundFPS = 60;
         cfg.backgroundFPS = 60;
+        
+        // größer bzw kleiner machen ausschalten
+        cfg.resizable = false;
 
         new LwjglApplication(getInstance(), cfg);
     }
