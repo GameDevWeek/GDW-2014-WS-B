@@ -23,9 +23,10 @@ public class Game {
 	// systems
 	private final RenderingSystem renderingSystem = new RenderingSystem(
 			GameConstants.PRIORITY_RENDERING);
-	private final InputSystem inputSystem = new InputSystem(GameConstants.PRIORITY_INPUT);
-	
-	//Manager
+	private final InputSystem inputSystem = new InputSystem(
+			GameConstants.PRIORITY_INPUT);
+
+	// Manager
 	private final InputManager inputManager = new InputManager();
 
 	public Game() {
@@ -40,8 +41,9 @@ public class Game {
 
 		addSystems();
 
-		createTile(assetManager);
-		
+		createTile(assetManager, 500f, 500f);
+		createArrow(assetManager, 50f, 50f, 90f);
+
 		inputManager.init();
 	}
 
@@ -55,7 +57,7 @@ public class Game {
 		engine.update(delta);
 	}
 
-	public void createTile(AssetManagerX assetManager) {
+	public void createTile(AssetManagerX assetManager, float x, float y) {
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(PositionComponent.class));
 		entity.add(engine.createComponent(TileComponent.class));
@@ -64,9 +66,26 @@ public class Game {
 		entity.getComponent(TextureComponent.class).texture = assetManager
 				.getTexture("cross");
 
-		entity.getComponent(PositionComponent.class).x = 500f;
-		entity.getComponent(PositionComponent.class).y = 500f;
-		
+		entity.getComponent(PositionComponent.class).x = x;
+		entity.getComponent(PositionComponent.class).y = y;
+
 		engine.addEntity(entity);
 	}
+
+	public void createArrow(AssetManagerX assetManager, float x, float y,
+			float rotation) {
+		Entity entity = engine.createEntity();
+		entity.add(engine.createComponent(PositionComponent.class));
+		entity.add(engine.createComponent(TextureComponent.class));
+
+		entity.getComponent(TextureComponent.class).texture = assetManager
+				.getTexture("arrow");
+		entity.getComponent(PositionComponent.class).rotation = rotation;
+		entity.getComponent(PositionComponent.class).x = x;
+		entity.getComponent(PositionComponent.class).y = y;
+
+		engine.addEntity(entity);
+
+	}
+
 }
