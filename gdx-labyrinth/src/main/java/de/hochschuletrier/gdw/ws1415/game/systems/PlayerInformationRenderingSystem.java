@@ -5,13 +5,11 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
-import de.hochschuletrier.gdw.ws1415.Main;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
+import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
 public class PlayerInformationRenderingSystem extends IteratingSystem {
 
@@ -24,19 +22,23 @@ public class PlayerInformationRenderingSystem extends IteratingSystem {
 
 	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
+	    
+	    float box_height = (float) Math.ceil(Gdx.graphics.getHeight() * GameBoardInformation.GAME_PLAYER_INFORMATION / 4);
 
-		float box_width = (float) (Gdx.graphics.getWidth() * 0.2);
-		float box_height = (float) (Gdx.graphics.getHeight() * 0.18);
-		float box_pos_x = 0;
-		float box_pos_y = (Gdx.graphics.getHeight() - 4 * box_height)
-				+ (entity.getComponent(PlayerInformationComponent.class).playerNumber - 1)
-				* box_height;
-		Color box_color = entity.getComponent(PlayerInformationComponent.class).color;
+	    float y = (float) Math.floor((Gdx.graphics.getHeight() * GameBoardInformation.GAME_NEXT_TILE) +
+	            (box_height * 
+	            (entity.getComponent(PlayerInformationComponent.class).playerNumber - 1)));
+	    
+	    float box_width = (float) Math.ceil(Gdx.graphics.getWidth() * GameBoardInformation.GAME_MENU_WIDTH);
+	    
+	    float x = 0.0f;
+	    
+	    Color box_color = entity.getComponent(PlayerInformationComponent.class).color;
 
-		DrawUtil.fillRect(box_pos_x, box_pos_y, box_width, box_height,
-				box_color);
+        DrawUtil.fillRect(x, y, box_width, box_height, box_color);
+
 		
-		font.draw(DrawUtil.batch, "TEST", box_pos_x + 20, box_pos_y + 20);
+        font.draw(DrawUtil.batch, "TEST", (int) Math.floor(x + 0.15 * box_width), (int) Math.floor(y + 0.5 * box_height));
 	}
 
 }

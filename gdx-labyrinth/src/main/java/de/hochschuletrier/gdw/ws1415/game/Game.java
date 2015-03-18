@@ -6,12 +6,9 @@ import com.badlogic.gdx.graphics.Color;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.Main;
-import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.TileType;
 import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
 import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.PlayerInformationRenderingSystem;
@@ -66,16 +63,9 @@ public class Game {
 	public void update(float delta) {
 		Main.getInstance().screenCamera.bind();
 		engine.update(delta);
-	}
+	}	
 
-	public void createTile(AssetManagerX assetManager, float x, float y) {
-		Entity entity = engine.createEntity();
-		entity.add(engine.createComponent(PositionComponent.class));
-		entity.add(engine.createComponent(TileComponent.class));
-		entity.add(engine.createComponent(TextureComponent.class));
-
-	
-
+	// TEST
 	public void createArrow(AssetManagerX assetManager, float x, float y,
 			float rotation) {
 		Entity entity = engine.createEntity();
