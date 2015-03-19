@@ -32,8 +32,7 @@ public class MainMenuState extends BaseGameState {
     public MainMenuState(AssetManagerX assetManager) {
         music = assetManager.getMusic("menu");
  
-        //music.setLooping(true);
-        
+        music.setLooping(true);
         MusicManager.play(music, 0.0f);
            
         
