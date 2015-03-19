@@ -49,7 +49,7 @@ public class MenuPageCredits extends MenuPage implements SceneAnimator.Getter {
     private SceneAnimator sceneAnimator;
 
     public MenuPageCredits(Skin skin, MenuManager menuManager) {
-        super(skin, "logo");
+        super(skin);
 
         try {
             //sceneAnimator = new SceneAnimator(this, "data/json/credits.json");
