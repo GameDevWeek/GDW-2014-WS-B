@@ -26,8 +26,9 @@ public class MenuPageRoot extends MenuPage {
         DecoImage exit = new DecoImage(assetManager.getTexture("beenden_button"));
         
         //if(type == Type.MAINMENU){
-            //addCenteredPlayButton(menuManager.getWidth() - 365, x, y - yStep * (i), 40, start, () -> {});
-            addCenteredPlayButton(menuManager.getWidth() - 365, 450, 280, 40, start, () -> {});
+           
+            //addCenteredPlayButton(menuManager.getWidth() - 365, 450, 280, 40, start, () -> {});
+            addPageEntry(menuManager, x, y -yStep * i, start, new MenuPageGame(skin, menuManager));
             addPageEntry(menuManager, x, y - yStep * (i+2), options, new MenuPageOptions(skin, menuManager));
             addPageEntry(menuManager, x, y - yStep * (i+4), credits, new MenuPageCredits(skin, menuManager));
             addCenteredExitButton(menuManager.getWidth()- 365, 65, 280, 40, exit, () -> System.exit(0));
