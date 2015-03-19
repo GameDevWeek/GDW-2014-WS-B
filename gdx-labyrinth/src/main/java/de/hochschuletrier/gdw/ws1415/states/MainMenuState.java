@@ -14,7 +14,7 @@ import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ws1415.Main;
 import de.hochschuletrier.gdw.ws1415.game.GameConstants;
-import de.hochschuletrier.gdw.ws1415.game.menu.MenuPageRoot;
+import de.hochschuletrier.gdw.ws1415.menu.MenuPageRoot;
 
 
 /**
