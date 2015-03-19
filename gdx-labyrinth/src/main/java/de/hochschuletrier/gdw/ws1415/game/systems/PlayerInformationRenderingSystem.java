@@ -37,8 +37,8 @@ public class PlayerInformationRenderingSystem extends IteratingSystem {
 
         DrawUtil.fillRect(x, y, box_width, box_height, box_color);
 
-		
-        font.draw(DrawUtil.batch, "TEST", (int) Math.floor(x + 0.15 * box_width), (int) Math.floor(y + 0.5 * box_height));
+		String name = entity.getComponent(PlayerInformationComponent.class).name;
+        font.draw(DrawUtil.batch, name, (int) Math.floor(x + 0.05 * box_width), (int) Math.floor(y + 0.1 * box_height));
 	}
 
 }
