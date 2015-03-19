@@ -1,4 +1,4 @@
-package de.hochschuletrier.gdw.ws1415.game.menu;
+package de.hochschuletrier.gdw.ws1415.menu;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
