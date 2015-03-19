@@ -7,23 +7,25 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ws1415.game.components.BackgroundComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
 public class BackgroundRenderingSystem extends IteratingSystem {
 
-    @SuppressWarnings("unchecked")
-    public BackgroundRenderingSystem(int priority) {
-        super(Family.all(BackgroundComponent.class, PositionComponent.class).get(), priority);
-    }
+	@SuppressWarnings("unchecked")
+	public BackgroundRenderingSystem(int priority) {
+		super(Family.all(BackgroundComponent.class, PositionComponent.class)
+				.get(), priority);
+	}
 
-    @Override
-    protected void processEntity(Entity entity, float deltaTime) {
-        if (entity.getComponent(BackgroundComponent.class).texture != null) {
-            DrawUtil.draw(entity.getComponent(BackgroundComponent.class).texture,
-                    entity.getComponent(PositionComponent.class).x ,
-                    entity.getComponent(PositionComponent.class).y, 
-                    0, 0, 700f,
-                    700f, 0.5f, 0.5f,
-                    0.0f);
-        }
-    }
+	@Override
+	protected void processEntity(Entity entity, float deltaTime) {
+		if (entity.getComponent(BackgroundComponent.class).texture != null) {
+			DrawUtil.draw(
+					entity.getComponent(BackgroundComponent.class).texture,
+					entity.getComponent(PositionComponent.class).x,
+					entity.getComponent(PositionComponent.class).y, 0, 0, 700f,
+					700f, GameBoardInformation.GAME_SCALE,
+					GameBoardInformation.GAME_SCALE, 0.0f);
+		}
+	}
 }
