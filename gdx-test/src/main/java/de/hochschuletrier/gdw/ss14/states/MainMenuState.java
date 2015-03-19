@@ -31,10 +31,11 @@ public class MainMenuState extends BaseGameState {
 
     public MainMenuState(AssetManagerX assetManager) {
         music = assetManager.getMusic("menu");
-        
+ 
         //music.setLooping(true);
-        music.play(); //?gibt nur kurz am Anfang ein Geräusch, aber nicht komplette Musikdatei
-                
+        
+        MusicManager.play(music, 0.0f);
+           
         
         Skin skin = Main.getInstance().getSkin();
         final MenuPageRoot menuPageRoot = new MenuPageRoot(skin, menuManager);
