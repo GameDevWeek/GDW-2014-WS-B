@@ -165,6 +165,7 @@ public class Main extends StateBasedGame {
 
     @Override
     protected void postUpdate(float delta) {
+        MusicManager.update(delta);
         postRender();
     }
 
