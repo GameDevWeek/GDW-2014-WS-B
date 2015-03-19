@@ -14,7 +14,6 @@
     "backgroundStone": "data/images/backgroundStone.png", 
     "gameBackgroundStone": "data/images/Labyrinthbackground.png",
     
-    # MENU
     "logo": "data/images/logo.png",
     "background_menu": "data/images/background_menu.png",
     "beenden_button": "data/images/beenden_button.png",
