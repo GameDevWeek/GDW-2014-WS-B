@@ -18,7 +18,6 @@ public class MenuPage extends Group {
     protected Main main = Main.getInstance();
     protected AssetManagerX assetManager = main.getAssetManager();
     protected final Skin skin;
-    protected int buttonCount = 0;
     
     public MenuPage(Skin skin, String background){
         super();
@@ -29,33 +28,40 @@ public class MenuPage extends Group {
     }
     
     protected final void addLeftAlignedButton(int x, int y, int width, int height, DecoImage button, Runnable runnable) {
-        //TextButton button = addButton(x, y, width, height, text, runnable, "mainMenu");
-        //button.getLabel().setAlignment(Align.left);
         button.setPosition(x, y);
         addActor(button);
     }
     
     protected final void addCenteredImage(int x, int y, int width, int height, DecoImage button, Runnable runnable){
         button.setPosition(x + width , y - height / 2);
-        //button.setAlign(Align.center);
-        addActor(button);
-        
-        //button.mouseClicked(MouseEvent.MOUSE_CLICKED, buttonCount);
-        //buttonCount++;
         
         button.setTouchable(Touchable.enabled);
-        button.addListener(new InputListener(){
+        button.addListener(new ClickListener(){
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                //System.out.println("TEST");
-                return true;
+            public void clicked (InputEvent event, float width, float height) {
+                runnable.run();
             }
         });
+        addActor(button);
     }
 
     protected final void addCenteredButton(int x, int y, int width, int height, String text, Runnable runnable) {
         TextButton button = addButton(x - width / 2, y - height / 2, width, height, text, runnable, "mainMenu");
         button.getLabel().setAlignment(Align.center);
+    }
+    
+    protected final void addCenteredPlayButton(int x, int y, int width, int height, DecoImage button, Runnable runnable){
+        button.setPosition(x - width , y);
+        
+        addActor(button);
+        button.setTouchable(Touchable.enabled);
+        button.addListener(new InputListener(){
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("GAME STARTED!");
+                return true;
+            }
+        });   
     }
     
     protected final void addCenteredExitButton(int x, int y, int width, int height, DecoImage button, Runnable runnable) {
@@ -69,9 +75,7 @@ public class MenuPage extends Group {
                 System.exit(0);
                 return true;
             }
-        });
-        
-        
+        });   
     }
 
     protected final TextButton addButton(int x, int y, int width, int height, String text, Runnable runnable, String style) {

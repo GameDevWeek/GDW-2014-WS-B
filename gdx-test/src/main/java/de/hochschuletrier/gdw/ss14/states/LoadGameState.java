@@ -29,14 +29,14 @@ public class LoadGameState extends BaseGameState {
 //        float drawWidth = Gdx.graphics.getWidth() - 100.0f;
 //        DrawUtil.fillRect(50, Gdx.graphics.getHeight() / 2 - 25, (int) (drawWidth * assetManager.getProgress()), 50, Color.GREEN);
 //        DrawUtil.drawRect(50, Gdx.graphics.getHeight() / 2 - 25, drawWidth, 50, Color.GREEN);
-        DrawUtil.fillRect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Color.GREEN);
+        DrawUtil.fillRect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Color.BLACK);
         
         float x = (Gdx.graphics.getWidth() - loadscreen.getWidth()) / 2;
         float y = (Gdx.graphics.getHeight() - loadscreen.getHeight()) / 2;
         DrawUtil.draw(loadscreen, x, y);
         
         
-        DrawUtil.fillRect(Gdx.graphics.getWidth() / 2 - 245, Gdx.graphics.getHeight() / 2 - 70, (int) (590f * assetManager.getProgress()), 50, Color.RED);
+        DrawUtil.fillRect(Gdx.graphics.getWidth() / 2 - 245, Gdx.graphics.getHeight() / 2 -70, (int) (590f * assetManager.getProgress()), 50, Color.BLUE);
 
     }
 

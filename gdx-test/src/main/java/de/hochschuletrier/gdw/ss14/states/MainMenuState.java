@@ -9,10 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.input.InputForwarder;
-import de.hochschuletrier.gdw.commons.gdx.input.InputInterceptor;
 import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
-import de.hochschuletrier.gdw.commons.gdx.menu.widgets.DecoImage;
 import de.hochschuletrier.gdw.commons.gdx.audio.MusicManager;
 import de.hochschuletrier.gdw.ss14.Main;
 import de.hochschuletrier.gdw.ss14.game.GameConstants;
@@ -33,12 +31,15 @@ public class MainMenuState extends BaseGameState {
 
     public MainMenuState(AssetManagerX assetManager) {
         music = assetManager.getMusic("menu");
-
+        
+        //music.setLooping(true);
+        music.play(); //?gibt nur kurz am Anfang ein Geräusch, aber nicht komplette Musikdatei
+                
+        
         Skin skin = Main.getInstance().getSkin();
-        final MenuPageRoot menuPageRoot = new MenuPageRoot(skin, menuManager, MenuPageRoot.Type.MAINMENU);
+        final MenuPageRoot menuPageRoot = new MenuPageRoot(skin, menuManager);
         menuManager.addLayer(menuPageRoot);
 
-        //menuManager.addLayer(new DecoImage(assetManager.getTexture("logo")));
         menuManager.pushPage(menuPageRoot);
 //        menuManager.getStage().setDebugAll(true);
 
