@@ -34,11 +34,12 @@ public class PlayerInformationRenderingSystem extends IteratingSystem {
 	    float x = 0.0f;
 	    
 	    Color box_color = entity.getComponent(PlayerInformationComponent.class).color;
+	    String playerName = entity.getComponent(PlayerInformationComponent.class).name;
 
         DrawUtil.fillRect(x, y, box_width, box_height, box_color);
 
 		
-        font.draw(DrawUtil.batch, "TEST", (int) Math.floor(x + 0.15 * box_width), (int) Math.floor(y + 0.5 * box_height));
+        font.draw(DrawUtil.batch, playerName, (int) Math.floor(x + 0.05 * box_width), (int) Math.floor(y + 0.1 * box_height));
 	}
 
 }
