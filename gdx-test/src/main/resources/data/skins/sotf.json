@@ -5,7 +5,8 @@
         "mainMenu-font": {"file": "data/fonts/verdana_46.fnt"},
         "mainMenu-Small-font": {"file": "data/fonts/verdana_32.fnt"},
         "credits-Title-font": {"file": "data/fonts/verdana_46.fnt"},
-        "credits-Name-font": {"file": "data/fonts/verdana_32_inverted.fnt"}
+        "credits-Name-font": {"file": "data/fonts/verdana_32_inverted.fnt"},
+        "test": {"file": "data/fonts/OrbitronBlack_Size32.fnt"}
     },
     "com.badlogic.gdx.graphics.Color": {
         "green": {"a": 1, "b": 0, "g": 1, "r": 0},
