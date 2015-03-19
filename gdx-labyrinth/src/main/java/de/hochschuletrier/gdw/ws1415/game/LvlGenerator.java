@@ -87,35 +87,44 @@ public class LvlGenerator {
 		entity.add(engine.createComponent(TextureComponent.class));
 
 		int random = rnd.nextInt(4);
-		switch (random) {
 
-		case 0:
-			createTile(engine, assetManager.getTexture("backgroundStone"), x,
-					y,
-					// assetManager.getTexture("cross"),
-					assetManager.getTexture("crossStone"));
-			break;
-		case 1:
-			createTile(engine, assetManager.getTexture("backgroundStone"), x,
-					y,
-					// assetManager.getTexture("tShapePurple"),
-					// assetManager.getTexture("tShapeYellow"),
-					assetManager.getTexture("tShapeStone"));
-			break;
-		case 2:
-			createTile(engine, assetManager.getTexture("backgroundStone"), x,
-					y,
-					// assetManager.getTexture("lShapeGreen"),
-					// assetManager.getTexture("lShapeBrown")
-					assetManager.getTexture("lShapeStone"));
-			break;
-		case 3:
+		if (x != 3 && y != 3) {
+			switch (random) {
+
+			case 0:
+				createTile(engine, assetManager.getTexture("backgroundStone"),
+						x, y,
+						// assetManager.getTexture("cross"),
+						assetManager.getTexture("crossStone"));
+				break;
+			case 1:
+				createTile(engine, assetManager.getTexture("backgroundStone"),
+						x, y,
+						// assetManager.getTexture("tShapePurple"),
+						// assetManager.getTexture("tShapeYellow"),
+						assetManager.getTexture("tShapeStone"));
+				break;
+			case 2:
+				createTile(engine, assetManager.getTexture("backgroundStone"),
+						x, y,
+						// assetManager.getTexture("lShapeGreen"),
+						// assetManager.getTexture("lShapeBrown")
+						assetManager.getTexture("lShapeStone"));
+				break;
+			case 3:
+				createTile(engine, assetManager.getTexture("backgroundStone"),
+						x, y,
+						// assetManager.getTexture("straightRed"),
+						// assetManager.getTexture("straightWhite"),
+						assetManager.getTexture("straightStone"));
+				break;
+			}
+		} else {
 			createTile(engine, assetManager.getTexture("backgroundStone"), x,
 					y,
 					// assetManager.getTexture("straightRed"),
 					// assetManager.getTexture("straightWhite"),
-					assetManager.getTexture("straightStone"));
-			break;
+					assetManager.getTexture("crossStone"));
 		}
 	}
 
