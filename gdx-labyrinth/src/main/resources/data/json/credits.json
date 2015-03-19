@@ -1,7 +1,7 @@
 {
     "textStyles" : {
-        "title": { "color": "F8BB08", "font": "credits-Title-font", "align": "center" },
-        "name": { "color": "FFFFFF", "font": "credits-Name-font", "align": "center" }
+        "title": { "color": "F8BB08", "font": "test", "align": "center" },
+        "name": { "color": "FFFFFF", "font": "test", "align": "center" }
 
     },
     "paths" : {
