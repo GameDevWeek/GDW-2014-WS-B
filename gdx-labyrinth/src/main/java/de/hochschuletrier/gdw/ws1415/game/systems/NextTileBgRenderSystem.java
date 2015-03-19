@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
+import de.hochschuletrier.gdw.ws1415.Main;
 import de.hochschuletrier.gdw.ws1415.game.components.NextTileBgRenderComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
@@ -32,7 +33,6 @@ public class NextTileBgRenderSystem extends IteratingSystem {
 	    
 	    float x = 0.0f;
 	    
-	    //Color box_color = Color.WHITE;
 	    DrawUtil.draw(entity.getComponent(NextTileBgRenderComponent.class).texture, x, y, box_width, box_height);
 
 		

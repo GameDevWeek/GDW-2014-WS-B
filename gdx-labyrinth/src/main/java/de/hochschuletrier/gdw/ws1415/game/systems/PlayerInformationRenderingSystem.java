@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
+import de.hochschuletrier.gdw.ws1415.Main;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
@@ -37,12 +38,12 @@ public class PlayerInformationRenderingSystem extends IteratingSystem {
 	    
 	    
 	    Color player_color = entity.getComponent(PlayerInformationComponent.class).color;
-
+	       	    
         DrawUtil.fillRect(x, y, box_width, box_height, player_color);
-	    DrawUtil.draw(entity.getComponent(PlayerInformationComponent.class).texture, x, y, box_width-30, box_height);
+	    DrawUtil.draw(entity.getComponent(PlayerInformationComponent.class).texture, x, y, (float)(box_width - box_width * 0.1), box_height);
 
 		String name = entity.getComponent(PlayerInformationComponent.class).name;
-        font.draw(DrawUtil.batch, name, (int) Math.floor(x + 0.05 * box_width), (int) Math.floor(y + 0.1 * box_height));
+        font.draw(DrawUtil.batch, name, (int) Math.floor(x + 0.05 * box_width), (int) Math.floor(y + 0.05 * box_height));
 	}
 
 }

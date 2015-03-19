@@ -112,6 +112,7 @@ public class Game {
 				.getTexture("LeftMenuBG");
 		engine.addEntity(entity);
 	}
+	
 
 	public void nextTileBgTest(AssetManagerX assetManager) {
 		Entity entity = engine.createEntity();
