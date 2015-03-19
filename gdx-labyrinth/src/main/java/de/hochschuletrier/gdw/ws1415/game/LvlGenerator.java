@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.game.components.BackgroundComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
@@ -52,28 +53,28 @@ public class LvlGenerator {
 			if (i != 3)
 				createArrow(engine, assetManager, i
 						* GameBoardInformation.TILE_SIZE + map_x, map_y
-						- GameBoardInformation.TILE_SIZE, 270f);
+						- GameBoardInformation.TILE_SIZE, 270f, i, -1);
 		}
 		// arrowLeft
 		for (int i = 0; i < 7; i++) {
 			if (i != 3)
 				createArrow(engine, assetManager, map_x
 						- GameBoardInformation.TILE_SIZE, map_y + i
-						* GameBoardInformation.TILE_SIZE, 180f);
+						* GameBoardInformation.TILE_SIZE, 180f, -1, i);
 		}
 		// arrowRight
 		for (int i = 0; i < 7; i++) {
 			if (i != 3)
 				createArrow(engine, assetManager, map_x
 						+ GameBoardInformation.TILE_SIZE * 7, map_y + i
-						* GameBoardInformation.TILE_SIZE, 0f);
+						* GameBoardInformation.TILE_SIZE, 0f, 7, i);
 		}
 		// arrowBottom
 		for (int i = 0; i < 7; i++) {
 			if (i != 3)
 				createArrow(engine, assetManager, i
 						* GameBoardInformation.TILE_SIZE + map_x, map_y + 7
-						* GameBoardInformation.TILE_SIZE, 90f);
+						* GameBoardInformation.TILE_SIZE, 90f, i, 7);
 		}
 
 	}
@@ -88,7 +89,7 @@ public class LvlGenerator {
 
 		int random = rnd.nextInt(4);
 
-		if (x != 3 && y != 3) {
+		if ((x != 3) || (y != 3)) {
 			switch (random) {
 
 			case 0:
@@ -185,15 +186,21 @@ public class LvlGenerator {
 	}
 
 	public static void createArrow(PooledEngine engine,
-			AssetManagerX assetManager, float x, float y, float rotation) {
+			AssetManagerX assetManager, float x, float y, float rotation,
+			int xInlvl, int yInlvl) {
 
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(PositionComponent.class));
 		entity.add(engine.createComponent(TextureComponent.class));
+		entity.add(engine.createComponent(InputComponent.class));
+		entity.add(engine.createComponent(PositionInLevelComponent.class));
 
 		entity.getComponent(PositionComponent.class).x = x;
 		entity.getComponent(PositionComponent.class).y = y;
 		entity.getComponent(PositionComponent.class).rotation = rotation;
+
+		entity.getComponent(PositionInLevelComponent.class).x = xInlvl;
+		entity.getComponent(PositionInLevelComponent.class).y = yInlvl;
 
 		switch ((int) rotation) {
 

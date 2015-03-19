@@ -26,4 +26,7 @@ public class GameBoardInformation {
 	// TITLE-FIELD IN PIXLE !!
 	final public static float TILE_FIELD = TILE_SIZE * NUMBER_OF_TILE;
 
+	// TileMovementSpeed
+	public final static float MOVEMENT_SPEED = 1f;
+
 }
