@@ -19,25 +19,27 @@ public class LvlGenerator {
 
 	private static Random rnd = new Random();
 	private static Random rnd2 = new Random();
-	
+
 	private static float map_x = 0;
 	private static float map_y = 0;
 
 	public static void generate(AssetManagerX assetManager, PooledEngine engine) {
-	    
-	    map_x = Gdx.graphics.getWidth() * GameBoardInformation.GAME_MENU_WIDTH + GameBoardInformation.ARROWS_WIDTH + 50;
-	    map_y = GameBoardInformation.ARROWS_HEIGHT;
-	    
-	    Entity entity = engine.createEntity();
-	    entity.add(engine.createComponent(BackgroundComponent.class));
-	    entity.add(engine.createComponent(PositionComponent.class));
-	    
-	    entity.getComponent(BackgroundComponent.class).texture = assetManager.getTexture("gameBackgroundStone");
-	    entity.getComponent(PositionComponent.class).x = map_x;
-	    entity.getComponent(PositionComponent.class).y = map_y;
-	    
-	    engine.addEntity(entity);
-	    
+
+		map_x = Gdx.graphics.getWidth() * GameBoardInformation.GAME_MENU_WIDTH
+				+ GameBoardInformation.ARROWS_WIDTH + 50f;
+		map_y = GameBoardInformation.ARROWS_HEIGHT;
+
+		Entity entity = engine.createEntity();
+		entity.add(engine.createComponent(BackgroundComponent.class));
+		entity.add(engine.createComponent(PositionComponent.class));
+
+		entity.getComponent(BackgroundComponent.class).texture = assetManager
+				.getTexture("gameBackgroundStone");
+		entity.getComponent(PositionComponent.class).x = map_x;
+		entity.getComponent(PositionComponent.class).y = map_y;
+
+		engine.addEntity(entity);
+
 		// LevelGeneration
 		for (int y = 0; y < 7; y++) {
 			for (int x = 0; x < 7; x++) {
@@ -61,31 +63,31 @@ public class LvlGenerator {
 		switch (random) {
 
 		case 0:
-			createTile(engine, assetManager.getTexture("backgroundStone"), x, y,
-					// assetManager.getTexture("cross"), 
-					assetManager.getTexture("crossStone")
-					);
+			createTile(engine, assetManager.getTexture("backgroundStone"), x,
+					y,
+					// assetManager.getTexture("cross"),
+					assetManager.getTexture("crossStone"));
 			break;
 		case 1:
-			createTile(engine, assetManager.getTexture("backgroundStone"), x, y,
+			createTile(engine, assetManager.getTexture("backgroundStone"), x,
+					y,
 					// assetManager.getTexture("tShapePurple"),
 					// assetManager.getTexture("tShapeYellow"),
-			        assetManager.getTexture("tShapeStone")
-			        );
+					assetManager.getTexture("tShapeStone"));
 			break;
 		case 2:
-			createTile(engine, assetManager.getTexture("backgroundStone"), x, y,
+			createTile(engine, assetManager.getTexture("backgroundStone"), x,
+					y,
 					// assetManager.getTexture("lShapeGreen"),
 					// assetManager.getTexture("lShapeBrown")
-			        assetManager.getTexture("lShapeStone")
-			        );
+					assetManager.getTexture("lShapeStone"));
 			break;
 		case 3:
-			createTile(engine, assetManager.getTexture("backgroundStone"), x, y,
+			createTile(engine, assetManager.getTexture("backgroundStone"), x,
+					y,
 					// assetManager.getTexture("straightRed"),
 					// assetManager.getTexture("straightWhite"),
-					assetManager.getTexture("straightStone")
-			        );
+					assetManager.getTexture("straightStone"));
 			break;
 		}
 	}
@@ -106,23 +108,31 @@ public class LvlGenerator {
 
 		entity.getComponent(TextureComponent.class).texture = texture[tmp];
 		entity.getComponent(TextureComponent.class).background = background;
-		
+
 		switch (rotation) {
 		case 0:
-			entity.getComponent(PositionComponent.class).x = map_x + x * 50f;
-			entity.getComponent(PositionComponent.class).y = map_y + y * 50f;
+			entity.getComponent(PositionComponent.class).x = map_x + x
+					* GameBoardInformation.TILE_SCALE;
+			entity.getComponent(PositionComponent.class).y = map_y + y
+					* GameBoardInformation.TILE_SCALE;
 			break;
 		case 1:
-			entity.getComponent(PositionComponent.class).x = map_x + x * 50f + 50;
-			entity.getComponent(PositionComponent.class).y = map_y + y * 50f;
+			entity.getComponent(PositionComponent.class).x = map_x + x
+					* GameBoardInformation.TILE_SCALE + 50;
+			entity.getComponent(PositionComponent.class).y = map_y + y
+					* GameBoardInformation.TILE_SCALE;
 			break;
 		case 2:
-			entity.getComponent(PositionComponent.class).x = map_x + x * 50f + 50;
-			entity.getComponent(PositionComponent.class).y = map_y + y * 50f + 50f;
+			entity.getComponent(PositionComponent.class).x = map_x + x
+					* GameBoardInformation.TILE_SCALE + 50;
+			entity.getComponent(PositionComponent.class).y = map_y + y
+					* GameBoardInformation.TILE_SCALE + 50f;
 			break;
 		case 3:
-			entity.getComponent(PositionComponent.class).x = map_x + x * 50f;
-			entity.getComponent(PositionComponent.class).y = map_y + y * 50f + 50f;
+			entity.getComponent(PositionComponent.class).x = map_x + x
+					* GameBoardInformation.TILE_SCALE;
+			entity.getComponent(PositionComponent.class).y = map_y + y
+					* GameBoardInformation.TILE_SCALE + 50f;
 			break;
 		}
 

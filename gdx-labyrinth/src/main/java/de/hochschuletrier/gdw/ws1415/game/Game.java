@@ -29,9 +29,11 @@ public class Game {
 			GameConstants.PRIORITY_RENDERING);
 	private final InputSystem inputSystem = new InputSystem(
 			GameConstants.PRIORITY_INPUT);
-	private final PlayerInformationRenderingSystem playerInformationRenderingSystem = new PlayerInformationRenderingSystem(GameConstants.PRIORITY_RENDERING);
+	private final PlayerInformationRenderingSystem playerInformationRenderingSystem = new PlayerInformationRenderingSystem(
+			GameConstants.PRIORITY_RENDERING);
 
-	private final BackgroundRenderingSystem backgroundRenderingSystem = new BackgroundRenderingSystem(GameConstants.PRIORITY_RENDERING_BACKGROUND);
+	private final BackgroundRenderingSystem backgroundRenderingSystem = new BackgroundRenderingSystem(
+			GameConstants.PRIORITY_RENDERING_BACKGROUND);
 	// Manager
 	private final InputManager inputManager = new InputManager();
 
@@ -44,12 +46,15 @@ public class Game {
 	}
 
 	public void init(AssetManagerX assetManager) {
-	    
-	    GameBoardInformation.ARROWS_WIDTH = (int) Math.ceil((Gdx.graphics.getWidth() - GameBoardInformation.TILDE_FIELD) / 2);
-	    GameBoardInformation.ARROWS_HEIGHT = (int) Math.ceil((Gdx.graphics.getHeight() - GameBoardInformation.TILDE_FIELD / 2) / 2);
-	    
+
+		GameBoardInformation.ARROWS_WIDTH = (int) Math
+				.ceil((Gdx.graphics.getWidth()
+						* GameBoardInformation.GAME_SCREEN_WIDTH - GameBoardInformation.TILDE_FIELD) / 2);
+		GameBoardInformation.ARROWS_HEIGHT = (int) Math.ceil((Gdx.graphics
+				.getHeight() - GameBoardInformation.TILDE_FIELD) / 2);
+
 		addSystems();
-		
+
 		// LvlGenerator.generate(assetManager, engine);
 
 		playerTest("Hugo Ignatz", Color.BLUE, 1);
@@ -71,7 +76,7 @@ public class Game {
 	public void update(float delta) {
 		Main.getInstance().screenCamera.bind();
 		engine.update(delta);
-	}	
+	}
 
 	// TEST
 	public void createArrow(AssetManagerX assetManager, float x, float y,
@@ -88,16 +93,16 @@ public class Game {
 
 		engine.addEntity(entity);
 	}
-	
+
 	public void playerTest(String name, Color color, int playerNumber) {
-	    Entity entity = engine.createEntity();
-	    entity.add(engine.createComponent(PlayerInformationComponent.class));
-	  
-	    entity.getComponent(PlayerInformationComponent.class).name = name;
-	    entity.getComponent(PlayerInformationComponent.class).color = color;
-	    entity.getComponent(PlayerInformationComponent.class).playerNumber = playerNumber;
-	    
-	    engine.addEntity(entity);
+		Entity entity = engine.createEntity();
+		entity.add(engine.createComponent(PlayerInformationComponent.class));
+
+		entity.getComponent(PlayerInformationComponent.class).name = name;
+		entity.getComponent(PlayerInformationComponent.class).color = color;
+		entity.getComponent(PlayerInformationComponent.class).playerNumber = playerNumber;
+
+		engine.addEntity(entity);
 	}
 
 }
