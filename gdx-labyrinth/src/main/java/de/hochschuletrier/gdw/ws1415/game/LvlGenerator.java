@@ -41,12 +41,39 @@ public class LvlGenerator {
 		engine.addEntity(entity);
 
 		// LevelGeneration
-		for (int y = 0; y < 7; y++) {
-			for (int x = 0; x < 7; x++) {
-
+		for (int y = 0; y < GameBoardInformation.NUMBER_OF_TILE; y++) {
+			for (int x = 0; x < GameBoardInformation.NUMBER_OF_TILE; x++) {
 				createTile(assetManager, engine, x, y);
-
 			}
+		}
+
+		// arrowTop
+		for (int i = 0; i < 7; i++) {
+			if (i != 3)
+				createArrow(engine, assetManager, i
+						* GameBoardInformation.TILE_SIZE + map_x, map_y
+						- GameBoardInformation.TILE_SIZE, 270f);
+		}
+		// arrowLeft
+		for (int i = 0; i < 7; i++) {
+			if (i != 3)
+				createArrow(engine, assetManager, map_x
+						- GameBoardInformation.TILE_SIZE, map_y + i
+						* GameBoardInformation.TILE_SIZE, 180f);
+		}
+		// arrowRight
+		for (int i = 0; i < 7; i++) {
+			if (i != 3)
+				createArrow(engine, assetManager, map_x
+						+ GameBoardInformation.TILE_SIZE * 7, map_y + i
+						* GameBoardInformation.TILE_SIZE, 0f);
+		}
+		// arrowBottom
+		for (int i = 0; i < 7; i++) {
+			if (i != 3)
+				createArrow(engine, assetManager, i
+						* GameBoardInformation.TILE_SIZE + map_x, map_y + 7
+						* GameBoardInformation.TILE_SIZE, 90f);
 		}
 
 	}
@@ -144,6 +171,38 @@ public class LvlGenerator {
 		entity.add(engine.createComponent(PositionInLevelComponent.class));
 		entity.getComponent(PositionInLevelComponent.class).x = (int) x;
 		entity.getComponent(PositionInLevelComponent.class).y = (int) y;
+
+		engine.addEntity(entity);
+	}
+
+	public static void createArrow(PooledEngine engine,
+			AssetManagerX assetManager, float x, float y, float rotation) {
+
+		Entity entity = engine.createEntity();
+		entity.add(engine.createComponent(PositionComponent.class));
+		entity.add(engine.createComponent(TextureComponent.class));
+
+		entity.getComponent(PositionComponent.class).x = x;
+		entity.getComponent(PositionComponent.class).y = y;
+		entity.getComponent(PositionComponent.class).rotation = rotation;
+
+		switch ((int) rotation) {
+
+		case 90:
+			entity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
+			break;
+		case 180:
+			entity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
+			entity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;
+			break;
+		case 270:
+			entity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;
+			break;
+		}
+
+		entity.getComponent(TextureComponent.class).scale = GameBoardInformation.GAME_SCALE;
+		entity.getComponent(TextureComponent.class).texture = assetManager
+				.getTexture("arrow");
 
 		engine.addEntity(entity);
 

@@ -17,7 +17,7 @@ public class GameBoardInformation {
 	public static int ARROWS_HEIGHT = 0;
 
 	// TileSize
-	private static int TILE_SIZE_TEXTURE = 100;
+	public static float TILE_SIZE_TEXTURE = 100f;
 	public static float GAME_SCALE = 0.625f;
 	public static final float TILE_SIZE = TILE_SIZE_TEXTURE * GAME_SCALE;
 
