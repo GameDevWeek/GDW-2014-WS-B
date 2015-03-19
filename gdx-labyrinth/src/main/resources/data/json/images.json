@@ -12,6 +12,7 @@
     "tShapeStone": "data/images/T.png",
     "crossStone": "data/images/PLUS.png",
     "backgroundStone": "data/images/backgroundStone.png", 
-    "gameBackgroundStone": "data/images/Labyrinthbackground.png"
+    "gameBackgroundStone": "data/images/Labyrinthbackground.png",
+    "arrow": "data/images/ArrowLeft.png"
     
 }
