@@ -35,7 +35,6 @@ public class MainMenuState extends BaseGameState {
         //music.setLooping(true);
         
         MusicManager.play(music, 0.0f);
-           
         
         Skin skin = Main.getInstance().getSkin();
         final MenuPageRoot menuPageRoot = new MenuPageRoot(skin, menuManager);

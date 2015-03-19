@@ -68,7 +68,7 @@
                 { "type": "text", "path" : "btw", "group" : "btw", "style" : "text_right", "text": "btw..", "delay": "8500" },
                 { "type": "text", "path" : "btw", "group" : "git1", "style" : "text_right", "text": "I hate Git!", "delay": "1500" },
                 { "type": "text", "path" : "btw", "group" : "git1b", "style" : "text_right", "text": "Nevermind, I need to learn to live with it..", "delay": "0" },
-                { "type": "text", "path" : "btw", "group" : "git2", "style" : "text_right", "text": "... there, I said it!", "delay": "1500" }
+                { "type": "text", "path" : "btw", "group" : "git2", "style" : "text_right", "text": "... Motherfucker!", "delay": "1500" }
             ],
             "animations": [
                 { "time": 0, "animation": "construct", "animationTime": 1000, "group": "title",
