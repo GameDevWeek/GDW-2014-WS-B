@@ -12,7 +12,7 @@ import de.hochschuletrier.gdw.commons.gdx.audio.MusicManager;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundEmitter;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
 import de.hochschuletrier.gdw.commons.gdx.utils.ScreenUtil;
-import de.hochschuletrier.gdw.ws1415.game.Settings;
+import de.hochschuletrier.gdw.ws1415.Settings;
 
 public class MenuPageOptions extends MenuPage {
     
