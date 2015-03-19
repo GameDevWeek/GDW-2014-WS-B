@@ -20,9 +20,9 @@ import de.hochschuletrier.gdw.commons.devcon.cvar.CVarEnum;
 import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.assets.loaders.AnimationExtendedLoader;
-import de.hochschuletrier.gdw.commons.gdx.devcon.DevConsoleView;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundDistanceModel;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundEmitter;
+import de.hochschuletrier.gdw.commons.gdx.devcon.DevConsoleView;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyManager;
 import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
 import de.hochschuletrier.gdw.commons.gdx.state.StateBasedGame;
@@ -31,7 +31,6 @@ import de.hochschuletrier.gdw.commons.gdx.utils.GdxResourceLocator;
 import de.hochschuletrier.gdw.commons.gdx.utils.KeyUtil;
 import de.hochschuletrier.gdw.commons.resourcelocator.CurrentResourceLocator;
 import de.hochschuletrier.gdw.commons.utils.ClassUtils;
-import de.hochschuletrier.gdw.ws1415.sandbox.SandboxCommand;
 import de.hochschuletrier.gdw.ws1415.states.LoadGameState;
 import de.hochschuletrier.gdw.ws1415.states.MainMenuState;
 
@@ -128,7 +127,6 @@ public class Main extends StateBasedGame {
         final MainMenuState mainMenuState = new MainMenuState(assetManager);
         addPersistentState(mainMenuState);
         changeState(mainMenuState, null, null);
-        SandboxCommand.init(assetManager);
     }
 
     @Override
@@ -200,6 +198,9 @@ public class Main extends StateBasedGame {
         cfg.vSyncEnabled = true;
         cfg.foregroundFPS = 60;
         cfg.backgroundFPS = 60;
+        
+        // größer bzw kleiner machen ausschalten
+        cfg.resizable = false;
 
         new LwjglApplication(getInstance(), cfg);
     }

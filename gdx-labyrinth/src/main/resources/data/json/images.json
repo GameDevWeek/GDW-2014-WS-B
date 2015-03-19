@@ -1,4 +1,17 @@
 {
-    "crosshair": "data/images/crosshair.png",
-    "logo": "data/images/logo.png"
+    "cross": "data/images/TILE-open.png",
+    "lShapeGreen": "data/images/TILE-L1.png",
+    "lShapeBrown": "data/images/TILE-L2.png",
+    "straightRed": "data/images/TILE-straight1.png",
+    "straightWhite": "data/images/TILE-straight2.png",
+    "tShapePurple": "data/images/TILE-T1.png",
+    "tShapeYellow": "data/images/TILE-T2.png",
+    "background": "data/images/TILE-background.png",
+    "straightStone": "data/images/I.png",
+    "lShapeStone": "data/images/L.png",
+    "tShapeStone": "data/images/T.png",
+    "crossStone": "data/images/PLUS.png",
+    "backgroundStone": "data/images/backgroundStone.png", 
+    "gameBackgroundStone": "data/images/Labyrinthbackground.png"
+    
 }
