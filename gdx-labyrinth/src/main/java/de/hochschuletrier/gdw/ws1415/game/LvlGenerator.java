@@ -18,7 +18,6 @@ import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 public class LvlGenerator {
 
 	private static Random rnd = new Random();
-	private static Random rnd2 = new Random();
 
 	private static float map_x = 0;
 	private static float map_y = 0;
@@ -26,7 +25,8 @@ public class LvlGenerator {
 	public static void generate(AssetManagerX assetManager, PooledEngine engine) {
 
 		map_x = Gdx.graphics.getWidth() * GameBoardInformation.GAME_MENU_WIDTH
-				+ GameBoardInformation.ARROWS_WIDTH + 50f;
+				+ GameBoardInformation.ARROWS_WIDTH;
+
 		map_y = GameBoardInformation.ARROWS_HEIGHT;
 
 		Entity entity = engine.createEntity();
@@ -108,31 +108,36 @@ public class LvlGenerator {
 
 		entity.getComponent(TextureComponent.class).texture = texture[tmp];
 		entity.getComponent(TextureComponent.class).background = background;
+		entity.getComponent(TextureComponent.class).scale = GameBoardInformation.GAME_SCALE;
 
 		switch (rotation) {
 		case 0:
 			entity.getComponent(PositionComponent.class).x = map_x + x
-					* GameBoardInformation.TILE_SCALE;
+					* GameBoardInformation.TILE_SIZE;
 			entity.getComponent(PositionComponent.class).y = map_y + y
-					* GameBoardInformation.TILE_SCALE;
+					* GameBoardInformation.TILE_SIZE;
 			break;
 		case 1:
 			entity.getComponent(PositionComponent.class).x = map_x + x
-					* GameBoardInformation.TILE_SCALE + 50;
+					* GameBoardInformation.TILE_SIZE
+					+ GameBoardInformation.TILE_SIZE;
 			entity.getComponent(PositionComponent.class).y = map_y + y
-					* GameBoardInformation.TILE_SCALE;
+					* GameBoardInformation.TILE_SIZE;
 			break;
 		case 2:
 			entity.getComponent(PositionComponent.class).x = map_x + x
-					* GameBoardInformation.TILE_SCALE + 50;
+					* GameBoardInformation.TILE_SIZE
+					+ GameBoardInformation.TILE_SIZE;
 			entity.getComponent(PositionComponent.class).y = map_y + y
-					* GameBoardInformation.TILE_SCALE + 50f;
+					* GameBoardInformation.TILE_SIZE
+					+ GameBoardInformation.TILE_SIZE;
 			break;
 		case 3:
 			entity.getComponent(PositionComponent.class).x = map_x + x
-					* GameBoardInformation.TILE_SCALE;
+					* GameBoardInformation.TILE_SIZE;
 			entity.getComponent(PositionComponent.class).y = map_y + y
-					* GameBoardInformation.TILE_SCALE + 50f;
+					* GameBoardInformation.TILE_SIZE
+					+ GameBoardInformation.TILE_SIZE;
 			break;
 		}
 

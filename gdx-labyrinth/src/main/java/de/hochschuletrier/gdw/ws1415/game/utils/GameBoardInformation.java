@@ -12,16 +12,18 @@ public class GameBoardInformation {
 	final public static float GAME_NEXT_TILE = 0.3f;
 	final public static float GAME_PLAYER_INFORMATION = 0.7f;
 
-	// ARROWS WIDTH IN PIXLE
+	// ARROWS WIDTH IN PIXLE initialized on GameStart
 	public static int ARROWS_WIDTH = 0; // 2x !!!!!
 	public static int ARROWS_HEIGHT = 0;
 
 	// TileSize
-	public static final float TILE_SCALE = 50f;
+	private static int TILE_SIZE_TEXTURE = 100;
+	public static float GAME_SCALE = 0.625f;
+	public static final float TILE_SIZE = TILE_SIZE_TEXTURE * GAME_SCALE;
 
 	final public static float NUMBER_OF_TILE = 7;
 
 	// TITLE-FIELD IN PIXLE !!
-	final public static float TILDE_FIELD = TILE_SCALE * NUMBER_OF_TILE;
+	final public static float TILE_FIELD = TILE_SIZE * NUMBER_OF_TILE;
 
 }

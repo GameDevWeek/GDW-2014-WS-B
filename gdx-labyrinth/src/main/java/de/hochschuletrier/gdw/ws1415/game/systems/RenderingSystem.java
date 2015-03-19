@@ -3,7 +3,6 @@ package de.hochschuletrier.gdw.ws1415.game.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
 
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
@@ -42,13 +41,15 @@ public class RenderingSystem extends IteratingSystem {
 		DrawUtil.draw(entity.getComponent(TextureComponent.class).background,
 				entity.getComponent(PositionComponent.class).x,
 				entity.getComponent(PositionComponent.class).y, 0, 0, 100f,
-				100f, 0.5f, 0.5f,
+				100f, GameBoardInformation.GAME_SCALE,
+				GameBoardInformation.GAME_SCALE,
 				entity.getComponent(PositionComponent.class).rotation);
 
 		DrawUtil.draw(entity.getComponent(TextureComponent.class).texture,
 				entity.getComponent(PositionComponent.class).x,
 				entity.getComponent(PositionComponent.class).y, 0, 0, 100.0f,
-				100.0f, 0.5f, 0.5f,
+				100.0f, GameBoardInformation.GAME_SCALE,
+				GameBoardInformation.GAME_SCALE,
 				entity.getComponent(PositionComponent.class).rotation);
 	}
 }

@@ -49,9 +49,9 @@ public class Game {
 
 		GameBoardInformation.ARROWS_WIDTH = (int) Math
 				.ceil((Gdx.graphics.getWidth()
-						* GameBoardInformation.GAME_SCREEN_WIDTH - GameBoardInformation.TILDE_FIELD) / 2);
+						* GameBoardInformation.GAME_SCREEN_WIDTH - GameBoardInformation.TILE_FIELD) / 2);
 		GameBoardInformation.ARROWS_HEIGHT = (int) Math.ceil((Gdx.graphics
-				.getHeight() - GameBoardInformation.TILDE_FIELD) / 2);
+				.getHeight() - GameBoardInformation.TILE_FIELD) / 2);
 
 		addSystems();
 
