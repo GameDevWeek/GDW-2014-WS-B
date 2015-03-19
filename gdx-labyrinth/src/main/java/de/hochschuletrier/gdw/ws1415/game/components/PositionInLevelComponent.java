@@ -3,13 +3,15 @@ package de.hochschuletrier.gdw.ws1415.game.components;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.utils.Pool;
 
-public class InputComponent extends Component implements Pool.Poolable {
+public class PositionInLevelComponent extends Component implements
+		Pool.Poolable {
 
-    // TODO Muss noch gemacht werden !!
-    
+	public int x;
+	public int y;
+
 	@Override
 	public void reset() {
-		// TODO SCHREIBEN
+		this.x = y = 0;
 
 	}
 

@@ -2,16 +2,20 @@ package de.hochschuletrier.gdw.ws1415.game;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.Main;
-import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
+import de.hochschuletrier.gdw.ws1415.game.systems.BackgroundRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
+import de.hochschuletrier.gdw.ws1415.game.systems.PlayerInformationRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.RenderingSystem;
+import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
 public class Game {
 
@@ -23,11 +27,15 @@ public class Game {
 	// systems
 	private final RenderingSystem renderingSystem = new RenderingSystem(
 			GameConstants.PRIORITY_RENDERING);
-	private final InputSystem inputSystem = new InputSystem(GameConstants.PRIORITY_INPUT);
-	
-	//Manager
-	private final InputManager inputManager = new InputManager();
+	private final InputSystem inputSystem = new InputSystem(
+			GameConstants.PRIORITY_INPUT);
+	private final PlayerInformationRenderingSystem playerInformationRenderingSystem = new PlayerInformationRenderingSystem(
+			GameConstants.PRIORITY_RENDERING);
 
+	private final BackgroundRenderingSystem backgroundRenderingSystem = new BackgroundRenderingSystem(
+			GameConstants.PRIORITY_RENDERING_BACKGROUND);
+	// Manager
+	private final InputManager inputManager = new InputManager();
 
 	public Game() {
 
@@ -38,17 +46,31 @@ public class Game {
 	}
 
 	public void init(AssetManagerX assetManager) {
-		
+
+		GameBoardInformation.ARROWS_WIDTH = (int) Math
+				.ceil((Gdx.graphics.getWidth()
+						* GameBoardInformation.GAME_SCREEN_WIDTH - GameBoardInformation.TILE_FIELD) / 2);
+		GameBoardInformation.ARROWS_HEIGHT = (int) Math.ceil((Gdx.graphics
+				.getHeight() - GameBoardInformation.TILE_FIELD) / 2);
+
 		addSystems();
-		
-		createTile(assetManager);
-		
+
+		// LvlGenerator.generate(assetManager, engine);
+
+		playerTest("Hugo Ignatz", Color.BLUE, 1);
+		playerTest("Willie Witzig", Color.RED, 2);
+		playerTest("Tom Ate", Color.YELLOW, 3);
+		playerTest("Peter Silie", Color.GREEN, 4);
+		LvlGenerator.generate(assetManager, engine);
+
 		inputManager.init();
 	}
 
 	private void addSystems() {
 		engine.addSystem(renderingSystem);
 		engine.addSystem(inputSystem);
+		engine.addSystem(playerInformationRenderingSystem);
+		engine.addSystem(backgroundRenderingSystem);
 	}
 
 	public void update(float delta) {
@@ -56,21 +78,31 @@ public class Game {
 		engine.update(delta);
 	}
 
-	public void createTile(AssetManagerX assetManager) {
+	// TEST
+	public void createArrow(AssetManagerX assetManager, float x, float y,
+			float rotation) {
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(PositionComponent.class));
-		entity.add(engine.createComponent(TileComponent.class));
 		entity.add(engine.createComponent(TextureComponent.class));
-		
-		// input test
-		entity.add(engine.createComponent(InputComponent.class));
-		
-		entity.getComponent(TextureComponent.class).texture = assetManager
-				.getTexture("cross");
 
-		entity.getComponent(PositionComponent.class).x = 500f;
-		entity.getComponent(PositionComponent.class).y = 500f;
-		
+		entity.getComponent(TextureComponent.class).texture = assetManager
+				.getTexture("arrow");
+		entity.getComponent(PositionComponent.class).rotation = rotation;
+		entity.getComponent(PositionComponent.class).x = x;
+		entity.getComponent(PositionComponent.class).y = y;
+
 		engine.addEntity(entity);
 	}
+
+	public void playerTest(String name, Color color, int playerNumber) {
+		Entity entity = engine.createEntity();
+		entity.add(engine.createComponent(PlayerInformationComponent.class));
+
+		entity.getComponent(PlayerInformationComponent.class).name = name;
+		entity.getComponent(PlayerInformationComponent.class).color = color;
+		entity.getComponent(PlayerInformationComponent.class).playerNumber = playerNumber;
+
+		engine.addEntity(entity);
+	}
+
 }

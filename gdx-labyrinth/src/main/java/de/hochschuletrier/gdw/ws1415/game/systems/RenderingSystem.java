@@ -7,14 +7,32 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
+import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
 public class RenderingSystem extends IteratingSystem {
 
+	float scale = 1.0f;
+
 	@SuppressWarnings("unchecked")
 	public RenderingSystem(int priority) {
-		super(Family.all(PositionComponent.class, TileComponent.class).get(),
-				priority);
+		super(
+				Family.all(PositionComponent.class, TextureComponent.class)
+						.get(), priority);
+	}
+
+	@Override
+	public void update(float deltaTime) {
+
+		// VIELLEICHT GARNICHT MEHR NÖTIG, WEIL FESTER BILDSCHIRM
+		// float scale_width = Gdx.graphics.getWidth() *
+		// GameBoardInformation.GAME_SCREEN_WIDTH *
+		// GameBoardInformation.TILDE_FIELD /
+		// GameBoardInformation.NUMBER_OF_TILE / 100;
+		// float scale_height = Gdx.graphics.getHeight() *
+		// GameBoardInformation.TILDE_FIELD /
+		// GameBoardInformation.NUMBER_OF_TILE / 100;
+		// scale = Math.max(scale_width, scale_height);
+		super.update(deltaTime);
 	}
 
 	@Override
@@ -22,8 +40,11 @@ public class RenderingSystem extends IteratingSystem {
 
 		DrawUtil.draw(entity.getComponent(TextureComponent.class).texture,
 				entity.getComponent(PositionComponent.class).x,
-				entity.getComponent(PositionComponent.class).y,
-				entity.getComponent(TextureComponent.class).scale);
+				entity.getComponent(PositionComponent.class).y, 0, 0,
+				GameBoardInformation.TILE_SIZE_TEXTURE,
+				GameBoardInformation.TILE_SIZE_TEXTURE,
+				GameBoardInformation.GAME_SCALE,
+				GameBoardInformation.GAME_SCALE,
+				entity.getComponent(PositionComponent.class).rotation);
 	}
-
 }
