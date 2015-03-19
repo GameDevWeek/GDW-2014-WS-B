@@ -60,6 +60,14 @@ public class Main extends StateBasedGame {
         super(new BaseGameState());
     }
 
+    public Skin getSkin() {
+    	return this.skin;
+    }
+    
+    public AssetManagerX getAssetManager() {
+    	return this.assetManager;
+    }
+
     public static Main getInstance() {
         if (instance == null) {
             instance = new Main();
