@@ -36,7 +36,8 @@ public class Game {
 			GameConstants.PRIORITY_RENDERING_BACKGROUND);
 	// Manager
 	private final InputManager inputManager = new InputManager();
-
+	
+	
 	public Game() {
 
 	}
@@ -56,11 +57,12 @@ public class Game {
 		addSystems();
 
 		// LvlGenerator.generate(assetManager, engine);
-
+		
 		playerTest("Hugo Ignatz", Color.BLUE, 1);
 		playerTest("Willie Witzig", Color.RED, 2);
 		playerTest("Tom Ate", Color.YELLOW, 3);
 		playerTest("Peter Silie", Color.GREEN, 4);
+
 		LvlGenerator.generate(assetManager, engine);
 
 		inputManager.init();
@@ -84,6 +86,7 @@ public class Game {
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(PositionComponent.class));
 		entity.add(engine.createComponent(TextureComponent.class));
+		
 
 		entity.getComponent(TextureComponent.class).texture = assetManager
 				.getTexture("arrow");
@@ -104,5 +107,4 @@ public class Game {
 
 		engine.addEntity(entity);
 	}
-
 }

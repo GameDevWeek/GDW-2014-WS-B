@@ -3,7 +3,6 @@ package de.hochschuletrier.gdw.ws1415.states;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
 import de.hochschuletrier.gdw.ws1415.game.Game;
-import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
 
 /**
  * Gameplay state
@@ -15,7 +14,7 @@ public class GameplayState extends BaseGameState {
     private final Game game;
 
     public GameplayState(AssetManagerX assetManager) {
-        game = new Game();
+        game = new Game();        
         game.init(assetManager);
     }
 

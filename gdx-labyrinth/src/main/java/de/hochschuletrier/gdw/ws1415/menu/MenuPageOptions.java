@@ -113,6 +113,7 @@ public class MenuPageOptions extends MenuPage {
     private void onMusicMuteChanged() {
         boolean musicOn = musicMuteButton.isChecked();
         musicMuteButton.setText(musicOn ? "An" : "Aus");
+        System.out.println(musicOn);
         MusicManager.setMuted(!musicOn);
     }
 

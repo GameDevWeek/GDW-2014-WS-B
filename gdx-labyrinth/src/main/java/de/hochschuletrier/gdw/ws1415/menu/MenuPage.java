@@ -59,7 +59,7 @@ public class MenuPage extends Group {
     }
     
     protected final void addCenteredPlayButton(int x, int y, int width, int height, DecoImage button, Runnable runnable){
-        button.setPosition(x - width , y);
+        button.setPosition(x , y-height);
         
         addActor(button);
         button.setTouchable(Touchable.enabled);
