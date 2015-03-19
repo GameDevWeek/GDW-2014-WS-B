@@ -13,6 +13,7 @@
     "crossStone": "data/images/PLUS.png",
     "backgroundStone": "data/images/backgroundStone.png", 
     "gameBackgroundStone": "data/images/Labyrinthbackground.png",
-    "arrow": "data/images/ArrowLeft.png"
+    "arrow": "data/images/ArrowLeft.png",
+    "LeftMenuBG": "data/images/LeftMenuBG.png"
     
 }

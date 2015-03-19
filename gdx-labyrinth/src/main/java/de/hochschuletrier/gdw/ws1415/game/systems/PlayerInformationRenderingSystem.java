@@ -5,8 +5,10 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
+import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
@@ -14,7 +16,7 @@ import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 public class PlayerInformationRenderingSystem extends IteratingSystem {
 
     private BitmapFont font = new BitmapFont(true);
-    
+       
 	@SuppressWarnings("unchecked")
 	public PlayerInformationRenderingSystem(int priority) {
 		super(Family.all(PlayerInformationComponent.class).get(), priority);
@@ -33,9 +35,11 @@ public class PlayerInformationRenderingSystem extends IteratingSystem {
 	    
 	    float x = 0.0f;
 	    
-	    Color box_color = entity.getComponent(PlayerInformationComponent.class).color;
+	    
+	    Color player_color = entity.getComponent(PlayerInformationComponent.class).color;
 
-        DrawUtil.fillRect(x, y, box_width, box_height, box_color);
+        DrawUtil.fillRect(x, y, box_width, box_height, player_color);
+	    DrawUtil.draw(entity.getComponent(PlayerInformationComponent.class).texture, x, y, box_width-30, box_height);
 
 		String name = entity.getComponent(PlayerInformationComponent.class).name;
         font.draw(DrawUtil.batch, name, (int) Math.floor(x + 0.05 * box_width), (int) Math.floor(y + 0.1 * box_height));
