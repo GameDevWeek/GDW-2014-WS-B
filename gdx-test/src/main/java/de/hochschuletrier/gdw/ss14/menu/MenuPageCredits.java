@@ -52,6 +52,7 @@ public class MenuPageCredits extends MenuPage implements SceneAnimator.Getter {
         super(skin, "logo");
 
         try {
+            //sceneAnimator = new SceneAnimator(this, "data/json/credits.json");
             sceneAnimator = new SceneAnimator(this, "data/json/credits.json");
             addActor(new SceneAnimatorActor(sceneAnimator));
         } catch (Exception ex) {
