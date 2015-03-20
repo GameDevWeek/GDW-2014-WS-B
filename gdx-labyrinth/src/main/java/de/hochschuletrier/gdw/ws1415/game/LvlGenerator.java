@@ -32,19 +32,19 @@ public class LvlGenerator {
 		map_y = GameBoardInformation.ARROWS_HEIGHT;
 		
 		if(GameConstants.p1present){
-		    playerTest(engine, GameConstants.playerNames[0], Color.BLUE, 1);
+		    playerTest(engine, GameConstants.playerNames[0], Color.RED, 1);
 		}
 		
 		if(GameConstants.p2present){
-            playerTest(engine, GameConstants.playerNames[1], Color.RED, 2);
+            playerTest(engine, GameConstants.playerNames[1], Color.GREEN, 2);
         }
 		
 		if(GameConstants.p3present){
-            playerTest(engine, GameConstants.playerNames[2], Color.YELLOW, 3);
+            playerTest(engine, GameConstants.playerNames[2], Color.BLUE, 3);
         }
 		
 		if(GameConstants.p4present){
-            playerTest(engine, GameConstants.playerNames[3], Color.GREEN, 4);
+            playerTest(engine, GameConstants.playerNames[3], Color.YELLOW, 4);
         }
 	
 
