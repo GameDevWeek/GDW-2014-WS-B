@@ -7,10 +7,11 @@ import com.badlogic.gdx.utils.Pool.Poolable;
 public class TileComponent extends Component implements Pool.Poolable {
 
 	public TileType tileType;
-	//Information in welche Richtung ein Tile "offen" ist!
-	// 1 = offen, 0 = geschlossen!
-	// erstes Element = Information nach oben, zweites Element Info nach rechts, usw.....
-	//Bsp.: L (bedeutet nach oben und nach rechts offen! Array = [1,1,0,0]
+	/**
+	*Information in welche Richtung ein Tile "offen" ist!
+	*1 = offen, 0 = geschlossen!
+	*erstes Element = Information nach oben, zweites Element Info nach rechts, usw. ...
+	*Bsp.: L (bedeutet nach oben und nach rechts offen! Array = [1,1,0,0] */
 	public int[] rotationData = new int[4];
 
 	@Override

@@ -26,28 +26,27 @@ public class LvlGenerator {
 	private static float map_y = 0;
 
 	public static void generate(AssetManagerX assetManager, PooledEngine engine) {
-		
+
 		map_x = Gdx.graphics.getWidth() * GameBoardInformation.GAME_MENU_WIDTH
 				+ GameBoardInformation.ARROWS_WIDTH;
 
 		map_y = GameBoardInformation.ARROWS_HEIGHT;
-		
-		if(GameConstants.p1present){
-		    playerTest(engine, GameConstants.playerNames[0], Color.RED, 1);
+
+		if (GameConstants.p1present) {
+			createPlayer(engine, GameConstants.playerNames[0], Color.RED, 1);
 		}
-		
-		if(GameConstants.p2present){
-            playerTest(engine, GameConstants.playerNames[1], Color.GREEN, 2);
-        }
-		
-		if(GameConstants.p3present){
-            playerTest(engine, GameConstants.playerNames[2], Color.BLUE, 3);
-        }
-		
-		if(GameConstants.p4present){
-            playerTest(engine, GameConstants.playerNames[3], Color.YELLOW, 4);
-        }
-	
+
+		if (GameConstants.p2present) {
+			createPlayer(engine, GameConstants.playerNames[1], Color.GREEN, 2);
+		}
+
+		if (GameConstants.p3present) {
+			createPlayer(engine, GameConstants.playerNames[2], Color.BLUE, 3);
+		}
+
+		if (GameConstants.p4present) {
+			createPlayer(engine, GameConstants.playerNames[3], Color.YELLOW, 4);
+		}
 
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(BackgroundComponent.class));
@@ -61,9 +60,9 @@ public class LvlGenerator {
 		entity.getComponent(BackgroundComponent.class).height = 700f;
 		entity.getComponent(BackgroundComponent.class).scale_width = GameBoardInformation.GAME_SCALE;
 		entity.getComponent(BackgroundComponent.class).scale_height = GameBoardInformation.GAME_SCALE;
-		
+
 		engine.addEntity(entity);
-		
+
 		Entity menu_Background = engine.createEntity();
 		menu_Background.add(engine.createComponent(BackgroundComponent.class));
 		menu_Background.add(engine.createComponent(PositionComponent.class));
@@ -74,8 +73,11 @@ public class LvlGenerator {
 		menu_Background.getComponent(PositionComponent.class).y = 0.0f;
 		menu_Background.getComponent(BackgroundComponent.class).width = 424.0f; //
 		menu_Background.getComponent(BackgroundComponent.class).height = 900.0f;
-		menu_Background.getComponent(BackgroundComponent.class).scale_width = (float) Math.ceil(Gdx.graphics.getWidth() * GameBoardInformation.GAME_MENU_WIDTH) / 424.0f;
-		menu_Background.getComponent(BackgroundComponent.class).scale_height = Gdx.graphics.getHeight() / 900.0f;
+		menu_Background.getComponent(BackgroundComponent.class).scale_width = (float) Math
+				.ceil(Gdx.graphics.getWidth()
+						* GameBoardInformation.GAME_MENU_WIDTH) / 424.0f;
+		menu_Background.getComponent(BackgroundComponent.class).scale_height = Gdx.graphics
+				.getHeight() / 900.0f;
 
 		engine.addEntity(menu_Background);
 
@@ -120,47 +122,48 @@ public class LvlGenerator {
 	public static void createTile(AssetManagerX assetManager,
 			PooledEngine engine, float x, float y) {
 
-		Entity entity = engine.createEntity();
-		entity.add(engine.createComponent(PositionComponent.class));
-		entity.add(engine.createComponent(TileComponent.class));
-		entity.add(engine.createComponent(TextureComponent.class));
-
 		int random = rnd.nextInt(4);
 
 		if ((x != 3) || (y != 3)) {
+
 			switch (random) {
 
 			case 0:
+				int[] rotationDataCross = { 1, 1, 1, 1 };
 				createTile(engine, assetManager.getTexture("backgroundStone"),
-						x, y,
+						x, y, rotationDataCross,
 						// assetManager.getTexture("cross"),
 						assetManager.getTexture("crossStone"));
 				break;
 			case 1:
+				int[] rotationDataT = { 1, 1, 0, 1 };
 				createTile(engine, assetManager.getTexture("backgroundStone"),
-						x, y,
+						x, y, rotationDataT,
 						// assetManager.getTexture("tShapePurple"),
 						// assetManager.getTexture("tShapeYellow"),
 						assetManager.getTexture("tShapeStone"));
 				break;
 			case 2:
+				int[] rotationDataL = { 1, 1, 0, 0 };
 				createTile(engine, assetManager.getTexture("backgroundStone"),
-						x, y,
+						x, y, rotationDataL,
 						// assetManager.getTexture("lShapeGreen"),
 						// assetManager.getTexture("lShapeBrown")
 						assetManager.getTexture("lShapeStone"));
 				break;
 			case 3:
+				int[] rotationDataStraight = { 1, 0, 1, 0 };
 				createTile(engine, assetManager.getTexture("backgroundStone"),
-						x, y,
+						x, y, rotationDataStraight,
 						// assetManager.getTexture("straightRed"),
 						// assetManager.getTexture("straightWhite"),
 						assetManager.getTexture("straightStone"));
 				break;
 			}
 		} else {
+			int[] rotationDataStraightDef = { 1, 1, 1, 1 };
 			createTile(engine, assetManager.getTexture("backgroundStone"), x,
-					y,
+					y, rotationDataStraightDef,
 					// assetManager.getTexture("straightRed"),
 					// assetManager.getTexture("straightWhite"),
 					assetManager.getTexture("crossStone"));
@@ -168,7 +171,7 @@ public class LvlGenerator {
 	}
 
 	private static void createTile(PooledEngine engine, Texture background,
-			float x, float y, Texture... texture) {
+			float x, float y, int[] rotationData, Texture... texture) {
 
 		Entity entity = engine.createEntity();
 		int tmp = rnd.nextInt(texture.length);
@@ -178,12 +181,18 @@ public class LvlGenerator {
 		entity.add(engine.createComponent(TileComponent.class));
 
 		int rotation = rnd.nextInt(4);
-
+		entity.getComponent(TileComponent.class).rotationData = rotationData;
 		entity.getComponent(PositionComponent.class).rotation = rotation * 90f;
-
+		entity.getComponent(TileComponent.class).rotate(rotation * 90f);
 		entity.getComponent(TextureComponent.class).texture = texture[tmp];
 		entity.getComponent(TextureComponent.class).background = background;
 		entity.getComponent(TextureComponent.class).scale = GameBoardInformation.GAME_SCALE;
+
+		for (int i = 0; i < 4; i++) {
+			System.out.print(""
+					+ entity.getComponent(TileComponent.class).rotationData[i] + ", ");
+		}
+		System.out.println("");
 
 		switch (rotation) {
 		case 0:
@@ -263,8 +272,9 @@ public class LvlGenerator {
 		engine.addEntity(entity);
 
 	}
-	
-	public static void playerTest(PooledEngine engine, String name, Color color, int playerNumber) {
+
+	public static void createPlayer(PooledEngine engine, String name,
+			Color color, int playerNumber) {
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(PlayerInformationComponent.class));
 		entity.add(engine.createComponent(PositionComponent.class));
@@ -273,20 +283,32 @@ public class LvlGenerator {
 		entity.getComponent(PlayerInformationComponent.class).name = name;
 		entity.getComponent(PlayerInformationComponent.class).color = color;
 		entity.getComponent(PlayerInformationComponent.class).playerNumber = playerNumber;
-		
-		switch(playerNumber) {
-			case 1: entity.getComponent(PositionComponent.class).x = map_x;
-					entity.getComponent(PositionComponent.class).y = map_y;
-					break;
-			case 2: entity.getComponent(PositionComponent.class).x = map_x + (GameBoardInformation.NUMBER_OF_TILE - 1) * GameBoardInformation.TILE_SIZE;
-					entity.getComponent(PositionComponent.class).y = map_y;
-					break;
-			case 3: entity.getComponent(PositionComponent.class).x = map_x;
-					entity.getComponent(PositionComponent.class).y = map_y + (GameBoardInformation.NUMBER_OF_TILE - 1) * GameBoardInformation.TILE_SIZE;
-					break;
-			case 4: entity.getComponent(PositionComponent.class).x = map_x + (GameBoardInformation.NUMBER_OF_TILE - 1) * GameBoardInformation.TILE_SIZE;
-					entity.getComponent(PositionComponent.class).y = map_y + (GameBoardInformation.NUMBER_OF_TILE - 1) * GameBoardInformation.TILE_SIZE;
-					break;
+
+		switch (playerNumber) {
+		case 1:
+			entity.getComponent(PositionComponent.class).x = map_x;
+			entity.getComponent(PositionComponent.class).y = map_y;
+			break;
+		case 2:
+			entity.getComponent(PositionComponent.class).x = map_x
+					+ (GameBoardInformation.NUMBER_OF_TILE - 1)
+					* GameBoardInformation.TILE_SIZE;
+			entity.getComponent(PositionComponent.class).y = map_y;
+			break;
+		case 3:
+			entity.getComponent(PositionComponent.class).x = map_x;
+			entity.getComponent(PositionComponent.class).y = map_y
+					+ (GameBoardInformation.NUMBER_OF_TILE - 1)
+					* GameBoardInformation.TILE_SIZE;
+			break;
+		case 4:
+			entity.getComponent(PositionComponent.class).x = map_x
+					+ (GameBoardInformation.NUMBER_OF_TILE - 1)
+					* GameBoardInformation.TILE_SIZE;
+			entity.getComponent(PositionComponent.class).y = map_y
+					+ (GameBoardInformation.NUMBER_OF_TILE - 1)
+					* GameBoardInformation.TILE_SIZE;
+			break;
 		}
 
 		engine.addEntity(entity);
