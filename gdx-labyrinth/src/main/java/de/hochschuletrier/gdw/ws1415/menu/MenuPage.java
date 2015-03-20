@@ -72,10 +72,6 @@ public class MenuPage extends Group {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 main.changeState(new GameplayState(assetManager));
-                //String Array mit PlayerNames übergeben
-                for(int i = 0; i < GameConstants.playerNames.length; i++){
-                    System.out.println(GameConstants.playerNames[i]);
-                }
                 return true;
             }
         });   
@@ -151,12 +147,14 @@ public class MenuPage extends Group {
                 if(buttonCount == 2){
                     DecoImage player = new DecoImage(assetManager.getTexture("player"));
                     addPlayerButton(100, 150, 100, 100, player, GameConstants.playerNames[buttonCount], 2);
+                    GameConstants.p3present = true;
                     buttonCount = 3;
                     return true;
                 }
                 else if(buttonCount == 3){
                     DecoImage player = new DecoImage(assetManager.getTexture("player"));
                     addPlayerButton(100, 0, 100, 100, player, GameConstants.playerNames[buttonCount], 3);
+                    GameConstants.p4present = true;
                     buttonCount = 0;
                     return true;
                 } 
