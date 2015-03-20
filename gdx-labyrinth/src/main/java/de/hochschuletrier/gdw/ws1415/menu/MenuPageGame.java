@@ -11,13 +11,17 @@ public class MenuPageGame extends MenuPage{
     
     public MenuPageGame(Skin skin, MenuManager menuManager) {
         super(skin, "menu_ingame");
+        //super(skin, "ladescreen");
+        //addActor(new DecoImage(assetManager.getTexture("menu_ingame")));
         
         DecoImage play = new DecoImage(assetManager.getTexture("start_button"));
-        addCenteredPlayButton(menuManager.getWidth() - 300, 450, 280, 320, play, () -> {});
+        addCenteredPlayButton(menuManager.getWidth() - 300, 650, 280, 320, play, () -> {});
         
         addCenteredButton(menuManager.getWidth() - 170, 54, 100, 40, "Zurück", () -> menuManager.popPage());
-        addPlayer(100, 25, 100, 100, "Add Player", () -> {});
+        addPlayer(menuManager.getWidth() - 220, 260, 100, 100, "Add Player", () -> {});
         //addCenteredButton(300, 54, 100, 100, "Add Player", () -> {});
+        
+        removePlayer(menuManager.getWidth() - 220, 160, 100, 100, "Remove Player", () -> {});
         
         DecoImage player = new DecoImage(assetManager.getTexture("player_RED"));
         addPlayerButton(100, 450, 100, 100, player, GameConstants.playerNames[0], 0);

@@ -19,7 +19,7 @@ public class LoadGameState extends BaseGameState {
     public LoadGameState(AssetManagerX assetManager, Runnable completeFunc) {
         this.assetManager = assetManager;
         this.completeFunc = completeFunc;
-        loadscreen = new Texture(Gdx.files.internal("data/images/logo.png"));
+        loadscreen = new Texture(Gdx.files.internal("data/images/ladescreen.png"));
     }
 
     public void render() {
@@ -36,7 +36,7 @@ public class LoadGameState extends BaseGameState {
         DrawUtil.draw(loadscreen, x, y);
         
         
-        DrawUtil.fillRect(Gdx.graphics.getWidth() / 2 - 245, Gdx.graphics.getHeight() / 2 -70, (int) (590f * assetManager.getProgress()), 50, Color.BLUE);
+        DrawUtil.fillRect(Gdx.graphics.getWidth() / 2 - 335, Gdx.graphics.getHeight() / 2 +116, (int) (685f * assetManager.getProgress()), 40, Color.BLUE);
 
     }
 

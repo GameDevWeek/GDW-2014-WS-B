@@ -22,7 +22,7 @@ public class MenuPageOptions extends MenuPage {
 //    private final TextButton fullscreenButton;
 
     public MenuPageOptions(Skin skin, MenuManager menuManager){
-        super(skin, "logo");
+        super(skin, "ladescreen");
         
         int y = 400;
         

@@ -114,7 +114,6 @@ public class LvlGenerator {
 						* GameBoardInformation.TILE_SIZE + map_x, map_y + 7
 						* GameBoardInformation.TILE_SIZE, 90f, i, 7);
 		}
-
 	}
 
 	public static void createTile(AssetManagerX assetManager,

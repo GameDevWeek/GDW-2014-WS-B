@@ -11,12 +11,12 @@ public class MenuPageRoot extends MenuPage {
 //    }
     
     public MenuPageRoot(Skin skin, MenuManager menuManager) {
-        super(skin, "logo");
+        super(skin, "menu_ingame");
         // TODO Auto-generated constructor stub
         
-        int x = 100;
+        int x = 90;  //100
         int i = 0;
-        int y = 470;
+        int y = 500;
         int yStep = 55;
         
        
@@ -31,7 +31,7 @@ public class MenuPageRoot extends MenuPage {
             addPageEntry(menuManager, x, y - yStep * i, start, new MenuPageGame(skin, menuManager));
             addPageEntry(menuManager, x, y - yStep * (i+2), options, new MenuPageOptions(skin, menuManager));
             addPageEntry(menuManager, x, y - yStep * (i+4), credits, new MenuPageCredits(skin, menuManager));
-            addCenteredExitButton(menuManager.getWidth()- 365, 65, 280, 40, exit, () -> System.exit(0));
+            addCenteredExitButton(menuManager.getWidth()- 935, 90, 280, 40, exit, () -> System.exit(0));
         //}
     }
 
