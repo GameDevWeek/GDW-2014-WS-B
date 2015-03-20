@@ -41,6 +41,8 @@ public class LevelHandlingSystem extends IteratingSystem {
 			entity.getComponent(PositionComponent.class).y = entity
 					.getComponent(MovementComponent.class).destinationY;
 			entity.remove(MovementComponent.class);
+
+			GameBoardInformation.CLICKABLE = true;
 		} else {
 
 			entity.getComponent(PositionComponent.class).x += distanceX
