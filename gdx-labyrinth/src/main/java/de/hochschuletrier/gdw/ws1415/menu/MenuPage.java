@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
@@ -119,7 +120,8 @@ public class MenuPage extends Group {
                TextField name = new TextField("", skin);
                //name.setPosition(600, 506); //funktioniert !!
                name.setPosition(label.getX()-45, label.getY()+30);
-               
+               //name.setVisible("transparent");
+               //name.setBackgroundColor("transparent");
                name.addListener(new InputListener(){
                    public boolean keyDown (InputEvent event, int keycode) {
                        if(keycode == Keys.ENTER){
