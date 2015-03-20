@@ -32,7 +32,7 @@ public class Game {
 			GameConstants.COMPONENT_POOL_MAX_SIZE);
 	// systems
 	private final RenderingSystem renderingSystem = new RenderingSystem(
-			GameConstants.PRIORITY_RENDERING + 10);
+			GameConstants.PRIORITY_RENDERING);
 	private final InputSystem inputSystem = new InputSystem(
 			GameConstants.PRIORITY_INPUT);
 	private final PlayerInformationRenderingSystem playerInformationRenderingSystem = new PlayerInformationRenderingSystem(
@@ -51,7 +51,8 @@ public class Game {
 
 	// Manager
 	private final InputManager inputManager = new InputManager();
-
+	
+	
 	public Game() {
 
 	}
@@ -68,9 +69,18 @@ public class Game {
 						* GameBoardInformation.GAME_SCREEN_WIDTH - GameBoardInformation.TILE_FIELD) / 2);
 		GameBoardInformation.ARROWS_HEIGHT = (int) Math.ceil((Gdx.graphics
 				.getHeight() - GameBoardInformation.TILE_FIELD) / 2);
+		
+		GameBoardInformation.MENU_WOODPLANK = assetManager.getTexture("woodplank");
 
 		GameBoardInformation.MENU_WOODPLANK = assetManager
 				.getTexture("woodplank");
+		
+		GameBoardInformation.MENU_WOODPLANK = assetManager.getTexture("woodplank");
+		GameBoardInformation.MENU_PLAYER1 = assetManager.getTexture("player_RED");
+		GameBoardInformation.MENU_PLAYER2 = assetManager.getTexture("player_GREEN");
+		GameBoardInformation.MENU_PLAYER3 = assetManager.getTexture("player_BLUE");
+		GameBoardInformation.MENU_PLAYER4 = assetManager.getTexture("player_YELLOW");
+		
 
 		addSystems();
 
@@ -105,6 +115,7 @@ public class Game {
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(PositionComponent.class));
 		entity.add(engine.createComponent(TextureComponent.class));
+		
 
 		entity.getComponent(TextureComponent.class).texture = assetManager
 				.getTexture("arrow");

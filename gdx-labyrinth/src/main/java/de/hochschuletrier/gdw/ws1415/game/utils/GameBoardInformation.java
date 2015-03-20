@@ -42,4 +42,8 @@ public class GameBoardInformation {
 	public static Entity nextTileEntity;
 	public static long nextTileEntityBuffer;
 
+	public static Texture MENU_PLAYER1 = null;
+	public static Texture MENU_PLAYER2 = null;
+	public static Texture MENU_PLAYER3 = null;
+	public static Texture MENU_PLAYER4 = null;
 }

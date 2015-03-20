@@ -32,10 +32,22 @@ public class LvlGenerator {
 
 		map_y = GameBoardInformation.ARROWS_HEIGHT;
 
-		playerTest(engine, "Hugo Ignatz", Color.BLUE, 1);
-		playerTest(engine, "Willie Witzig", Color.RED, 2);
-		playerTest(engine, "Tom Ate", Color.YELLOW, 3);
-		playerTest(engine, "Peter Silie", Color.GREEN, 4);
+		if(GameConstants.p1present){
+		    playerTest(engine, GameConstants.playerNames[0], Color.RED, 1);
+		}
+		
+		if(GameConstants.p2present){
+            playerTest(engine, GameConstants.playerNames[1], Color.GREEN, 2);
+        }
+		
+		if(GameConstants.p3present){
+            playerTest(engine, GameConstants.playerNames[2], Color.BLUE, 3);
+        }
+		
+		if(GameConstants.p4present){
+            playerTest(engine, GameConstants.playerNames[3], Color.YELLOW, 4);
+        }
+	
 
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(BackgroundComponent.class));

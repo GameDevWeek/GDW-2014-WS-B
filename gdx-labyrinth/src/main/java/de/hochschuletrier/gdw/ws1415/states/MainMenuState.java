@@ -14,7 +14,7 @@ import de.hochschuletrier.gdw.commons.gdx.state.BaseGameState;
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
 import de.hochschuletrier.gdw.ws1415.Main;
 import de.hochschuletrier.gdw.ws1415.game.GameConstants;
-import de.hochschuletrier.gdw.ws1415.game.menu.MenuPageRoot;
+import de.hochschuletrier.gdw.ws1415.menu.MenuPageRoot;
 
 
 /**
@@ -32,8 +32,7 @@ public class MainMenuState extends BaseGameState {
     public MainMenuState(AssetManagerX assetManager) {
         music = assetManager.getMusic("menu");
  
-        //music.setLooping(true);
-        
+        music.setLooping(true);
         MusicManager.play(music, 0.0f);
            
         

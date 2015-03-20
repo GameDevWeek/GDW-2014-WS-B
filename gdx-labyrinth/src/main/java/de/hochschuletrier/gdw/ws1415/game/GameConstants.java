@@ -16,4 +16,11 @@ public class GameConstants {
 
     // Music parameters
     public static float MUSIC_FADE_TIME = 2;
+    
+    //Playernames
+    public static String[] playerNames = {"Player 1", "Player 2", "Player 3", "Der Spaten"};
+    public static boolean p1present = true;
+    public static boolean p2present = true;
+    public static boolean p3present = false;
+    public static boolean p4present = false;
 }

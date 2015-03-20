@@ -1,4 +1,4 @@
-package de.hochschuletrier.gdw.ws1415.game.menu;
+package de.hochschuletrier.gdw.ws1415.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -19,16 +19,17 @@ public class MenuPageOptions extends MenuPage {
     private final Label soundLabel, musicLabel;
     private final Slider soundSlider, musicSlider;
     private final TextButton soundMuteButton, musicMuteButton;
-    private final TextButton fullscreenButton;
+//    private final TextButton fullscreenButton;
 
     public MenuPageOptions(Skin skin, MenuManager menuManager){
         super(skin, "logo");
         
         int y = 400;
         
-        createLabel(100, y).setText("Vollbild Modus:");
-        fullscreenButton = createToggleButton(440, y, "Aus", this::onFullscreenChanged);    
-        y -= 50;
+        /* Vollbild gerade nicht notwendig, die resize = false */
+//        createLabel(100, y).setText("Vollbild Modus:");
+//        fullscreenButton = createToggleButton(440, y, "Aus", this::onFullscreenChanged);    
+//        y -= 50;
         
         createLabel(100,y).setText("Sound: ");
         soundSlider = createSlider(170, y, this::onSoundVolumeChanged);
@@ -85,12 +86,12 @@ public class MenuPageOptions extends MenuPage {
         return pct + "%";
     }
     
-    private void onFullscreenChanged() {
-        boolean fullscreenOn = fullscreenButton.isChecked();
-        fullscreenButton.setText(fullscreenOn ? "An" : "Aus");
-
-        ScreenUtil.setFullscreen(fullscreenOn);
-    }
+//    private void onFullscreenChanged() {
+//        boolean fullscreenOn = fullscreenButton.isChecked();
+//        fullscreenButton.setText(fullscreenOn ? "An" : "Aus");
+//
+//        ScreenUtil.setFullscreen(fullscreenOn);
+//    }
     
     private void onSoundVolumeChanged() {
         final float value = soundSlider.getValue();
@@ -113,6 +114,7 @@ public class MenuPageOptions extends MenuPage {
     private void onMusicMuteChanged() {
         boolean musicOn = musicMuteButton.isChecked();
         musicMuteButton.setText(musicOn ? "An" : "Aus");
+        System.out.println(musicOn);
         MusicManager.setMuted(!musicOn);
     }
 
@@ -133,7 +135,7 @@ public class MenuPageOptions extends MenuPage {
         soundMuteButton.setChecked(!Settings.SOUND_MUTE.get());
         musicSlider.setValue(Settings.MUSIC_VOLUME.get());
         musicMuteButton.setChecked(!Settings.MUSIC_MUTE.get());
-        fullscreenButton.setChecked(Gdx.graphics.isFullscreen());
+//        fullscreenButton.setChecked(Gdx.graphics.isFullscreen());
     }
 
     private void storeSettings() {

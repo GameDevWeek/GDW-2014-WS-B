@@ -14,7 +14,7 @@ import java.util.LinkedList;
 public class MusicManager {
 
     private static boolean muted;
-    private static float globalVolume = 1;
+    private static float globalVolume = 1.0f;
     private static Music currentMusic;
     private static final LinkedList<Fade> fades = new LinkedList();
     private static final ReflectionPool<Fade> pool = new ReflectionPool(Fade.class);
@@ -103,8 +103,14 @@ public class MusicManager {
         fades.clear();
     }
 
-    public static void update(float deltaTime) {
-        for (Iterator<Fade> iterator = fades.iterator(); iterator.hasNext();) {
+    public static void update(float deltaTime) {   
+    	
+    	/* FIX Lautstärke auch nach muted auf false gesetzt wurde auf 0.0f */
+    	if(currentMusic != null && !muted && (currentMusic.isPlaying() == true)) {
+    		currentMusic.setVolume(globalVolume);
+    	}
+    	
+    	for (Iterator<Fade> iterator = fades.iterator(); iterator.hasNext();) {
             Fade fade = iterator.next();
             if (fade.update(deltaTime)) {
                 if (fade.music == currentMusic) {
