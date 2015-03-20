@@ -21,4 +21,7 @@ public class GameConstants {
     
     // Music parameters
     public static float MUSIC_FADE_TIME = 2;
+    
+    //Playernames
+    public static String[] playerNames = new String[4];
 }

@@ -34,7 +34,7 @@ public class LvlGenerator {
 		playerTest(engine, "Hugo Ignatz", Color.BLUE, 1);
 		playerTest(engine, "Willie Witzig", Color.RED, 2);
 		playerTest(engine, "Tom Ate", Color.YELLOW, 3);
-		playerTest(engine, "Peter Silie", Color.GREEN, 4);
+		//playerTest(engine, "Peter Silie", Color.GREEN, 4);
 
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(BackgroundComponent.class));
