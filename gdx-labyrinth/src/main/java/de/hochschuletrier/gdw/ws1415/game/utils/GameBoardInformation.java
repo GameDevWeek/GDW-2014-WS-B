@@ -33,4 +33,8 @@ public class GameBoardInformation {
 
 	// texture
 	public static Texture MENU_WOODPLANK = null;
+
+	// Pfeile blockieren
+	public static boolean CLICKABLE = true;
+
 }

@@ -43,6 +43,8 @@ public class MovementUtil {
 
 		}
 
+		GameBoardInformation.CLICKABLE = false;
+
 	}
 
 	public static void moveV(int column, float direction) {
@@ -68,6 +70,7 @@ public class MovementUtil {
 
 		}
 
+		GameBoardInformation.CLICKABLE = false;
 	}
 
 }
