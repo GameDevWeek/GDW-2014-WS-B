@@ -44,8 +44,27 @@ public class LvlGenerator {
 				.getTexture("gameBackgroundStone");
 		entity.getComponent(PositionComponent.class).x = map_x;
 		entity.getComponent(PositionComponent.class).y = map_y;
-
+		entity.getComponent(BackgroundComponent.class).width = 700f;
+		entity.getComponent(BackgroundComponent.class).height = 700f;
+		entity.getComponent(BackgroundComponent.class).scale_width = GameBoardInformation.GAME_SCALE;
+		entity.getComponent(BackgroundComponent.class).scale_height = GameBoardInformation.GAME_SCALE;
+		
 		engine.addEntity(entity);
+		
+		Entity menu_Background = engine.createEntity();
+		menu_Background.add(engine.createComponent(BackgroundComponent.class));
+		menu_Background.add(engine.createComponent(PositionComponent.class));
+
+		menu_Background.getComponent(BackgroundComponent.class).texture = assetManager
+				.getTexture("menu_ingame");
+		menu_Background.getComponent(PositionComponent.class).x = 0.0f;
+		menu_Background.getComponent(PositionComponent.class).y = 0.0f;
+		menu_Background.getComponent(BackgroundComponent.class).width = 424.0f; //
+		menu_Background.getComponent(BackgroundComponent.class).height = 900.0f;
+		menu_Background.getComponent(BackgroundComponent.class).scale_width = (float) Math.ceil(Gdx.graphics.getWidth() * GameBoardInformation.GAME_MENU_WIDTH) / 424.0f;
+		menu_Background.getComponent(BackgroundComponent.class).scale_height = Gdx.graphics.getHeight() / 900.0f;
+
+		engine.addEntity(menu_Background);
 
 		// LevelGeneration
 		for (int y = 0; y < GameBoardInformation.NUMBER_OF_TILE; y++) {

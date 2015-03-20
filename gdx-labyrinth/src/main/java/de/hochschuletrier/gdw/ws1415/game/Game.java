@@ -77,7 +77,7 @@ public class Game {
 		engine.addSystem(renderingSystem);
 		engine.addSystem(inputSystem);
 		engine.addSystem(playerInformationRenderingSystem);
-		engine.addSystem(nextTileBgRenderSystem);
+		// engine.addSystem(nextTileBgRenderSystem);
 		engine.addSystem(backgroundRenderingSystem);
 		
 		engine.addSystem(playerRenderingSystem);

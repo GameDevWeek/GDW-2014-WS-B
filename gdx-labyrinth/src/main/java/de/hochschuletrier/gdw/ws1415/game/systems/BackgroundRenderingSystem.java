@@ -23,9 +23,11 @@ public class BackgroundRenderingSystem extends IteratingSystem {
 			DrawUtil.draw(
 					entity.getComponent(BackgroundComponent.class).texture,
 					entity.getComponent(PositionComponent.class).x,
-					entity.getComponent(PositionComponent.class).y, 0, 0, 700f,
-					700f, GameBoardInformation.GAME_SCALE,
-					GameBoardInformation.GAME_SCALE, 0.0f);
+					entity.getComponent(PositionComponent.class).y, 0, 0, 
+					entity.getComponent(BackgroundComponent.class).width,
+					entity.getComponent(BackgroundComponent.class).height,
+					entity.getComponent(BackgroundComponent.class).scale_width,
+					entity.getComponent(BackgroundComponent.class).scale_height, 0.0f);
 		}
 	}
 }
