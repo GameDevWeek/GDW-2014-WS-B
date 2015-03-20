@@ -5,8 +5,8 @@ import com.badlogic.gdx.utils.Pool;
 
 public class InputComponent extends Component implements Pool.Poolable {
 
-    // TODO Muss noch gemacht werden !!
-    
+	public boolean active;
+
 	@Override
 	public void reset() {
 		// TODO SCHREIBEN
