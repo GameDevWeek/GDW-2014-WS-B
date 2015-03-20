@@ -14,6 +14,7 @@ import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
 import de.hochschuletrier.gdw.ws1415.game.systems.BackgroundRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.PlayerInformationRenderingSystem;
+import de.hochschuletrier.gdw.ws1415.game.systems.PlayerRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.RenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
@@ -34,6 +35,10 @@ public class Game {
 
 	private final BackgroundRenderingSystem backgroundRenderingSystem = new BackgroundRenderingSystem(
 			GameConstants.PRIORITY_RENDERING_BACKGROUND);
+	
+	private final PlayerRenderingSystem playerRenderingSystem = new PlayerRenderingSystem(
+			GameConstants.PRIORITY_RENDERING + 1);
+	
 	// Manager
 	private final InputManager inputManager = new InputManager();
 
@@ -57,10 +62,6 @@ public class Game {
 
 		// LvlGenerator.generate(assetManager, engine);
 
-		playerTest("Hugo Ignatz", Color.BLUE, 1);
-		playerTest("Willie Witzig", Color.RED, 2);
-		playerTest("Tom Ate", Color.YELLOW, 3);
-		playerTest("Peter Silie", Color.GREEN, 4);
 		LvlGenerator.generate(assetManager, engine);
 
 		inputManager.init();
@@ -71,6 +72,8 @@ public class Game {
 		engine.addSystem(inputSystem);
 		engine.addSystem(playerInformationRenderingSystem);
 		engine.addSystem(backgroundRenderingSystem);
+		
+		engine.addSystem(playerRenderingSystem);
 	}
 
 	public void update(float delta) {
@@ -90,17 +93,6 @@ public class Game {
 		entity.getComponent(PositionComponent.class).rotation = rotation;
 		entity.getComponent(PositionComponent.class).x = x;
 		entity.getComponent(PositionComponent.class).y = y;
-
-		engine.addEntity(entity);
-	}
-
-	public void playerTest(String name, Color color, int playerNumber) {
-		Entity entity = engine.createEntity();
-		entity.add(engine.createComponent(PlayerInformationComponent.class));
-
-		entity.getComponent(PlayerInformationComponent.class).name = name;
-		entity.getComponent(PlayerInformationComponent.class).color = color;
-		entity.getComponent(PlayerInformationComponent.class).playerNumber = playerNumber;
 
 		engine.addEntity(entity);
 	}

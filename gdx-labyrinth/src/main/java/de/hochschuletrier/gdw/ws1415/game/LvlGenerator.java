@@ -5,10 +5,12 @@ import java.util.Random;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.game.components.BackgroundComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
@@ -23,11 +25,16 @@ public class LvlGenerator {
 	private static float map_y = 0;
 
 	public static void generate(AssetManagerX assetManager, PooledEngine engine) {
-
+		
 		map_x = Gdx.graphics.getWidth() * GameBoardInformation.GAME_MENU_WIDTH
 				+ GameBoardInformation.ARROWS_WIDTH;
 
 		map_y = GameBoardInformation.ARROWS_HEIGHT;
+		
+		playerTest(engine, "Hugo Ignatz", Color.BLUE, 1);
+		playerTest(engine, "Willie Witzig", Color.RED, 2);
+		playerTest(engine, "Tom Ate", Color.YELLOW, 3);
+		playerTest(engine, "Peter Silie", Color.GREEN, 4);
 
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(BackgroundComponent.class));
@@ -215,5 +222,33 @@ public class LvlGenerator {
 
 		engine.addEntity(entity);
 
+	}
+	
+	public static void playerTest(PooledEngine engine, String name, Color color, int playerNumber) {
+		Entity entity = engine.createEntity();
+		entity.add(engine.createComponent(PlayerInformationComponent.class));
+		entity.add(engine.createComponent(PositionComponent.class));
+		entity.add(engine.createComponent(TextureComponent.class));
+
+		entity.getComponent(PlayerInformationComponent.class).name = name;
+		entity.getComponent(PlayerInformationComponent.class).color = color;
+		entity.getComponent(PlayerInformationComponent.class).playerNumber = playerNumber;
+		
+		switch(playerNumber) {
+			case 1: entity.getComponent(PositionComponent.class).x = map_x;
+					entity.getComponent(PositionComponent.class).y = map_y;
+					break;
+			case 2: entity.getComponent(PositionComponent.class).x = map_x + (GameBoardInformation.NUMBER_OF_TILE - 1) * GameBoardInformation.TILE_SIZE;
+					entity.getComponent(PositionComponent.class).y = map_y;
+					break;
+			case 3: entity.getComponent(PositionComponent.class).x = map_x;
+					entity.getComponent(PositionComponent.class).y = map_y + (GameBoardInformation.NUMBER_OF_TILE - 1) * GameBoardInformation.TILE_SIZE;
+					break;
+			case 4: entity.getComponent(PositionComponent.class).x = map_x + (GameBoardInformation.NUMBER_OF_TILE - 1) * GameBoardInformation.TILE_SIZE;
+					entity.getComponent(PositionComponent.class).y = map_y + (GameBoardInformation.NUMBER_OF_TILE - 1) * GameBoardInformation.TILE_SIZE;
+					break;
+		}
+
+		engine.addEntity(entity);
 	}
 }
