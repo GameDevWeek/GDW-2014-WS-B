@@ -20,6 +20,7 @@ public class MenuPage extends Group {
     protected Main main = Main.getInstance();
     protected AssetManagerX assetManager = main.getAssetManager();
     protected final Skin skin;
+    protected int buttonCount = 3;
     
     public MenuPage(Skin skin) {
     	super(); 
@@ -104,6 +105,8 @@ public class MenuPage extends Group {
         button.setPosition(x, y);
         addActor(button);
         createLabel(x, y, width, height).setText(name);
+        
+        //button.addL
     }
     
     private Label createLabel(int x, int y, int width, int height) {
@@ -113,7 +116,25 @@ public class MenuPage extends Group {
         return label;
     }
     
-    private final void addPlayer(int x, int y, int width, int height, String name, Runnable runnable){
+    protected final void addPlayer(int x, int y, int width, int height, String name, Runnable runnable){
         TextButton button = addButton(x, y - height / 2, width, height, name, runnable, "mainMenu");
+        
+        button.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                if(buttonCount == 3){
+                    DecoImage player = new DecoImage(assetManager.getTexture("player"));
+                    addPlayerButton(100, 150, 100, 100, player, "Player " + buttonCount);
+                    buttonCount = 4;
+                    return true;
+                }
+                else if(buttonCount == 4){
+                    DecoImage player = new DecoImage(assetManager.getTexture("player"));
+                    addPlayerButton(100, 0, 100, 100, player, "Player " + buttonCount);
+                    buttonCount = 0;
+                    return true;
+                } 
+                return true;
+            }
+        });
     }
 }
