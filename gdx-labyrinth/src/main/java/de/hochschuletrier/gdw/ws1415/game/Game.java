@@ -7,12 +7,14 @@ import com.badlogic.gdx.graphics.Color;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.Main;
+import de.hochschuletrier.gdw.ws1415.game.components.NextTileBgRenderComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
 import de.hochschuletrier.gdw.ws1415.game.systems.BackgroundRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
+import de.hochschuletrier.gdw.ws1415.game.systems.NextTileBgRenderSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.PlayerInformationRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.PlayerRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.RenderingSystem;
@@ -32,6 +34,8 @@ public class Game {
 			GameConstants.PRIORITY_INPUT);
 	private final PlayerInformationRenderingSystem playerInformationRenderingSystem = new PlayerInformationRenderingSystem(
 			GameConstants.PRIORITY_RENDERING);
+	private final NextTileBgRenderSystem nextTileBgRenderSystem = new NextTileBgRenderSystem(
+			GameConstants.PRIORITY_RENDERING - 1);
 
 	private final BackgroundRenderingSystem backgroundRenderingSystem = new BackgroundRenderingSystem(
 			GameConstants.PRIORITY_RENDERING_BACKGROUND);
@@ -71,6 +75,7 @@ public class Game {
 		engine.addSystem(renderingSystem);
 		engine.addSystem(inputSystem);
 		engine.addSystem(playerInformationRenderingSystem);
+		engine.addSystem(nextTileBgRenderSystem);
 		engine.addSystem(backgroundRenderingSystem);
 		
 		engine.addSystem(playerRenderingSystem);
