@@ -32,7 +32,7 @@ public class Game {
 			GameConstants.COMPONENT_POOL_MAX_SIZE);
 	// systems
 	private final RenderingSystem renderingSystem = new RenderingSystem(
-			GameConstants.PRIORITY_RENDERING);
+			GameConstants.PRIORITY_RENDERING + 10);
 	private final InputSystem inputSystem = new InputSystem(
 			GameConstants.PRIORITY_INPUT);
 	private final PlayerInformationRenderingSystem playerInformationRenderingSystem = new PlayerInformationRenderingSystem(
@@ -45,10 +45,10 @@ public class Game {
 
 	private final BackgroundRenderingSystem backgroundRenderingSystem = new BackgroundRenderingSystem(
 			GameConstants.PRIORITY_RENDERING_BACKGROUND);
-	
+
 	private final PlayerRenderingSystem playerRenderingSystem = new PlayerRenderingSystem(
 			GameConstants.PRIORITY_RENDERING + 1);
-	
+
 	// Manager
 	private final InputManager inputManager = new InputManager();
 
@@ -68,8 +68,9 @@ public class Game {
 						* GameBoardInformation.GAME_SCREEN_WIDTH - GameBoardInformation.TILE_FIELD) / 2);
 		GameBoardInformation.ARROWS_HEIGHT = (int) Math.ceil((Gdx.graphics
 				.getHeight() - GameBoardInformation.TILE_FIELD) / 2);
-		
-		GameBoardInformation.MENU_WOODPLANK = assetManager.getTexture("woodplank");
+
+		GameBoardInformation.MENU_WOODPLANK = assetManager
+				.getTexture("woodplank");
 
 		addSystems();
 
@@ -78,7 +79,8 @@ public class Game {
 		inputManager.init();
 
 		MovementUtil.init(engine,
-				engine.getEntitiesFor(Family.all(TileComponent.class).get()));
+				engine.getEntitiesFor(Family.all(TileComponent.class).get()),
+				assetManager);
 	}
 
 	private void addSystems() {
@@ -88,7 +90,7 @@ public class Game {
 		// engine.addSystem(nextTileBgRenderSystem);
 		engine.addSystem(backgroundRenderingSystem);
 		engine.addSystem(levelHandlingsystem);
-		
+
 		engine.addSystem(playerRenderingSystem);
 	}
 

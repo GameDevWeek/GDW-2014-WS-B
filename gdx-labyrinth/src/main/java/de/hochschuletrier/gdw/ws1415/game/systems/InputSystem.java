@@ -43,6 +43,7 @@ public class InputSystem extends IteratingSystem {
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y
 									+ GameBoardInformation.TILE_SIZE)) {
+
 						MovementUtil
 								.moveH(entity
 										.getComponent(PositionInLevelComponent.class).y,
