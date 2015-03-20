@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
 import de.hochschuletrier.gdw.commons.devcon.DevConsole;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVar;
 import de.hochschuletrier.gdw.commons.devcon.cvar.CVarEnum;
@@ -20,6 +21,7 @@ import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.assets.loaders.AnimationExtendedLoader;
 import de.hochschuletrier.gdw.commons.gdx.devcon.DevConsoleView;
+import de.hochschuletrier.gdw.commons.gdx.audio.MusicManager;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundDistanceModel;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundEmitter;
 import de.hochschuletrier.gdw.commons.gdx.input.hotkey.HotkeyManager;
@@ -54,7 +56,8 @@ public class Main extends StateBasedGame {
     public static final InputMultiplexer inputMultiplexer = new InputMultiplexer();
     private final CVarEnum<SoundDistanceModel> distanceModel = new CVarEnum("snd_distanceModel", SoundDistanceModel.INVERSE, SoundDistanceModel.class, 0, "sound distance model");
     private final CVarEnum<SoundEmitter.Mode> emitterMode = new CVarEnum("snd_mode", SoundEmitter.Mode.STEREO, SoundEmitter.Mode.class, 0, "sound mode");
-
+   
+    
     public Main() {
         super(new BaseGameState());
     }
@@ -100,7 +103,7 @@ public class Main extends StateBasedGame {
         loadAssetLists();
         setupGdx();
 
-        skin = new Skin(Gdx.files.internal("data/skins/basic.json"));
+        skin = new Skin(Gdx.files.internal("data/skins/sotf.json"));
         consoleView.init(skin);
         addScreenListener(consoleView);
         inputMultiplexer.addProcessor(consoleView.getInputProcessor());
@@ -113,6 +116,9 @@ public class Main extends StateBasedGame {
 
         this.console.register(emitterMode);
         emitterMode.addListener(this::onEmitterModeChanged);
+        
+        MusicManager.setGlobalVolume(Settings.MUSIC_VOLUME.get());
+        SoundEmitter.setGlobalVolume(Settings.SOUND_VOLUME.get());
     }
 
     private void onLoadComplete() {
@@ -180,6 +186,14 @@ public class Main extends StateBasedGame {
 
     @Override
     public void resume() {
+    }
+    
+    public AssetManagerX getAssetManager() {
+        return assetManager;
+    }
+    
+    public Skin getSkin(){
+        return skin;
     }
 
     public static void main(String[] args) {

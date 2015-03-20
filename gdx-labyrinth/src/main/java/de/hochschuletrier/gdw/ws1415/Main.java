@@ -59,6 +59,14 @@ public class Main extends StateBasedGame {
         super(new BaseGameState());
     }
 
+    public Skin getSkin() {
+    	return this.skin;
+    }
+    
+    public AssetManagerX getAssetManager() {
+    	return this.assetManager;
+    }
+
     public static Main getInstance() {
         if (instance == null) {
             instance = new Main();
@@ -100,7 +108,7 @@ public class Main extends StateBasedGame {
         loadAssetLists();
         setupGdx();
 
-        skin = new Skin(Gdx.files.internal("data/skins/basic.json"));
+        skin = new Skin(Gdx.files.internal("data/skins/sotf.json"));
         consoleView.init(skin);
         addScreenListener(consoleView);
         inputMultiplexer.addProcessor(consoleView.getInputProcessor());
