@@ -20,6 +20,8 @@
     "beenden_button": "data/images/beenden_button.png",
     "credits_button": "data/images/credits_button.png",
     "optionen_button": "data/images/optionen_button.png",
-    "start_button": "data/images/start_button.png"
+    "start_button": "data/images/start_button.png",
+    "menu_ingame": "data/images/menu_ingame.png",
+    "player": "data/images/player.png"
    
 }

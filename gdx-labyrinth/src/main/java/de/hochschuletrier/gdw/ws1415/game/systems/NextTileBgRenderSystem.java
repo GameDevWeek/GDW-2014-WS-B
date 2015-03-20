@@ -25,7 +25,7 @@ public class NextTileBgRenderSystem extends IteratingSystem {
 	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
 	    
-	    float box_height = (float) Math.ceil(Gdx.graphics.getHeight() * GameBoardInformation.GAME_NEXT_TILE);
+	    float box_height = Gdx.graphics.getHeight();
 
 	    float y = 0.0f;
 	    
@@ -36,7 +36,7 @@ public class NextTileBgRenderSystem extends IteratingSystem {
 	    DrawUtil.draw(entity.getComponent(NextTileBgRenderComponent.class).texture, x, y, box_width, box_height);
 
 		
-        font.draw(DrawUtil.batch, "Next: ", (int) Math.floor(x + 0.05 * box_width), (int) Math.floor(y + 0.1 * box_height));
+        font.draw(DrawUtil.batch, "This is SPAAAAAATEN ", (int) Math.floor(x + 0.15 * box_width), (int) Math.floor(y + 0.05 * box_height));
 	}
 
 }

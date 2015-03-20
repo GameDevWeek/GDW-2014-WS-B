@@ -34,16 +34,16 @@ public class PlayerInformationRenderingSystem extends IteratingSystem {
 	    
 	    float box_width = (float) Math.ceil(Gdx.graphics.getWidth() * GameBoardInformation.GAME_MENU_WIDTH);
 	    
-	    float x = 0.0f;
+	    float x = Gdx.graphics.getWidth() * 0.0125f;
 	    
 	    
 	    Color player_color = entity.getComponent(PlayerInformationComponent.class).color;
 	       	    
-        DrawUtil.fillRect(x, y, box_width, box_height, player_color);
+        //DrawUtil.fillRect(x, y, box_width, box_height, player_color);
 	    DrawUtil.draw(entity.getComponent(PlayerInformationComponent.class).texture, x, y, (float)(box_width - box_width * 0.1), box_height);
 
 		String name = entity.getComponent(PlayerInformationComponent.class).name;
-        font.draw(DrawUtil.batch, name, (int) Math.floor(x + 0.05 * box_width), (int) Math.floor(y + 0.05 * box_height));
+        font.draw(DrawUtil.batch, name, (int) Math.floor(x + 0.15 * box_width), (int) Math.floor(y + 0.3 * box_height));
 	}
 
 }

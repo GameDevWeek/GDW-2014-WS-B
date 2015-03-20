@@ -109,7 +109,7 @@ public class Game {
 		entity.getComponent(PlayerInformationComponent.class).color = color;
 		entity.getComponent(PlayerInformationComponent.class).playerNumber = playerNumber;
 		entity.getComponent(PlayerInformationComponent.class).texture = assetManager
-				.getTexture("LeftMenuBG");
+				.getTexture("player");
 		engine.addEntity(entity);
 	}
 
@@ -117,7 +117,7 @@ public class Game {
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(NextTileBgRenderComponent.class));
 		entity.getComponent(NextTileBgRenderComponent.class).texture = assetManager
-				.getTexture("LeftMenuBG");
+				.getTexture("menu_ingame");
 
 		engine.addEntity(entity);
 	}
