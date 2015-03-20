@@ -13,13 +13,21 @@
     "crossStone": "data/images/PLUS.png",
     "backgroundStone": "data/images/backgroundStone.png", 
     "gameBackgroundStone": "data/images/Labyrinthbackground.png",
-
     "arrow": "data/images/ArrowLeft.png",
-
+    "LeftMenuBG": "data/images/LeftMenuBG.png",
     "logo": "data/images/logo.png",
     "background_menu": "data/images/background_menu.png",
     "beenden_button": "data/images/beenden_button.png",
     "credits_button": "data/images/credits_button.png",
     "optionen_button": "data/images/optionen_button.png",
-    "start_button": "data/images/start_button.png"
+    "start_button": "data/images/start_button.png",
+    "crosshair" : "data/images/crosshair.png",
+    "player": "data/images/player.png",
+    "player_RED": "data/images/PLAYER_RED.png",
+    "player_GREEN": "data/images/PLAYER_GREEN.png",
+    "player_BLUE": "data/images/PLAYER_BLUE.png",
+    "player_YELLOW": "data/images/PLAYER_YELLOW.png",
+    "menu_ingame": "data/images/menu_ingame.png",
+    "woodplank": "data/images/woodplank.png"
+   
 }

@@ -1,5 +1,7 @@
 package de.hochschuletrier.gdw.ws1415.game.utils;
 
+import com.badlogic.gdx.graphics.Texture;
+
 public class GameBoardInformation {
 
 	// WIDTH from the game, total of 1 !!
@@ -26,4 +28,13 @@ public class GameBoardInformation {
 	// TITLE-FIELD IN PIXLE !!
 	final public static float TILE_FIELD = TILE_SIZE * NUMBER_OF_TILE;
 
+	// TileMovementSpeed
+	public final static float MOVEMENT_SPEED = 5f;
+
+	// texture
+	public static Texture MENU_WOODPLANK = null;
+	public static Texture MENU_PLAYER1 = null;
+	public static Texture MENU_PLAYER2 = null;
+	public static Texture MENU_PLAYER3 = null;
+	public static Texture MENU_PLAYER4 = null;
 }

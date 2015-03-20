@@ -20,6 +20,7 @@ import de.hochschuletrier.gdw.commons.devcon.cvar.CVarEnum;
 import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.assets.loaders.AnimationExtendedLoader;
+import de.hochschuletrier.gdw.commons.gdx.audio.MusicManager;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundDistanceModel;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundEmitter;
 import de.hochschuletrier.gdw.commons.gdx.devcon.DevConsoleView;
@@ -121,6 +122,9 @@ public class Main extends StateBasedGame {
 
         this.console.register(emitterMode);
         emitterMode.addListener(this::onEmitterModeChanged);
+        
+        MusicManager.setGlobalVolume(Settings.MUSIC_VOLUME.get());
+        SoundEmitter.setGlobalVolume(Settings.SOUND_VOLUME.get());
     }
 
     private void onLoadComplete() {
@@ -166,6 +170,7 @@ public class Main extends StateBasedGame {
 
     @Override
     protected void postUpdate(float delta) {
+        MusicManager.update(delta);
         postRender();
     }
 
