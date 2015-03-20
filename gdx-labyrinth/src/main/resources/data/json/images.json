@@ -28,6 +28,7 @@
     "player_BLUE": "data/images/PLAYER_BLUE.png",
     "player_YELLOW": "data/images/PLAYER_YELLOW.png",
     "menu_ingame": "data/images/menu_ingame.png",
-    "woodplank": "data/images/woodplank.png"
+    "woodplank": "data/images/woodplank.png",
+    "pfeil_rechts": "data/images/Pfeil_rund_rechtsrum.png"
    
 }
