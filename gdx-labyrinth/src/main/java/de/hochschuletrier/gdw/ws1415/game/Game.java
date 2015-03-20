@@ -61,6 +61,8 @@ public class Game {
 						* GameBoardInformation.GAME_SCREEN_WIDTH - GameBoardInformation.TILE_FIELD) / 2);
 		GameBoardInformation.ARROWS_HEIGHT = (int) Math.ceil((Gdx.graphics
 				.getHeight() - GameBoardInformation.TILE_FIELD) / 2);
+		
+		GameBoardInformation.MENU_WOODPLANK = assetManager.getTexture("woodplank");
 
 		addSystems();
 
