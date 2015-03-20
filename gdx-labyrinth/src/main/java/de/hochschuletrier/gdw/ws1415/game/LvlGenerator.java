@@ -31,9 +31,9 @@ public class LvlGenerator {
 
 		map_y = GameBoardInformation.ARROWS_HEIGHT;
 		
-		playerTest(engine, "Hugo Ignatz", Color.BLUE, 1);
-		playerTest(engine, "Willie Witzig", Color.RED, 2);
-		playerTest(engine, "Tom Ate", Color.YELLOW, 3);
+		playerTest(engine, GameConstants.playerNames[0], Color.BLUE, 1);
+		playerTest(engine, GameConstants.playerNames[1], Color.RED, 2);
+		playerTest(engine, GameConstants.playerNames[2], Color.YELLOW, 3);
 		//playerTest(engine, "Peter Silie", Color.GREEN, 4);
 
 		Entity entity = engine.createEntity();

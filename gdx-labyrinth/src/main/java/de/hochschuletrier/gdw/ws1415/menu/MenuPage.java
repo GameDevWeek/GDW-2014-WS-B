@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.menu.widgets.DecoImage;
 import de.hochschuletrier.gdw.ws1415.Main;
+import de.hochschuletrier.gdw.ws1415.game.GameConstants;
 import de.hochschuletrier.gdw.ws1415.states.GameplayState;
 
 public class MenuPage extends Group {
@@ -22,7 +23,7 @@ public class MenuPage extends Group {
     protected Main main = Main.getInstance();
     protected AssetManagerX assetManager = main.getAssetManager();
     protected final Skin skin;
-    protected int buttonCount = 3;
+    protected int buttonCount = 2;
     
     public MenuPage(Skin skin) {
     	super(); 
@@ -71,6 +72,10 @@ public class MenuPage extends Group {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 main.changeState(new GameplayState(assetManager));
+                //String Array mit PlayerNames übergeben
+                for(int i = 0; i < GameConstants.playerNames.length; i++){
+                    System.out.println(GameConstants.playerNames[i]);
+                }
                 return true;
             }
         });   
@@ -103,41 +108,33 @@ public class MenuPage extends Group {
         return button;
     }
     
-    protected final void addPlayerButton(int x, int y, int width, int height, DecoImage button, String name){
-        button.setPosition(x, y);
-        
-//        button.addListener(new InputListener(){
-//            @Override
-//            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//                System.out.println("test");
-//                return true;
-//            }
-//        });   
+    protected final void addPlayerButton(int x, int y, int width, int height, DecoImage button, String name, int index){
+        button.setPosition(x, y); 
         addActor(button);
-        createLabel(x, y, width, height).setText(name);
+        createLabel(x, y, width, height, index).setText(name);
     }
     
-    private Label createLabel(int x, int y, int width, int height) {
+    private Label createLabel(int x, int y, int width, int height, int index) {
         Label label = new Label("", skin);
         label.setBounds(x+170, y+20, width, height);
         
         label.addListener(new InputListener(){
            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-               //System.out.println(("test"));
                TextField name = new TextField("", skin);
                name.setPosition(600, 506);
                
                name.addListener(new InputListener(){
                    public boolean keyDown (InputEvent event, int keycode) {
-                       //keycode = 13;
                        if(keycode == Keys.ENTER){
                            label.setText(name.getText());
+                           GameConstants.playerNames[index] = label.getText().toString();
                            removeActor(name);
                        }
                        return true;
-                   }                   
+                   } 
+                   
                });
-               
+
                addActor(name);
                return true;
            }
@@ -151,15 +148,15 @@ public class MenuPage extends Group {
         
         button.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                if(buttonCount == 3){
+                if(buttonCount == 2){
                     DecoImage player = new DecoImage(assetManager.getTexture("player"));
-                    addPlayerButton(100, 150, 100, 100, player, "Player " + buttonCount);
-                    buttonCount = 4;
+                    addPlayerButton(100, 150, 100, 100, player, GameConstants.playerNames[buttonCount], 2);
+                    buttonCount = 3;
                     return true;
                 }
-                else if(buttonCount == 4){
+                else if(buttonCount == 3){
                     DecoImage player = new DecoImage(assetManager.getTexture("player"));
-                    addPlayerButton(100, 0, 100, 100, player, "Player " + buttonCount);
+                    addPlayerButton(100, 0, 100, 100, player, GameConstants.playerNames[buttonCount], 3);
                     buttonCount = 0;
                     return true;
                 } 
