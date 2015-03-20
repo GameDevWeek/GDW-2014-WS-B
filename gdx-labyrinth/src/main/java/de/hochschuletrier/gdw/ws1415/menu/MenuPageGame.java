@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
 import de.hochschuletrier.gdw.commons.gdx.menu.widgets.DecoImage;
+import de.hochschuletrier.gdw.ws1415.game.GameConstants;
 
 public class MenuPageGame extends MenuPage{
     
@@ -19,10 +20,10 @@ public class MenuPageGame extends MenuPage{
         //addCenteredButton(300, 54, 100, 100, "Add Player", () -> {});
         
         DecoImage player = new DecoImage(assetManager.getTexture("player"));
-        addPlayerButton(100, 450, 100, 100, player, "Player 1");
+        addPlayerButton(100, 450, 100, 100, player, GameConstants.playerNames[0], 0);
         
         DecoImage player2 = new DecoImage(assetManager.getTexture("player"));
-        addPlayerButton(100, 300, 100, 100, player2, "Player 2");
+        addPlayerButton(100, 300, 100, 100, player2, GameConstants.playerNames[1], 1);
         
 //        TextField test = new TextField("logo", skin);
 //        test.setPosition(400, 450);
