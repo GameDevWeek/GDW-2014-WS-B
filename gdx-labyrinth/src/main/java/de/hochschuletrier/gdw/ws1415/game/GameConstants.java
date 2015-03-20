@@ -14,8 +14,6 @@ public class GameConstants {
 	public static final int COMPONENT_POOL_INITIAL_SIZE = 32;
 	public static final int COMPONENT_POOL_MAX_SIZE = 256;
 
-	// Physix parameters
-	public static final int POSITION_ITERATIONS = 3;
-	public static final int VELOCITY_ITERATIONS = 8;
-	public static final int BOX2D_SCALE = 40;
+    // Music parameters
+    public static float MUSIC_FADE_TIME = 2;
 }

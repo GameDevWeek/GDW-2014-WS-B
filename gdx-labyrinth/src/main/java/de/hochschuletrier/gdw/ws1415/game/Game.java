@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.Main;
+import de.hochschuletrier.gdw.ws1415.game.components.NextTileBgRenderComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
@@ -16,7 +17,9 @@ import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
 import de.hochschuletrier.gdw.ws1415.game.systems.BackgroundRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.LevelHandlingSystem;
+import de.hochschuletrier.gdw.ws1415.game.systems.NextTileBgRenderSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.PlayerInformationRenderingSystem;
+import de.hochschuletrier.gdw.ws1415.game.systems.PlayerRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.RenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
@@ -34,10 +37,18 @@ public class Game {
 			GameConstants.PRIORITY_INPUT);
 	private final PlayerInformationRenderingSystem playerInformationRenderingSystem = new PlayerInformationRenderingSystem(
 			GameConstants.PRIORITY_RENDERING);
+
 	private final LevelHandlingSystem levelHandlingsystem = new LevelHandlingSystem(
 			GameConstants.PRIORITY_LEVEL_HANDLING);
+	private final NextTileBgRenderSystem nextTileBgRenderSystem = new NextTileBgRenderSystem(
+			GameConstants.PRIORITY_RENDERING - 1);
+
 	private final BackgroundRenderingSystem backgroundRenderingSystem = new BackgroundRenderingSystem(
 			GameConstants.PRIORITY_RENDERING_BACKGROUND);
+	
+	private final PlayerRenderingSystem playerRenderingSystem = new PlayerRenderingSystem(
+			GameConstants.PRIORITY_RENDERING + 1);
+	
 	// Manager
 	private final InputManager inputManager = new InputManager();
 
@@ -57,13 +68,11 @@ public class Game {
 						* GameBoardInformation.GAME_SCREEN_WIDTH - GameBoardInformation.TILE_FIELD) / 2);
 		GameBoardInformation.ARROWS_HEIGHT = (int) Math.ceil((Gdx.graphics
 				.getHeight() - GameBoardInformation.TILE_FIELD) / 2);
+		
+		GameBoardInformation.MENU_WOODPLANK = assetManager.getTexture("woodplank");
 
 		addSystems();
 
-		playerTest("Hugo Ignatz", Color.BLUE, 1);
-		playerTest("Willie Witzig", Color.RED, 2);
-		playerTest("Tom Ate", Color.YELLOW, 3);
-		playerTest("Peter Silie", Color.GREEN, 4);
 		LvlGenerator.generate(assetManager, engine);
 
 		inputManager.init();
@@ -76,8 +85,11 @@ public class Game {
 		engine.addSystem(renderingSystem);
 		engine.addSystem(inputSystem);
 		engine.addSystem(playerInformationRenderingSystem);
+		// engine.addSystem(nextTileBgRenderSystem);
 		engine.addSystem(backgroundRenderingSystem);
 		engine.addSystem(levelHandlingsystem);
+		
+		engine.addSystem(playerRenderingSystem);
 	}
 
 	public void update(float delta) {
@@ -97,17 +109,6 @@ public class Game {
 		entity.getComponent(PositionComponent.class).rotation = rotation;
 		entity.getComponent(PositionComponent.class).x = x;
 		entity.getComponent(PositionComponent.class).y = y;
-
-		engine.addEntity(entity);
-	}
-
-	public void playerTest(String name, Color color, int playerNumber) {
-		Entity entity = engine.createEntity();
-		entity.add(engine.createComponent(PlayerInformationComponent.class));
-
-		entity.getComponent(PlayerInformationComponent.class).name = name;
-		entity.getComponent(PlayerInformationComponent.class).color = color;
-		entity.getComponent(PlayerInformationComponent.class).playerNumber = playerNumber;
 
 		engine.addEntity(entity);
 	}

@@ -14,11 +14,14 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+
 import de.hochschuletrier.gdw.commons.gdx.assets.loaders.AnimationExtendedLoader;
 import de.hochschuletrier.gdw.commons.gdx.assets.loaders.AsynchronousAssetLoaderX;
 import de.hochschuletrier.gdw.commons.gdx.assets.loaders.TiledMapLoader;
+import de.hochschuletrier.gdw.commons.gdx.menu.widgets.DecoImage;
 import de.hochschuletrier.gdw.commons.jackson.JacksonReader;
 import de.hochschuletrier.gdw.commons.tiled.TiledMap;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;

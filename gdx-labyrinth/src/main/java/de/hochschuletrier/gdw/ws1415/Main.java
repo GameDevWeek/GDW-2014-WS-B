@@ -20,6 +20,7 @@ import de.hochschuletrier.gdw.commons.devcon.cvar.CVarEnum;
 import de.hochschuletrier.gdw.commons.gdx.assets.AnimationExtended;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.commons.gdx.assets.loaders.AnimationExtendedLoader;
+import de.hochschuletrier.gdw.commons.gdx.audio.MusicManager;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundDistanceModel;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundEmitter;
 import de.hochschuletrier.gdw.commons.gdx.devcon.DevConsoleView;
@@ -57,6 +58,14 @@ public class Main extends StateBasedGame {
 
     public Main() {
         super(new BaseGameState());
+    }
+
+    public Skin getSkin() {
+    	return this.skin;
+    }
+    
+    public AssetManagerX getAssetManager() {
+    	return this.assetManager;
     }
 
     public static Main getInstance() {
@@ -100,7 +109,7 @@ public class Main extends StateBasedGame {
         loadAssetLists();
         setupGdx();
 
-        skin = new Skin(Gdx.files.internal("data/skins/basic.json"));
+        skin = new Skin(Gdx.files.internal("data/skins/sotf.json"));
         consoleView.init(skin);
         addScreenListener(consoleView);
         inputMultiplexer.addProcessor(consoleView.getInputProcessor());
@@ -113,6 +122,9 @@ public class Main extends StateBasedGame {
 
         this.console.register(emitterMode);
         emitterMode.addListener(this::onEmitterModeChanged);
+        
+        MusicManager.setGlobalVolume(Settings.MUSIC_VOLUME.get());
+        SoundEmitter.setGlobalVolume(Settings.SOUND_VOLUME.get());
     }
 
     private void onLoadComplete() {
@@ -158,6 +170,7 @@ public class Main extends StateBasedGame {
 
     @Override
     protected void postUpdate(float delta) {
+        MusicManager.update(delta);
         postRender();
     }
 
