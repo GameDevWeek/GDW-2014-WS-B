@@ -64,6 +64,11 @@ public class Game {
 				.getHeight() - GameBoardInformation.TILE_FIELD) / 2);
 		
 		GameBoardInformation.MENU_WOODPLANK = assetManager.getTexture("woodplank");
+		GameBoardInformation.MENU_PLAYER1 = assetManager.getTexture("player_RED");
+		GameBoardInformation.MENU_PLAYER2 = assetManager.getTexture("player_GREEN");
+		GameBoardInformation.MENU_PLAYER3 = assetManager.getTexture("player_BLUE");
+		GameBoardInformation.MENU_PLAYER4 = assetManager.getTexture("player_YELLOW");
+		
 
 		addSystems();
 
