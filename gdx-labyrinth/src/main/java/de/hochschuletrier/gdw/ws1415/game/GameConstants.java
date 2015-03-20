@@ -23,5 +23,5 @@ public class GameConstants {
     public static float MUSIC_FADE_TIME = 2;
     
     //Playernames
-    public static String[] playerNames = new String[4];
+    public static String[] playerNames = {"Player 1", "Player 2", "Player 3", "Der Spaten"};
 }
