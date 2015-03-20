@@ -23,5 +23,6 @@
     "optionen_button": "data/images/optionen_button.png",
     "start_button": "data/images/start_button.png",
     "crosshair" : "data/images/crosshair.png",
-    "menu_ingame": "data/images/menu_ingame.png"
+    "menu_ingame": "data/images/menu_ingame.png",
+    "player": "data/images/player.png"
 }

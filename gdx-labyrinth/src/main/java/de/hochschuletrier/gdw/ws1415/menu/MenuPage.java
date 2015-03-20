@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -97,5 +98,22 @@ public class MenuPage extends Group {
         });
         addActor(button);
         return button;
+    }
+    
+    protected final void addPlayerButton(int x, int y, int width, int height, DecoImage button, String name){
+        button.setPosition(x, y);
+        addActor(button);
+        createLabel(x, y, width, height).setText(name);
+    }
+    
+    private Label createLabel(int x, int y, int width, int height) {
+        Label label = new Label("", skin);
+        label.setBounds(x+170, y+20, width, height);
+        addActor(label);
+        return label;
+    }
+    
+    private final void addPlayer(int x, int y, int width, int height, String name, Runnable runnable){
+        TextButton button = addButton(x, y - height / 2, width, height, name, runnable, "mainMenu");
     }
 }
