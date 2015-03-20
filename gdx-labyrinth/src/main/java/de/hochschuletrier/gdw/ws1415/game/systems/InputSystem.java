@@ -28,87 +28,79 @@ public class InputSystem extends IteratingSystem {
 	protected void processEntity(Entity entity, float deltaTime) {
 		// check if something was clicked !!
 		for (int i = 0; i < Input_Puffer.click.size(); i++) {
-			// TODO Schreiben was bei einem click passiert, der auf einem Entity
-			// mit InputComponente ist !
 
-			switch ((int) entity.getComponent(PositionComponent.class).rotation) {
+			if (entity.getComponent(InputComponent.class).active) {
 
-			case 0:
-				if ((Input_Puffer.click.get(i).x >= entity
-						.getComponent(PositionComponent.class).x && Input_Puffer.click
-						.get(i).x - GameBoardInformation.TILE_SIZE <= entity
+				switch ((int) entity.getComponent(PositionComponent.class).rotation) {
+
+				case 0:
+					if ((Input_Puffer.click.get(i).x >= entity
+							.getComponent(PositionComponent.class).x && Input_Puffer.click
+							.get(i).x - GameBoardInformation.TILE_SIZE <= entity
+								.getComponent(PositionComponent.class).x)
+							&& (Input_Puffer.click.get(i).y >= entity
+									.getComponent(PositionComponent.class).y && Input_Puffer.click
+									.get(i).y <= entity
+									.getComponent(PositionComponent.class).y
+									+ GameBoardInformation.TILE_SIZE)) {
+						MovementUtil
+								.moveH(entity
+										.getComponent(PositionInLevelComponent.class).y,
+										-1f);
+					}
+					break;
+				case 90:
+					if ((Input_Puffer.click.get(i).x <= entity
+							.getComponent(PositionComponent.class).x && Input_Puffer.click
+							.get(i).x >= entity
+							.getComponent(PositionComponent.class).x
+							- GameBoardInformation.TILE_SIZE)
+							&& (Input_Puffer.click.get(i).y >= entity
+									.getComponent(PositionComponent.class).y && Input_Puffer.click
+									.get(i).y <= entity
+									.getComponent(PositionComponent.class).y
+									+ GameBoardInformation.TILE_SIZE)) {
+						MovementUtil
+								.moveV(entity
+										.getComponent(PositionInLevelComponent.class).x,
+										-1f);
+					}
+					break;
+				case 180:
+					if ((Input_Puffer.click.get(i).x <= entity
+							.getComponent(PositionComponent.class).x && Input_Puffer.click
+							.get(i).x >= entity
+							.getComponent(PositionComponent.class).x
+							- GameBoardInformation.TILE_SIZE)
+							&& (Input_Puffer.click.get(i).y >= entity
+									.getComponent(PositionComponent.class).y
+									- GameBoardInformation.TILE_SIZE && Input_Puffer.click
+									.get(i).y <= entity
+									.getComponent(PositionComponent.class).y)) {
+						MovementUtil
+								.moveH(entity
+										.getComponent(PositionInLevelComponent.class).y,
+										1f);
+					}
+					break;
+				case 270:
+					if ((Input_Puffer.click.get(i).x >= entity
 							.getComponent(PositionComponent.class).x)
-						&& (Input_Puffer.click.get(i).y >= entity
-								.getComponent(PositionComponent.class).y && Input_Puffer.click
-								.get(i).y <= entity
-								.getComponent(PositionComponent.class).y
-								+ GameBoardInformation.TILE_SIZE)) {
-					System.out
-							.println("click "
-									+ entity.getComponent(PositionInLevelComponent.class).x
-									+ " "
-									+ entity.getComponent(PositionInLevelComponent.class).y);
-					MovementUtil
-							.moveH(entity
-									.getComponent(PositionInLevelComponent.class).y,
-									-1f);
-				}
-				break;
-			case 90:
-				if ((Input_Puffer.click.get(i).x <= entity
-						.getComponent(PositionComponent.class).x && Input_Puffer.click
-						.get(i).x >= entity
-						.getComponent(PositionComponent.class).x
-						- GameBoardInformation.TILE_SIZE)
-						&& (Input_Puffer.click.get(i).y >= entity
-								.getComponent(PositionComponent.class).y && Input_Puffer.click
-								.get(i).y <= entity
-								.getComponent(PositionComponent.class).y
-								+ GameBoardInformation.TILE_SIZE)) {
-					System.out
-							.println("click "
-									+ entity.getComponent(PositionInLevelComponent.class).x
-									+ " "
-									+ entity.getComponent(PositionInLevelComponent.class).y);
-				}
-				break;
-			case 180:
-				if ((Input_Puffer.click.get(i).x <= entity
-						.getComponent(PositionComponent.class).x && Input_Puffer.click
-						.get(i).x >= entity
-						.getComponent(PositionComponent.class).x
-						- GameBoardInformation.TILE_SIZE)
-						&& (Input_Puffer.click.get(i).y >= entity
-								.getComponent(PositionComponent.class).y
-								- GameBoardInformation.TILE_SIZE && Input_Puffer.click
-								.get(i).y <= entity
-								.getComponent(PositionComponent.class).y)) {
-					System.out
-							.println("click "
-									+ entity.getComponent(PositionInLevelComponent.class).x
-									+ " "
-									+ entity.getComponent(PositionInLevelComponent.class).y);
-				}
-				break;
-			case 270:
-				if ((Input_Puffer.click.get(i).x >= entity
-						.getComponent(PositionComponent.class).x)
-						&& (Input_Puffer.click.get(i).x <= entity
-								.getComponent(PositionComponent.class).x
-								+ GameBoardInformation.TILE_SIZE)
-						&& (Input_Puffer.click.get(i).y <= entity
-								.getComponent(PositionComponent.class).y)
-						&& Input_Puffer.click.get(i).y >= entity
-								.getComponent(PositionComponent.class).y
-								- GameBoardInformation.TILE_SIZE) {
-					System.out
-							.println("click "
-									+ entity.getComponent(PositionInLevelComponent.class).x
-									+ " "
-									+ entity.getComponent(PositionInLevelComponent.class).y);
+							&& (Input_Puffer.click.get(i).x <= entity
+									.getComponent(PositionComponent.class).x
+									+ GameBoardInformation.TILE_SIZE)
+							&& (Input_Puffer.click.get(i).y <= entity
+									.getComponent(PositionComponent.class).y)
+							&& Input_Puffer.click.get(i).y >= entity
+									.getComponent(PositionComponent.class).y
+									- GameBoardInformation.TILE_SIZE) {
+						MovementUtil
+								.moveV(entity
+										.getComponent(PositionInLevelComponent.class).x,
+										1f);
+					}
 				}
 			}
-
 		}
 	}
 }

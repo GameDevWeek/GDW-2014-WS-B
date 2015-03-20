@@ -12,8 +12,11 @@ import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
 public class LevelHandlingSystem extends IteratingSystem {
 
-	private float moveTime = 1f;
-	private float progress = 0f;
+	public boolean inProgress = false;
+
+	private float distance;
+	private float distanceX;
+	private float distanceY;
 
 	@SuppressWarnings("unchecked")
 	public LevelHandlingSystem(int priority) {
@@ -21,19 +24,31 @@ public class LevelHandlingSystem extends IteratingSystem {
 	}
 
 	@Override
-	public void update(float deltaTime) {
-		super.update(deltaTime);
-		this.progress += deltaTime;
-
-	}
-
-	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
 
-		entity.getComponent(MovementComponent.class).originX += entity
-				.getComponent(MovementComponent.class).destinationX
-				* deltaTime
-				* GameBoardInformation.MOVEMENT_SPEED;
-	}
+		distanceX = (entity.getComponent(MovementComponent.class).destinationX - entity
+				.getComponent(PositionComponent.class).x);
 
+		distanceY = (entity.getComponent(MovementComponent.class).destinationY - entity
+				.getComponent(PositionComponent.class).y);
+
+		distance = distanceX + distanceY;
+
+		if ((distance >= 0f & distance < 1f)
+				|| (distance <= 0 & distance > -1f)) {
+			entity.getComponent(PositionComponent.class).x = entity
+					.getComponent(MovementComponent.class).destinationX;
+			entity.getComponent(PositionComponent.class).y = entity
+					.getComponent(MovementComponent.class).destinationY;
+			entity.remove(MovementComponent.class);
+		} else {
+
+			entity.getComponent(PositionComponent.class).x += distanceX
+					* deltaTime * GameBoardInformation.MOVEMENT_SPEED;
+
+			entity.getComponent(PositionComponent.class).y += distanceY
+					* deltaTime * GameBoardInformation.MOVEMENT_SPEED;
+
+		}
+	}
 }

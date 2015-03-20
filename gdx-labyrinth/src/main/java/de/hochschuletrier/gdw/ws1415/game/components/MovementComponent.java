@@ -12,10 +12,11 @@ public class MovementComponent extends Component implements Pool.Poolable {
 	public float destinationY;
 
 	public float movementSpeed;
+	public float direction;
 
 	@Override
 	public void reset() {
-		originX = originY = destinationX = destinationY = movementSpeed = 0f;
+		originX = originY = destinationX = destinationY = movementSpeed = direction = 0f;
 	}
 
 }

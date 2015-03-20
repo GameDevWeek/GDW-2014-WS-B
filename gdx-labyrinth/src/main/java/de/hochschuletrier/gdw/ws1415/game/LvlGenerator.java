@@ -202,6 +202,8 @@ public class LvlGenerator {
 		entity.getComponent(PositionInLevelComponent.class).x = xInlvl;
 		entity.getComponent(PositionInLevelComponent.class).y = yInlvl;
 
+		entity.getComponent(InputComponent.class).active = true;
+
 		switch ((int) rotation) {
 
 		case 90:
