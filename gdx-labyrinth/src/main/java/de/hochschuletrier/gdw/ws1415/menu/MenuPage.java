@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ws1415.menu;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -7,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
@@ -103,15 +105,43 @@ public class MenuPage extends Group {
     
     protected final void addPlayerButton(int x, int y, int width, int height, DecoImage button, String name){
         button.setPosition(x, y);
+        
+//        button.addListener(new InputListener(){
+//            @Override
+//            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                System.out.println("test");
+//                return true;
+//            }
+//        });   
         addActor(button);
         createLabel(x, y, width, height).setText(name);
-        
-        //button.addL
     }
     
     private Label createLabel(int x, int y, int width, int height) {
         Label label = new Label("", skin);
         label.setBounds(x+170, y+20, width, height);
+        
+        label.addListener(new InputListener(){
+           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+               //System.out.println(("test"));
+               TextField name = new TextField("", skin);
+               name.setPosition(600, 506);
+               
+               name.addListener(new InputListener(){
+                   public boolean keyDown (InputEvent event, int keycode) {
+                       //keycode = 13;
+                       if(keycode == Keys.ENTER){
+                           label.setText(name.getText());
+                           removeActor(name);
+                       }
+                       return true;
+                   }                   
+               });
+               
+               addActor(name);
+               return true;
+           }
+        });
         addActor(label);
         return label;
     }

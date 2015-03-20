@@ -1,6 +1,7 @@
 package de.hochschuletrier.gdw.ws1415.menu;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
 import de.hochschuletrier.gdw.commons.gdx.menu.widgets.DecoImage;
@@ -22,5 +23,9 @@ public class MenuPageGame extends MenuPage{
         
         DecoImage player2 = new DecoImage(assetManager.getTexture("player"));
         addPlayerButton(100, 300, 100, 100, player2, "Player 2");
+        
+//        TextField test = new TextField("logo", skin);
+//        test.setPosition(400, 450);
+//        addActor(test);
     }
 }
