@@ -117,7 +117,8 @@ public class MenuPage extends Group {
         label.addListener(new InputListener(){
            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                TextField name = new TextField("", skin);
-               name.setPosition(600, 506);
+               //name.setPosition(600, 506); //funktioniert !!
+               name.setPosition(label.getX()-45, label.getY()+30);
                
                name.addListener(new InputListener(){
                    public boolean keyDown (InputEvent event, int keycode) {
