@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 
 import de.hochschuletrier.gdw.commons.gdx.utils.DrawUtil;
+import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
@@ -16,7 +17,7 @@ public class RenderingSystem extends IteratingSystem {
 	@SuppressWarnings("unchecked")
 	public RenderingSystem(int priority) {
 		super(
-				Family.all(PositionComponent.class, TextureComponent.class)
+				Family.all(PositionComponent.class, TextureComponent.class).exclude(PlayerInformationComponent.class)
 						.get(), priority);
 	}
 

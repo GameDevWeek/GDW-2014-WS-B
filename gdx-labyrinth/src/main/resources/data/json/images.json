@@ -13,9 +13,8 @@
     "crossStone": "data/images/PLUS.png",
     "backgroundStone": "data/images/backgroundStone.png", 
     "gameBackgroundStone": "data/images/Labyrinthbackground.png",
-
     "arrow": "data/images/ArrowLeft.png",
-
+    "LeftMenuBG": "data/images/LeftMenuBG.png",
     "logo": "data/images/logo.png",
     "background_menu": "data/images/background_menu.png",
     "beenden_button": "data/images/beenden_button.png",
@@ -25,4 +24,7 @@
     "crosshair" : "data/images/crosshair.png",
     "menu_ingame": "data/images/menu_ingame.png",
     "player": "data/images/player.png"
+    "menu_ingame": "data/images/menu_ingame.png",
+    "woodplank": "data/images/woodplank.png"
+   
 }
