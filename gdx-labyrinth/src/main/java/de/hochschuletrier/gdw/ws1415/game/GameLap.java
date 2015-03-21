@@ -1,7 +1,5 @@
 package de.hochschuletrier.gdw.ws1415.game;
 
-import java.util.ArrayList;
-
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
@@ -11,8 +9,8 @@ import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent.species;
+import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.utils.PlayerMovement;
 
 public class GameLap {
@@ -79,76 +77,78 @@ public class GameLap {
 				.exclude(PlayerInformationComponent.class).get());
 		int anzMovementArrows = 0;
 		for (Entity tmp : arrows) {
-			if (tmp.getComponent(SpeciesComponent.class).isSpecies != null
-					&& tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW) {
+				// NullPointer abfangen
+			if (tmp.getComponent(SpeciesComponent.class).isSpecies == null) {
+				throw new NullPointerException("isSpecies in SpeciesComponent ist null");
+			}	// Wenn es ein normaler Arrow ist
+			else if (tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW) {
 				tmp.getComponent(TextureComponent.class).visible = false;
 				tmp.getComponent(InputComponent.class).active = false;
-			} else if (tmp.getComponent(SpeciesComponent.class).isSpecies != null
-					&& tmp.getComponent(SpeciesComponent.class).isSpecies == species.MOVEMENT_ARROW) {
-				
+			}	// Wenn es ein MoveArrow ist 
+			else if (tmp.getComponent(SpeciesComponent.class).isSpecies == species.MOVEMENT_ARROW) {
 				switch (anzMovementArrows) {
-				 case 0: System.out.println("Left: " + PlayerMovement.checkLeft(currentPlayer, engine));
-					 if(PlayerMovement.checkLeft(currentPlayer, engine) >
-				 0) {
-				 tmp.getComponent(TextureComponent.class).visible = true;
-				 tmp.getComponent(TextureComponent.class).texture =
-				 currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
-				 tmp.getComponent(PositionComponent.class).x =
-				 currentPlayer.getComponent(PositionComponent.class).x;
-				 tmp.getComponent(PositionComponent.class).y =
-				 currentPlayer.getComponent(PositionComponent.class).y;
-				 break;
-				 }
-				 case 1: System.out.println("Up: " + PlayerMovement.checkUp(currentPlayer, engine));
-					 if(PlayerMovement.checkUp(currentPlayer, engine) > 0)
-				 {
-				 tmp.getComponent(TextureComponent.class).visible = true;
-				 tmp.getComponent(TextureComponent.class).texture =
-				 currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
-				 tmp.getComponent(PositionComponent.class).x =
-				 currentPlayer.getComponent(PositionComponent.class).x + 30;
-				 tmp.getComponent(PositionComponent.class).y =
-				 currentPlayer.getComponent(PositionComponent.class).y;
-				 tmp.getComponent(PositionComponent.class).rotation = 90;
-				 break;
-				 }
-				case 2:
-					System.out.println("Right: " + PlayerMovement.checkRight(currentPlayer, engine));
-					if (PlayerMovement.checkRight(currentPlayer, engine) > 0) {
-						tmp.getComponent(TextureComponent.class).visible = true;
-						tmp.getComponent(TextureComponent.class).texture = currentPlayer
-								.getComponent(PlayerInformationComponent.class).arrow;
-						tmp.getComponent(PositionComponent.class).x = currentPlayer
-								.getComponent(PositionComponent.class).x + 30;
-						tmp.getComponent(PositionComponent.class).y = currentPlayer
-								.getComponent(PositionComponent.class).y - 30;
-						tmp.getComponent(PositionComponent.class).rotation = 180;
-						tmp.getComponent(InputComponent.class).active = true;
-						anzMovementArrows++;
-						break;
-					}
-				case 3:
-					System.out.println("Down: " + PlayerMovement.checkDown(currentPlayer, engine));
-					if (PlayerMovement.checkDown(currentPlayer, engine) > 0) {
-						tmp.getComponent(TextureComponent.class).visible = true;
-						tmp.getComponent(TextureComponent.class).texture = currentPlayer
-								.getComponent(PlayerInformationComponent.class).arrow;
-						tmp.getComponent(PositionComponent.class).x = currentPlayer
-								.getComponent(PositionComponent.class).x;
-						tmp.getComponent(PositionComponent.class).y = currentPlayer
-								.getComponent(PositionComponent.class).y - 30;
-						tmp.getComponent(PositionComponent.class).rotation = 270;
-						break;
-					}
-				default:
-					anzMovementArrows += 1;
-					break;
+				 	case 0: System.out.println("Left: " + PlayerMovement.checkLeft(currentPlayer, engine));
+				 		checkMoveLeft(tmp, engine);
+				 		anzMovementArrows++;
+				 		break;
+				 	case 1: System.out.println("Up: " + PlayerMovement.checkUp(currentPlayer, engine));
+				 		checkMoveUp(tmp, engine);
+				 		anzMovementArrows++;
+				 		break;
+				 	case 2:
+				 		System.out.println("Right: " + PlayerMovement.checkRight(currentPlayer, engine));
+				 		checkMoveRight(tmp, engine);
+				 		anzMovementArrows++;
+				 		break;
+				 	case 3:
+				 		System.out.println("Down: " + PlayerMovement.checkDown(currentPlayer, engine));
+				 		checkMoveDown(tmp, engine);
+				 		anzMovementArrows++;
+				 		break;
 				}
-				// System.out.println(PlayerMovement.checkRight(currentPlayer,
-				// engine));
-				// System.out.println(PlayerMovement.checkDown(currentPlayer,
-				// engine));
 			}
+		}
+	}
+	private static void checkMoveDown(Entity moveArrow, PooledEngine engine) {
+		if (PlayerMovement.checkDown(currentPlayer, engine) > 0) {
+			moveArrow.getComponent(TextureComponent.class).visible = true;
+			moveArrow.getComponent(InputComponent.class).active = true;
+			moveArrow.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
+			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x;
+			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y - 30;
+			moveArrow.getComponent(PositionComponent.class).rotation = 270;
+		}
+	}
+	
+	private static void checkMoveRight(Entity moveArrow, PooledEngine engine) {
+		if (PlayerMovement.checkRight(currentPlayer, engine) > 0) {
+			moveArrow.getComponent(TextureComponent.class).visible = true;
+			moveArrow.getComponent(InputComponent.class).active = true;
+			moveArrow.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
+			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x + 30;
+			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y - 30;
+			moveArrow.getComponent(PositionComponent.class).rotation = 180;
+		}
+	}
+	
+	private static void checkMoveUp(Entity moveArrow, PooledEngine engine) {
+		if(PlayerMovement.checkUp(currentPlayer, engine) > 0) {
+			moveArrow.getComponent(TextureComponent.class).visible = true;
+			moveArrow.getComponent(InputComponent.class).active = true;
+			moveArrow.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
+			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x + 30;
+			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y;
+			moveArrow.getComponent(PositionComponent.class).rotation = 90;
+		}
+	}
+	
+	private static void checkMoveLeft(Entity moveArrow, PooledEngine engine) {
+		if(PlayerMovement.checkLeft(currentPlayer, engine) > 0) {
+			moveArrow.getComponent(TextureComponent.class).visible = true;
+			moveArrow.getComponent(InputComponent.class).active = true;
+			moveArrow.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
+			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x;
+			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y;
 		}
 	}
 }
