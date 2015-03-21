@@ -6,11 +6,14 @@ import com.badlogic.ashley.systems.IteratingSystem;
 
 import de.hochschuletrier.gdw.ws1415.game.GameLap;
 import de.hochschuletrier.gdw.ws1415.game.MovementUtil;
+import de.hochschuletrier.gdw.ws1415.game.components.AnimationComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.DirectionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent.species;
+import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.Input_Puffer;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
@@ -43,23 +46,21 @@ public class InputSystem extends IteratingSystem {
 				case 0:
 					if ((Input_Puffer.click.get(i).x >= entity
 							.getComponent(PositionComponent.class).x && Input_Puffer.click
-							.get(i).x - GameBoardInformation.TILE_SIZE <= entity
-								.getComponent(PositionComponent.class).x)
+							.get(i).x <= entity
+								.getComponent(PositionComponent.class).x + entity.getComponent(TextureComponent.class).texture.getWidth())
 							&& (Input_Puffer.click.get(i).y >= entity
 									.getComponent(PositionComponent.class).y && Input_Puffer.click
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y
-									+ GameBoardInformation.TILE_SIZE)) {
+									+ entity.getComponent(TextureComponent.class).texture.getHeight())) {
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
 							
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
-							System.out.println("LAUFEN");
-							GameLap.nextCondition();
+							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
 						}
 						else{
 							MovementUtil.moveH(entity.getComponent(PositionInLevelComponent.class).y,-1f);
-							GameLap.nextCondition();
 						}
 					}
 					break;
@@ -68,22 +69,20 @@ public class InputSystem extends IteratingSystem {
 							.getComponent(PositionComponent.class).x && Input_Puffer.click
 							.get(i).x >= entity
 							.getComponent(PositionComponent.class).x
-							- GameBoardInformation.TILE_SIZE)
+							- entity.getComponent(TextureComponent.class).texture.getWidth())
 							&& (Input_Puffer.click.get(i).y >= entity
 									.getComponent(PositionComponent.class).y && Input_Puffer.click
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y
-									+ GameBoardInformation.TILE_SIZE)) {
+									+ entity.getComponent(TextureComponent.class).texture.getHeight())) {
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
 							
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
-							System.out.println("LAUFEN");
-							GameLap.nextCondition();
+							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
 						}
 						else {
 							MovementUtil.moveV(entity.getComponent(PositionInLevelComponent.class).x,-1f);
-							GameLap.nextCondition();
 						}
 					}
 					break;
@@ -92,22 +91,20 @@ public class InputSystem extends IteratingSystem {
 							.getComponent(PositionComponent.class).x && Input_Puffer.click
 							.get(i).x >= entity
 							.getComponent(PositionComponent.class).x
-							- GameBoardInformation.TILE_SIZE)
+							- entity.getComponent(TextureComponent.class).texture.getWidth())
 							&& (Input_Puffer.click.get(i).y >= entity
 									.getComponent(PositionComponent.class).y
-									- GameBoardInformation.TILE_SIZE && Input_Puffer.click
+									- entity.getComponent(TextureComponent.class).texture.getHeight() && Input_Puffer.click
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y)) {
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
 							
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
-							System.out.println("LAUFEN");
-							GameLap.nextCondition();
+							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
 						}
 						else {
 							MovementUtil.moveH(entity.getComponent(PositionInLevelComponent.class).y,1f);
-							GameLap.nextCondition();
 						}
 					}
 					break;
@@ -116,22 +113,20 @@ public class InputSystem extends IteratingSystem {
 							.getComponent(PositionComponent.class).x)
 							&& (Input_Puffer.click.get(i).x <= entity
 									.getComponent(PositionComponent.class).x
-									+ GameBoardInformation.TILE_SIZE)
+									+ entity.getComponent(TextureComponent.class).texture.getWidth())
 							&& (Input_Puffer.click.get(i).y <= entity
 									.getComponent(PositionComponent.class).y)
 							&& Input_Puffer.click.get(i).y >= entity
 									.getComponent(PositionComponent.class).y
-									- GameBoardInformation.TILE_SIZE) {
+									- entity.getComponent(TextureComponent.class).texture.getHeight()) {
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
 							
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
-							System.out.println("LAUFEN");
-							GameLap.nextCondition();
+							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
 						}
 						else {
 							MovementUtil.moveV(entity.getComponent(PositionInLevelComponent.class).x,1f);
-							GameLap.nextCondition();
 						}
 					}
 				}

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.game.components.BackgroundComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.DirectionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
@@ -315,6 +316,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 			entity.getComponent(PositionInLevelComponent.class).x = 0;
 			entity.getComponent(PositionInLevelComponent.class).y = 0;
 			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager.getTexture("RED_ARROW");
+			entity.getComponent(TextureComponent.class).texture = assetManager.getTexture("RED_PLAYER");
 			break;
 		case 2:
 			entity.getComponent(PositionComponent.class).x = map_x
@@ -324,6 +326,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 			entity.getComponent(PositionInLevelComponent.class).x = 6;
 			entity.getComponent(PositionInLevelComponent.class).y = 0;
 			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager.getTexture("GREEN_ARROW");
+			entity.getComponent(TextureComponent.class).texture = assetManager.getTexture("GREEN_PLAYER");
 			break;
 		case 3:
 			entity.getComponent(PositionComponent.class).x = map_x;
@@ -332,6 +335,8 @@ private static Entity createTile(PooledEngine engine, Texture background,
 					* GameBoardInformation.TILE_SIZE;
 			entity.getComponent(PositionInLevelComponent.class).x = 0;
 			entity.getComponent(PositionInLevelComponent.class).y = 6;
+			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager.getTexture("BLUE_ARROW");
+			entity.getComponent(TextureComponent.class).texture = assetManager.getTexture("BLUE_PLAYER");
 			break;
 		case 4:
 			entity.getComponent(PositionComponent.class).x = map_x
@@ -342,6 +347,8 @@ private static Entity createTile(PooledEngine engine, Texture background,
 					* GameBoardInformation.TILE_SIZE;
 			entity.getComponent(PositionInLevelComponent.class).x = 6;
 			entity.getComponent(PositionInLevelComponent.class).y = 6;
+			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager.getTexture("YELLOW_ARROW");
+			entity.getComponent(TextureComponent.class).texture = assetManager.getTexture("YELLOW_PLAYER");
 			break;
 		}
 
@@ -393,6 +400,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 			movementArrow.add(engine.createComponent(InputComponent.class));
 			movementArrow.add(engine.createComponent(TextureComponent.class));
 			movementArrow.add(engine.createComponent(SpeciesComponent.class));
+			movementArrow.add(engine.createComponent(DirectionComponent.class));
 			
 			movementArrow.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.MOVEMENT_ARROW;
 			

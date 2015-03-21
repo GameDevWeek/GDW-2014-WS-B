@@ -5,13 +5,16 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
 
+import de.hochschuletrier.gdw.ws1415.game.components.DirectionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent.species;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
+import de.hochschuletrier.gdw.ws1415.game.utils.MovementDestinations;
 import de.hochschuletrier.gdw.ws1415.game.utils.PlayerMovement;
 
 public class GameLap {
@@ -44,23 +47,20 @@ public class GameLap {
 
 	/** NUR VON DER GAME KLASSE AUFGERUFEN */
 	public static void newCondition(PooledEngine engine) {
-		switch (currentCondition) {
-		case TILE:
-			PlayerMoveStep(engine);
-			break;
-		case PLAYER:
-			nextPlayer(engine);
-			break;
-		}
-
 		isChanged = false;
+		switch (currentCondition) {
+			case TILE:
+				PlayerMoveStep(engine);
+				break;
+			case PLAYER:
+				nextPlayer(engine);
+				break;
+		}		
 	}
 
 	public static void nextPlayer(PooledEngine engine) {
 		currentPlayerInList = ++currentPlayerInList % playerList.size();
 		currentPlayer = playerList.get(currentPlayerInList);
-		System.out.println(currentPlayerInList + " | ");
-		System.out.println(currentPlayer.getComponent(PlayerInformationComponent.class).playerNumber);
 		@SuppressWarnings("unchecked")
 		ImmutableArray<Entity> arrows = engine.getEntitiesFor(Family.all(SpeciesComponent.class, PositionComponent.class, TextureComponent.class).exclude(PlayerInformationComponent.class).get());
 		for(Entity tmp : arrows) {
@@ -91,6 +91,7 @@ public class GameLap {
 						TextureComponent.class)
 				.exclude(PlayerInformationComponent.class).get());
 		int anzMovementArrows = 0;
+		boolean noWay = false;
 		for (Entity tmp : arrows) {
 				// NullPointer abfangen
 			if (tmp.getComponent(SpeciesComponent.class).isSpecies == null) {
@@ -103,68 +104,95 @@ public class GameLap {
 			}	// Wenn es ein MoveArrow ist 
 			else if (tmp.getComponent(SpeciesComponent.class).isSpecies == species.MOVEMENT_ARROW) {
 				switch (anzMovementArrows) {
-				 	case 0: System.out.println("Left: " + PlayerMovement.checkLeft(currentPlayer, engine));
-				 		checkMoveLeft(tmp, engine);
+				 	case 0: 
+				 		noWay = noWay | checkMoveLeft(tmp, engine);
 				 		anzMovementArrows++;
 				 		break;
-				 	case 1: System.out.println("Up: " + PlayerMovement.checkUp(currentPlayer, engine));
-				 		checkMoveUp(tmp, engine);
+				 	case 1:
+				 		noWay = noWay | checkMoveUp(tmp, engine);
 				 		anzMovementArrows++;
 				 		break;
 				 	case 2:
-				 		System.out.println("Right: " + PlayerMovement.checkRight(currentPlayer, engine));
-				 		checkMoveRight(tmp, engine);
+				 		noWay = noWay | checkMoveRight(tmp, engine);
 				 		anzMovementArrows++;
 				 		break;
 				 	case 3:
-				 		System.out.println("Down: " + PlayerMovement.checkDown(currentPlayer, engine));
-				 		checkMoveDown(tmp, engine);
+				 		noWay = noWay | checkMoveDown(tmp, engine);
 				 		anzMovementArrows++;
 				 		break;
 				}
 			}
 		}
+		if(noWay == false) {
+			nextCondition();
+		}
 	}
-	private static void checkMoveDown(Entity moveArrow, PooledEngine engine) {
-		if (PlayerMovement.checkDown(currentPlayer, engine) > 0) {
+	private static boolean checkMoveDown(Entity moveArrow, PooledEngine engine) {
+		System.out.println(currentPlayer.getComponent(PositionInLevelComponent.class).x + " | "  + currentPlayer.getComponent(PositionInLevelComponent.class).y);
+		int tmp = PlayerMovement.checkDown(currentPlayer, engine);
+		System.out.println("DOWN : " + tmp);
+		if (tmp > 0) {
 			moveArrow.getComponent(TextureComponent.class).visible = true;
 			moveArrow.getComponent(InputComponent.class).active = true;
 			moveArrow.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
-			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x;
-			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y - 30;
+			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x + 20;
+			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y + 100;
 			moveArrow.getComponent(PositionComponent.class).rotation = 270;
+			moveArrow.getComponent(DirectionComponent.class).direction = MovementDestinations.DOWN;
+			moveArrow.getComponent(DirectionComponent.class).steps = tmp;
+			
+			return true;
 		}
+		return false;
 	}
 	
-	private static void checkMoveRight(Entity moveArrow, PooledEngine engine) {
-		if (PlayerMovement.checkRight(currentPlayer, engine) > 0) {
+	private static boolean checkMoveRight(Entity moveArrow, PooledEngine engine) {
+		int tmp = PlayerMovement.checkRight(currentPlayer, engine);
+		System.out.println("RIGHT : " + tmp);
+		if (tmp > 0) {
 			moveArrow.getComponent(TextureComponent.class).visible = true;
 			moveArrow.getComponent(InputComponent.class).active = true;
 			moveArrow.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
-			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x + 30;
-			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y - 30;
+			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x + 100;
+			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y + 43;
 			moveArrow.getComponent(PositionComponent.class).rotation = 180;
+			moveArrow.getComponent(DirectionComponent.class).direction = MovementDestinations.RIGHT;
+			moveArrow.getComponent(DirectionComponent.class).steps = tmp;
+			return true;
 		}
+		return false;
 	}
 	
-	private static void checkMoveUp(Entity moveArrow, PooledEngine engine) {
-		if(PlayerMovement.checkUp(currentPlayer, engine) > 0) {
+	private static boolean checkMoveUp(Entity moveArrow, PooledEngine engine) {
+		int tmp = PlayerMovement.checkUp(currentPlayer, engine);
+		System.out.println("UP : " + tmp);
+		if(tmp > 0) {
 			moveArrow.getComponent(TextureComponent.class).visible = true;
 			moveArrow.getComponent(InputComponent.class).active = true;
 			moveArrow.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
-			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x + 30;
-			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y;
+			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x + 45;
+			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y - 39;
 			moveArrow.getComponent(PositionComponent.class).rotation = 90;
+			moveArrow.getComponent(DirectionComponent.class).direction = MovementDestinations.UP;
+			moveArrow.getComponent(DirectionComponent.class).steps = tmp;
+			return true;
 		}
+		return false;
 	}
 	
-	private static void checkMoveLeft(Entity moveArrow, PooledEngine engine) {
-		if(PlayerMovement.checkLeft(currentPlayer, engine) > 0) {
+	private static boolean checkMoveLeft(Entity moveArrow, PooledEngine engine) {
+		int tmp = PlayerMovement.checkLeft(currentPlayer, engine);
+		System.out.println("LEFT : " + tmp);
+		if(tmp > 0) {
 			moveArrow.getComponent(TextureComponent.class).visible = true;
 			moveArrow.getComponent(InputComponent.class).active = true;
 			moveArrow.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
-			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x;
-			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y;
+			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x - 38;
+			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y + 17;
+			moveArrow.getComponent(DirectionComponent.class).direction = MovementDestinations.LEFT;
+			moveArrow.getComponent(DirectionComponent.class).steps = tmp;
+			return true;
 		}
+		return false;
 	}
 }

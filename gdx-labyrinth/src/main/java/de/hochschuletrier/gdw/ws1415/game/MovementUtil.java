@@ -3,14 +3,13 @@ package de.hochschuletrier.gdw.ws1415.game;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Gdx;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.game.components.MovementComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
+import de.hochschuletrier.gdw.ws1415.game.utils.MovementDestinations;
 
 public class MovementUtil {
 
@@ -113,7 +112,7 @@ public class MovementUtil {
 		// neues Tile links oben erzeugen, brauch ich nachher wieder !!
 //		GameBoardInformation.nextTileEntity = LvlGenerator.createTile(
 //				assetManager, engine, -5.2f, 0f);
-		GameBoardInformation.CLICKABLE = false;
+		// GameBoardInformation.CLICKABLE = false;
 
 	}
 
@@ -205,6 +204,39 @@ public class MovementUtil {
 //		GameBoardInformation.nextTileEntity = LvlGenerator.createTile(
 //				assetManager, engine, -5.2f, 0f);
 
-		GameBoardInformation.CLICKABLE = false;
+		// GameBoardInformation.CLICKABLE = false;
+	}
+	
+	public static void playerMovement(int steps, MovementDestinations direction) {
+		MovementComponent movementComponent = engine.createComponent(MovementComponent.class);
+		GameLap.currentPlayer.add(movementComponent);
+		movementComponent.originX = GameLap.currentPlayer.getComponent(PositionComponent.class).x;
+		movementComponent.originY = GameLap.currentPlayer.getComponent(PositionComponent.class).y;
+		movementComponent.movementSpeed = 0.5f;
+		switch (direction) {
+			case DOWN: 	GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).y += steps;
+						movementComponent.destinationX = GameLap.currentPlayer.getComponent(PositionComponent.class).x;
+						movementComponent.destinationY = GameLap.currentPlayer.getComponent(PositionComponent.class).y
+																										+ steps * GameBoardInformation.TILE_SIZE;
+						break;
+			case RIGHT: GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).x += steps;
+						movementComponent.destinationX = GameLap.currentPlayer.getComponent(PositionComponent.class).x
+																										+ steps * GameBoardInformation.TILE_SIZE;
+						movementComponent.destinationY = GameLap.currentPlayer.getComponent(PositionComponent.class).y;
+																										
+						break;
+			case UP: 	GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).y -= steps;
+						movementComponent.destinationX = GameLap.currentPlayer.getComponent(PositionComponent.class).x;
+						movementComponent.destinationY = GameLap.currentPlayer.getComponent(PositionComponent.class).y
+																										- steps * GameBoardInformation.TILE_SIZE;
+					
+						break;
+			case LEFT: 	GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).x -= steps;
+						movementComponent.destinationX = GameLap.currentPlayer.getComponent(PositionComponent.class).x
+																				- steps * GameBoardInformation.TILE_SIZE;
+						movementComponent.destinationY = GameLap.currentPlayer.getComponent(PositionComponent.class).y;
+																				
+						break;
+		}
 	}
 }

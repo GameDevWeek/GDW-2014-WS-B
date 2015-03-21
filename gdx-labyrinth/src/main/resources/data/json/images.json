@@ -34,5 +34,10 @@
     "rotation_Button": "data/images/ROTATION_BUTTON.png",  
     
     "RED_ARROW": "data/images/ArrowRed.png",
-    "GREEN_ARROW": "data/images/ArrowGreen.png"
+    "GREEN_ARROW": "data/images/ArrowGreen.png", 
+    
+    "RED_PLAYER": "data/images/Player_RED.png",
+    "GREEN_PLAYER": "data/images/Player_GREEN.png",
+    "BLUE_PLAYER": "data/images/Player_BLUE.png",
+    "YELLOW_PLAYER": "data/images/Player_YELLOW.png"
 }
