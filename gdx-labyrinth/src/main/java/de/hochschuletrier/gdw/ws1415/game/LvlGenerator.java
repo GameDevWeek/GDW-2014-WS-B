@@ -188,11 +188,11 @@ public class LvlGenerator {
 		entity.getComponent(TextureComponent.class).background = background;
 		entity.getComponent(TextureComponent.class).scale = GameBoardInformation.GAME_SCALE;
 
-		for (int i = 0; i < 4; i++) {
-			System.out.print(""
-					+ entity.getComponent(TileComponent.class).rotationData[i] + ", ");
-		}
-		System.out.println("");
+//		for (int i = 0; i < 4; i++) {
+//			System.out.print(""
+//					+ entity.getComponent(TileComponent.class).rotationData[i] + ", ");
+//		}
+//		System.out.println("");
 
 		switch (rotation) {
 		case 0:
