@@ -246,12 +246,14 @@ public class MenuPage extends Group {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                 if(buttonCount == 4){
                     removeActor(p4);
-                    removeActor(player4);                    
+                    removeActor(player4);
+                    GameConstants.p3present = false;
                     buttonCount = 3;
                 }
                 else if(buttonCount == 3){
                     removeActor(p3);
                     removeActor(player3);
+                    GameConstants.p4present = false;
                     buttonCount = 2;
                 }
                 return true;
