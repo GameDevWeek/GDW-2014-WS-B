@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ws1415.game.utils;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 
 public class GameBoardInformation {
@@ -33,6 +34,14 @@ public class GameBoardInformation {
 
 	// texture
 	public static Texture MENU_WOODPLANK = null;
+
+	// Pfeile blockieren
+	public static boolean CLICKABLE = true;
+
+	// nextTileEntity
+	public static Entity nextTileEntity;
+	public static long nextTileEntityBuffer;
+
 	public static Texture MENU_PLAYER1 = null;
 	public static Texture MENU_PLAYER2 = null;
 	public static Texture MENU_PLAYER3 = null;

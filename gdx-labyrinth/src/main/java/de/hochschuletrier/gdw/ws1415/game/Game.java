@@ -45,10 +45,10 @@ public class Game {
 
 	private final BackgroundRenderingSystem backgroundRenderingSystem = new BackgroundRenderingSystem(
 			GameConstants.PRIORITY_RENDERING_BACKGROUND);
-	
+
 	private final PlayerRenderingSystem playerRenderingSystem = new PlayerRenderingSystem(
 			GameConstants.PRIORITY_RENDERING + 1);
-	
+
 	// Manager
 	private final InputManager inputManager = new InputManager();
 	
@@ -71,6 +71,11 @@ public class Game {
 				.getHeight() - GameBoardInformation.TILE_FIELD) / 2);
 		
 		GameBoardInformation.MENU_WOODPLANK = assetManager.getTexture("woodplank");
+
+		GameBoardInformation.MENU_WOODPLANK = assetManager
+				.getTexture("woodplank");
+		
+		GameBoardInformation.MENU_WOODPLANK = assetManager.getTexture("woodplank");
 		GameBoardInformation.MENU_PLAYER1 = assetManager.getTexture("player_RED");
 		GameBoardInformation.MENU_PLAYER2 = assetManager.getTexture("player_GREEN");
 		GameBoardInformation.MENU_PLAYER3 = assetManager.getTexture("player_BLUE");
@@ -84,7 +89,8 @@ public class Game {
 		inputManager.init();
 
 		MovementUtil.init(engine,
-				engine.getEntitiesFor(Family.all(TileComponent.class).get()));
+				engine.getEntitiesFor(Family.all(TileComponent.class).get()),
+				assetManager);
 	}
 
 	private void addSystems() {
@@ -94,7 +100,7 @@ public class Game {
 		// engine.addSystem(nextTileBgRenderSystem);
 		engine.addSystem(backgroundRenderingSystem);
 		engine.addSystem(levelHandlingsystem);
-		
+
 		engine.addSystem(playerRenderingSystem);
 	}
 

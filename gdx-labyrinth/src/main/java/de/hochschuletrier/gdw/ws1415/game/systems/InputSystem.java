@@ -29,7 +29,7 @@ public class InputSystem extends IteratingSystem {
 		// check if something was clicked !!
 		for (int i = 0; i < Input_Puffer.click.size(); i++) {
 
-			if (entity.getComponent(InputComponent.class).active) {
+			if (GameBoardInformation.CLICKABLE) {
 
 				switch ((int) entity.getComponent(PositionComponent.class).rotation) {
 
@@ -43,6 +43,7 @@ public class InputSystem extends IteratingSystem {
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y
 									+ GameBoardInformation.TILE_SIZE)) {
+
 						MovementUtil
 								.moveH(entity
 										.getComponent(PositionInLevelComponent.class).y,
