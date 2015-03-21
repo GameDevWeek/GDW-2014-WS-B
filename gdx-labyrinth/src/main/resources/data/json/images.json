@@ -30,6 +30,6 @@
     "menu_ingame": "data/images/menu_ingame.png",
     "woodplank": "data/images/woodplank.png",
     "pfeil_rechts": "data/images/Pfeil_rund_rechtsrum.png",
-    "ladescreen": "data/images/ladescreen.png"
-   
+    "ladescreen": "data/images/ladescreen.png",
+    "rotation_Button": "data/images/ROTATION_BUTTON.png"   
 }
