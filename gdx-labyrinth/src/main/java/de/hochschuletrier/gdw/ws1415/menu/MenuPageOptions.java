@@ -11,8 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import de.hochschuletrier.gdw.commons.gdx.audio.MusicManager;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundEmitter;
 import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
+import de.hochschuletrier.gdw.commons.gdx.menu.widgets.DecoImage;
 import de.hochschuletrier.gdw.commons.gdx.utils.ScreenUtil;
 import de.hochschuletrier.gdw.ws1415.Settings;
+import de.hochschuletrier.gdw.ws1415.game.GameConstants;
 
 public class MenuPageOptions extends MenuPage {
     
@@ -22,7 +24,7 @@ public class MenuPageOptions extends MenuPage {
 //    private final TextButton fullscreenButton;
 
     public MenuPageOptions(Skin skin, MenuManager menuManager){
-        super(skin, "ladescreen");
+        super(skin, "background");
         
         int y = 400;
         
@@ -42,7 +44,12 @@ public class MenuPageOptions extends MenuPage {
         musicLabel = createLabel(380, y);
         musicMuteButton = createToggleButton(440, y, "Aus", this::onMusicMuteChanged);
 
-        addCenteredButton(menuManager.getWidth() - 100, 54, 100, 40, "Zurück", () -> menuManager.popPage());
+        //addCenteredButton(menuManager.getWidth() - 100, 54, 100, 40, "Zurück", () -> menuManager.popPage());
+        
+        DecoImage back = new DecoImage(assetManager.getTexture("back"));
+        back.setPosition(25, 530);
+        addActor(back);
+        addCenteredButton(menuManager.getWidth() - 965, 560, 100, 40, "<", () -> menuManager.popPage());
     }
     
     private TextButton createToggleButton(int x, int y, String text, Runnable runnable) {
@@ -114,7 +121,6 @@ public class MenuPageOptions extends MenuPage {
     private void onMusicMuteChanged() {
         boolean musicOn = musicMuteButton.isChecked();
         musicMuteButton.setText(musicOn ? "An" : "Aus");
-        System.out.println(musicOn);
         MusicManager.setMuted(!musicOn);
     }
 

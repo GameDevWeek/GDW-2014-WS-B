@@ -1,4 +1,8 @@
 {
 	"click": "data/sounds/click.wav",
+	"accept": "data/sounds/treasure.wav",
+	"cancel": "data/sounds/Cancel.wav",
+	"hover": "data/sounds/plop.wav",
+	
 	"helicopter": "data/sounds/helicopter.wav"
 }
