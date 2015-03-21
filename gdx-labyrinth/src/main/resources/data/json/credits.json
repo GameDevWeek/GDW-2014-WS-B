@@ -48,15 +48,25 @@
             "time": 0,
             "items" : [
                 { "type": "text", "style" : "title", "path": "middle", "text": "Organisation", "delay": "100" },
+                { "type": "text", "style" : "name", "path": "left", "text": "Santo Pfingsten", "delay": "750" },
                 { "type": "text", "style" : "name", "path": "left", "text": "Tobias Meier", "delay": "750" },
                 
                 { "type": "text", "style" : "title", "path": "middle", "text": "Design", "delay": "1150" },
                 { "type": "text", "style" : "name", "path": "right", "text": "Natalie Carl", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Saskia Hohmann", "delay": "750" },
                 
-                { "type": "text", "style" : "title", "path": "middle", "text": "Programmierung", "delay": "1150" },
+                { "type": "text", "style" : "title", "path": "middle", "text": "Sound", "delay": "1150" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Manuel Neugebauer", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Felix Wishnewsky", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Noah Plingen", "delay": "750" },
+                
+                { "type": "text", "style" : "title", "path": "middle", "text": "Menu und HUD", "delay": "1150" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Vanessa Hoff", "delay": "750" },         
+                
+                { "type": "text", "style" : "title", "path": "middle", "text": "Gameplay", "delay": "1150" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Tobias Meier", "delay": "750" },
                 { "type": "text", "style" : "name", "path": "right", "text": "Martin Keren", "delay": "750" },
-                { "type": "text", "style" : "name", "path": "right", "text": "David Siepen", "delay": "750" },
-                { "type": "text", "style" : "name", "path": "right", "text": "Vanessa Hoff", "delay": "750" }         
+                { "type": "text", "style" : "name", "path": "right", "text": "David Siepen", "delay": "750" }      
             ]
         },
         "animations": {
