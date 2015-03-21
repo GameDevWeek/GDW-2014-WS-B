@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
+import de.hochschuletrier.gdw.commons.gdx.audio.MusicManager;
 import de.hochschuletrier.gdw.ws1415.Main;
 import de.hochschuletrier.gdw.ws1415.game.components.NextTileBgRenderComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
@@ -58,7 +59,6 @@ public class Game {
 	}
 
 	public void dispose() {
-
 	}
 
 	@SuppressWarnings("unchecked")

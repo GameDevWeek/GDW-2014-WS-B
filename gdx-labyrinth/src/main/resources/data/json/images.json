@@ -17,10 +17,13 @@
     "LeftMenuBG": "data/images/LeftMenuBG.png",
     "logo": "data/images/logo.png",
     "background_menu": "data/images/background_menu.png",
-    "beenden_button": "data/images/beenden_button.png",
-    "credits_button": "data/images/credits_button.png",
-    "optionen_button": "data/images/optionen_button.png",
-    "start_button": "data/images/start_button.png",
+    "beenden_button": "data/images/quitgme.png",
+    "credits_button": "data/images/credits.png",
+    "optionen_button": "data/images/options.png",
+    "start_button": "data/images/newgame.png",
+    "play_button": "data/images/startgame.png",
+    "addplayer": "data/images/addplayer.png",
+    "remove": "data/images/remove.png",
     "crosshair" : "data/images/crosshair.png",
     "player": "data/images/player.png",
     "player_RED": "data/images/PLAYER_RED.png",
@@ -30,6 +33,9 @@
     "menu_ingame": "data/images/menu_ingame.png",
     "woodplank": "data/images/woodplank.png",
     "pfeil_rechts": "data/images/Pfeil_rund_rechtsrum.png",
-    "ladescreen": "data/images/ladescreen.png"
+    "ladescreen": "data/images/ladescreen.png",
+    "menuscreen": "data/images/Menuscreen.png",
+    "background": "data/images/global_background.png",
+    "back": "data/images/MENU.png"
    
 }
