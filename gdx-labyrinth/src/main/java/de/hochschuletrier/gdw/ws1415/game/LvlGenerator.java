@@ -17,9 +17,7 @@ import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent.species;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
-import de.hochschuletrier.gdw.ws1415.game.utils.PlayerMovement;
 
 public class LvlGenerator {
 
@@ -36,19 +34,19 @@ public class LvlGenerator {
 		map_y = GameBoardInformation.ARROWS_HEIGHT;
 
 		if (GameConstants.p1present) {
-			createPlayer(engine, GameConstants.playerNames[0], Color.RED, 1);
+			createPlayer(engine, assetManager, GameConstants.playerNames[0], Color.RED, 1);
 		}
 
 		if (GameConstants.p2present) {
-			createPlayer(engine, GameConstants.playerNames[1], Color.GREEN, 2);
+			createPlayer(engine, assetManager, GameConstants.playerNames[1], Color.GREEN, 2);
 		}
 
 		if (GameConstants.p3present) {
-			createPlayer(engine, GameConstants.playerNames[2], Color.BLUE, 3);
+			createPlayer(engine, assetManager, GameConstants.playerNames[2], Color.BLUE, 3);
 		}
 
 		if (GameConstants.p4present) {
-			createPlayer(engine, GameConstants.playerNames[3], Color.YELLOW, 4);
+			createPlayer(engine, assetManager, GameConstants.playerNames[3], Color.YELLOW, 4);
 		}
 
 		Entity entity = engine.createEntity();
@@ -96,6 +94,9 @@ public class LvlGenerator {
 		
 		// Rotation Button
 		rotationButton(engine, assetManager);
+		
+		// Movement Button
+		createMovementArray(engine, assetManager);
 
 		// arrowTop
 		for (int i = 0; i < 7; i++) {
@@ -293,7 +294,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 
 	}
 
-	public static void createPlayer(PooledEngine engine, String name,
+	public static void createPlayer(PooledEngine engine, AssetManagerX assetManager, String name,
 			Color color, int playerNumber) {
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(PlayerInformationComponent.class));
@@ -304,13 +305,14 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		entity.getComponent(PlayerInformationComponent.class).name = name;
 		entity.getComponent(PlayerInformationComponent.class).color = color;
 		entity.getComponent(PlayerInformationComponent.class).playerNumber = playerNumber;
-
+		
 		switch (playerNumber) {
 		case 1:
 			entity.getComponent(PositionComponent.class).x = map_x;
 			entity.getComponent(PositionComponent.class).y = map_y;
 			entity.getComponent(PositionInLevelComponent.class).x = 0;
 			entity.getComponent(PositionInLevelComponent.class).y = 0;
+			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager.getTexture("RED_ARROW");
 			break;
 		case 2:
 			entity.getComponent(PositionComponent.class).x = map_x
@@ -379,5 +381,22 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		rotationArrow2.getComponent(InputComponent.class).action = InputComponent.clickAction.ROTATION;
 		engine.addEntity(rotationArrow2);
 
+	}
+	
+	public static void createMovementArray(PooledEngine engine, AssetManagerX assetManager) {
+		for(int i = 0; i < 4; i++) {
+			Entity movementArrow = engine.createEntity();
+			movementArrow.add(engine.createComponent(PositionComponent.class));
+			movementArrow.add(engine.createComponent(InputComponent.class));
+			movementArrow.add(engine.createComponent(TextureComponent.class));
+			movementArrow.add(engine.createComponent(SpeciesComponent.class));
+			
+			movementArrow.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.MOVEMENT_ARROW;
+			
+			movementArrow.getComponent(TextureComponent.class).visible = false;
+			
+			movementArrow.getComponent(InputComponent.class).action = InputComponent.clickAction.MOVEMENT;
+			engine.addEntity(movementArrow);
+		}
 	}
 }

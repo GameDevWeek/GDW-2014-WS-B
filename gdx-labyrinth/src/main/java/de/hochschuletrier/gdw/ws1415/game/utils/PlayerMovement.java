@@ -119,18 +119,16 @@ public class PlayerMovement {
 		int[] nextRotationData;
 
 		while (nextTilePosX <= 6) {
-			nextTilePosX = currentTilePosX + 1;
-			nextTilePosY = currentTilePosY;
-
+			
 			nextTile = PlayerMovement.getTileByPos(nextTilePosX, nextTilePosY,
 					engine);
-
+			
 			currentRotationData = currentTile.getComponent(TileComponent.class).rotationData;
 			nextRotationData = nextTile.getComponent(TileComponent.class).rotationData;
-
+			
 			if ((currentRotationData[1] == 1) && (nextRotationData[3] == 1)) {
 				moveCount++;
-			}
+			}	
 
 			currentTile = nextTile;
 			nextTilePosX += 1;

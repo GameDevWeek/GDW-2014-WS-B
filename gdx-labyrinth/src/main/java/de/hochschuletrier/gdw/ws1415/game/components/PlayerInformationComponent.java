@@ -13,6 +13,7 @@ public class PlayerInformationComponent extends Component implements Pool.Poolab
 	public String name;
 	public Color color;
 	public Texture texture;
+	public Texture arrow;
 	
 	@Override
 	public void reset() {

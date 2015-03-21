@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Pool;
 public class InputComponent extends Component implements Pool.Poolable {
 
 	public enum clickAction {
-		ROTATION, TILE
+		ROTATION, TILE, MOVEMENT
 	}
 	
 	public boolean active;

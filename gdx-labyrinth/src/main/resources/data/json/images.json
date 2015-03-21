@@ -31,5 +31,7 @@
     "woodplank": "data/images/woodplank.png",
     "pfeil_rechts": "data/images/Pfeil_rund_rechtsrum.png",
     "ladescreen": "data/images/ladescreen.png",
-    "rotation_Button": "data/images/ROTATION_BUTTON.png"   
+    "rotation_Button": "data/images/ROTATION_BUTTON.png",  
+    
+    "RED_ARROW": "data/images/ArrowRed.png"
 }
