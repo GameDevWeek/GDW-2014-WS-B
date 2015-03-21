@@ -1,5 +1,6 @@
 package de.hochschuletrier.gdw.ws1415.menu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -24,6 +25,7 @@ public class MenuPage extends Group {
     protected Main main = Main.getInstance();
     protected AssetManagerX assetManager = main.getAssetManager();
     protected final Skin skin;
+    //protected final Skin transparent;
     protected int buttonCount = 2;
     protected DecoImage player3, player4;
     protected Label p3, p4;
@@ -31,6 +33,7 @@ public class MenuPage extends Group {
     public MenuPage(Skin skin) {
     	super(); 
     	this.skin = skin;
+    	//transparent = new Skin(Gdx.files.internal("data/skins/sotf.json"));
     	
     	setVisible(false);
     }
@@ -39,6 +42,7 @@ public class MenuPage extends Group {
         super();
         this.skin = skin;
         
+        //transparent = new Skin(Gdx.files.internal("data/skins/sotf.json"));
         addActor(new DecoImage(assetManager.getTexture(background)));
         setVisible(false);
     }
@@ -122,16 +126,16 @@ public class MenuPage extends Group {
     
     private Label createLabel(int x, int y, int width, int height, int index) {
         if(index == 2){
-            p3 = new Label("Player 3", skin);
+            p3 = new Label(GameConstants.playerNames[index], skin);
             p3.setBounds(x+170, y+20, width, height);
-            //p3.setText("Player3");
             p3.addListener(new InputListener(){
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                    TextField name = new TextField("", skin);
+                    TextField name = new TextField("", skin, "transparent");
                     //name.setPosition(600, 506); //funktioniert !!
+                    p3.setText("");
+                    
+                    //name.setPosition(p3.getX()-45, p3.getY()+30);
                     name.setPosition(p3.getX()-45, p3.getY()+30);
-                    //name.setVisible("transparent");
-                    //name.setBackgroundColor("transparent");
                     name.addListener(new InputListener(){
                         public boolean keyDown (InputEvent event, int keycode) {
                             if(keycode == Keys.ENTER){
@@ -152,16 +156,14 @@ public class MenuPage extends Group {
             return p3;
         }
         else if(index == 3){
-            p4 = new Label("Player 4", skin);
+            p4 = new Label(GameConstants.playerNames[index], skin);
             p4.setBounds(x+170, y+20, width, height);
-            //p4.setText("Player4");
             p4.addListener(new InputListener(){
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                    TextField name = new TextField("", skin);
+                    TextField name = new TextField("", skin, "transparent");
                     //name.setPosition(600, 506); //funktioniert !!
+                    p4.setText("");
                     name.setPosition(p4.getX()-45, p4.getY()+30);
-                    //name.setVisible("transparent");
-                    //name.setBackgroundColor("transparent");
                     name.addListener(new InputListener(){
                         public boolean keyDown (InputEvent event, int keycode) {
                             if(keycode == Keys.ENTER){
@@ -188,11 +190,10 @@ public class MenuPage extends Group {
         
         label.addListener(new InputListener(){
            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-               TextField name = new TextField("", skin);
+               TextField name = new TextField("", skin, "transparent");
                //name.setPosition(600, 506); //funktioniert !!
+               label.setText("");
                name.setPosition(label.getX()-45, label.getY()+30);
-               //name.setVisible("transparent");
-               //name.setBackgroundColor("transparent");
                name.addListener(new InputListener(){
                    public boolean keyDown (InputEvent event, int keycode) {
                        if(keycode == Keys.ENTER){
