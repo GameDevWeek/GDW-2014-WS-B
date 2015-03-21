@@ -57,11 +57,14 @@ public class GameLap {
 
 	public static void nextPlayer(PooledEngine engine) {
 		currentPlayerInList = ++currentPlayerInList % playerList.size();
+		System.out.println(currentPlayer.getComponent(PlayerInformationComponent.class).playerNumber);
 		@SuppressWarnings("unchecked")
 		ImmutableArray<Entity> arrows = engine.getEntitiesFor(Family.all(SpeciesComponent.class, PositionComponent.class, TextureComponent.class).exclude(PlayerInformationComponent.class).get());
 		for(Entity tmp : arrows) {
-			if(tmp.getComponent(SpeciesComponent.class).isSpecies != null && 
-					tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW) {
+			if (tmp.getComponent(SpeciesComponent.class).isSpecies == null) {
+				throw new NullPointerException();
+			}
+			else if(tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW) {
 				tmp.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
 				tmp.getComponent(TextureComponent.class).visible = true;
 				tmp.getComponent(InputComponent.class).active = true;
@@ -81,7 +84,7 @@ public class GameLap {
 			if (tmp.getComponent(SpeciesComponent.class).isSpecies == null) {
 				throw new NullPointerException("isSpecies in SpeciesComponent ist null");
 			}	// Wenn es ein normaler Arrow ist
-			else if (tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW) {
+			else if (tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW || tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW) {
 				tmp.getComponent(TextureComponent.class).visible = false;
 				tmp.getComponent(InputComponent.class).active = false;
 			}	// Wenn es ein MoveArrow ist 

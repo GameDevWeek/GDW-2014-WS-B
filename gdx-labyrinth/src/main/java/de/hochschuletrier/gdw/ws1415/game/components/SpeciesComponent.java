@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Pool;
 public class SpeciesComponent extends Component implements Pool.Poolable{
 
 	public static enum species {
-		ARROW, MOVEMENT_ARROW
+		ARROW, MOVEMENT_ARROW, ROTATION_ARROW
 	}
 	
 	public species isSpecies = null;

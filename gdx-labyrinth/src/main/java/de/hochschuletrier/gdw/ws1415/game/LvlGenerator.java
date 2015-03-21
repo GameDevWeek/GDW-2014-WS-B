@@ -358,7 +358,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		
 		rotationArrow.getComponent(PositionComponent.class).rotation = 0;
 		
-		rotationArrow.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ARROW;
+		rotationArrow.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ROTATION_ARROW;
 		
 		rotationArrow.getComponent(InputComponent.class).action = InputComponent.clickAction.ROTATION;
 		
@@ -376,7 +376,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		
 		rotationArrow2.getComponent(PositionComponent.class).rotation = 180;
 		
-		rotationArrow2.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ARROW;
+		rotationArrow2.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ROTATION_ARROW;
 		
 		rotationArrow2.getComponent(InputComponent.class).action = InputComponent.clickAction.ROTATION;
 		engine.addEntity(rotationArrow2);

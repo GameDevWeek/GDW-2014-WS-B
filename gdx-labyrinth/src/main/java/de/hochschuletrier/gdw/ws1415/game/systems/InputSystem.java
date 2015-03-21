@@ -50,20 +50,16 @@ public class InputSystem extends IteratingSystem {
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y
 									+ GameBoardInformation.TILE_SIZE)) {
-						
-//						MovementUtil
-//								.moveH(entity
-//										.getComponent(PositionInLevelComponent.class).y,
-//										-1f);
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
 							
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
 							System.out.println("LAUFEN");
+							GameLap.nextCondition();
 						}
 						else{
-							GameLap.nextCondition();
 							MovementUtil.moveH(entity.getComponent(PositionInLevelComponent.class).y,-1f);
+							GameLap.nextCondition();
 						}
 					}
 					break;
@@ -78,18 +74,16 @@ public class InputSystem extends IteratingSystem {
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y
 									+ GameBoardInformation.TILE_SIZE)) {
-						GameLap.nextCondition();
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
 							
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
 							System.out.println("LAUFEN");
+							GameLap.nextCondition();
 						}
 						else {
-							MovementUtil
-								.moveV(entity
-										.getComponent(PositionInLevelComponent.class).x,
-										-1f);
+							MovementUtil.moveV(entity.getComponent(PositionInLevelComponent.class).x,-1f);
+							GameLap.nextCondition();
 						}
 					}
 					break;
@@ -104,18 +98,16 @@ public class InputSystem extends IteratingSystem {
 									- GameBoardInformation.TILE_SIZE && Input_Puffer.click
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y)) {
-						GameLap.nextCondition();
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
 							
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
 							System.out.println("LAUFEN");
+							GameLap.nextCondition();
 						}
 						else {
-							MovementUtil
-								.moveH(entity
-										.getComponent(PositionInLevelComponent.class).y,
-										1f);
+							MovementUtil.moveH(entity.getComponent(PositionInLevelComponent.class).y,1f);
+							GameLap.nextCondition();
 						}
 					}
 					break;
@@ -130,18 +122,16 @@ public class InputSystem extends IteratingSystem {
 							&& Input_Puffer.click.get(i).y >= entity
 									.getComponent(PositionComponent.class).y
 									- GameBoardInformation.TILE_SIZE) {
-						GameLap.nextCondition();
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
 							
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
 							System.out.println("LAUFEN");
+							GameLap.nextCondition();
 						}
 						else {
-							MovementUtil
-								.moveV(entity
-										.getComponent(PositionInLevelComponent.class).x,
-										1f);
+							MovementUtil.moveV(entity.getComponent(PositionInLevelComponent.class).x,1f);
+							GameLap.nextCondition();
 						}
 					}
 				}
