@@ -110,8 +110,9 @@ public class MovementUtil {
 			}
 
 		}
-		GameBoardInformation.nextTileEntity = LvlGenerator.createTile(
-				assetManager, engine, -5.2f, 0f);
+		// neues Tile links oben erzeugen, brauch ich nachher wieder !!
+//		GameBoardInformation.nextTileEntity = LvlGenerator.createTile(
+//				assetManager, engine, -5.2f, 0f);
 		GameBoardInformation.CLICKABLE = false;
 
 	}
@@ -200,9 +201,9 @@ public class MovementUtil {
 			}
 
 		}
-
-		GameBoardInformation.nextTileEntity = LvlGenerator.createTile(
-				assetManager, engine, -5.2f, 0f);
+		// neues Tile links oben erzeugen, brauch ich nachher wieder !!
+//		GameBoardInformation.nextTileEntity = LvlGenerator.createTile(
+//				assetManager, engine, -5.2f, 0f);
 
 		GameBoardInformation.CLICKABLE = false;
 	}
