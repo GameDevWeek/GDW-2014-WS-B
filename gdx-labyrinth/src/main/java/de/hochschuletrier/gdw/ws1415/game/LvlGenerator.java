@@ -19,6 +19,7 @@ import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent.species;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
+import de.hochschuletrier.gdw.ws1415.game.utils.PlayerMovement;
 
 public class LvlGenerator {
 
@@ -203,11 +204,11 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		entity.getComponent(TextureComponent.class).background = background;
 		entity.getComponent(TextureComponent.class).scale = GameBoardInformation.GAME_SCALE;
 
-//		for (int i = 0; i < 4; i++) {
-//			System.out.print(""
-//					+ entity.getComponent(TileComponent.class).rotationData[i] + ", ");
-//		}
-//		System.out.println("");
+		// for (int i = 0; i < 4; i++) {
+		// System.out.print(""
+		// + entity.getComponent(TileComponent.class).rotationData[i] + ", ");
+		// }
+		// System.out.println("");
 
 		switch (rotation) {
 		case 0:
@@ -298,6 +299,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		entity.add(engine.createComponent(PlayerInformationComponent.class));
 		entity.add(engine.createComponent(PositionComponent.class));
 		entity.add(engine.createComponent(TextureComponent.class));
+		entity.add(engine.createComponent(PositionInLevelComponent.class));
 
 		entity.getComponent(PlayerInformationComponent.class).name = name;
 		entity.getComponent(PlayerInformationComponent.class).color = color;
@@ -307,18 +309,24 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		case 1:
 			entity.getComponent(PositionComponent.class).x = map_x;
 			entity.getComponent(PositionComponent.class).y = map_y;
+			entity.getComponent(PositionInLevelComponent.class).x = 0;
+			entity.getComponent(PositionInLevelComponent.class).y = 0;
 			break;
 		case 2:
 			entity.getComponent(PositionComponent.class).x = map_x
 					+ (GameBoardInformation.NUMBER_OF_TILE - 1)
 					* GameBoardInformation.TILE_SIZE;
 			entity.getComponent(PositionComponent.class).y = map_y;
+			entity.getComponent(PositionInLevelComponent.class).x = 6;
+			entity.getComponent(PositionInLevelComponent.class).y = 0;
 			break;
 		case 3:
 			entity.getComponent(PositionComponent.class).x = map_x;
 			entity.getComponent(PositionComponent.class).y = map_y
 					+ (GameBoardInformation.NUMBER_OF_TILE - 1)
 					* GameBoardInformation.TILE_SIZE;
+			entity.getComponent(PositionInLevelComponent.class).x = 0;
+			entity.getComponent(PositionInLevelComponent.class).y = 6;
 			break;
 		case 4:
 			entity.getComponent(PositionComponent.class).x = map_x
@@ -327,6 +335,8 @@ private static Entity createTile(PooledEngine engine, Texture background,
 			entity.getComponent(PositionComponent.class).y = map_y
 					+ (GameBoardInformation.NUMBER_OF_TILE - 1)
 					* GameBoardInformation.TILE_SIZE;
+			entity.getComponent(PositionInLevelComponent.class).x = 6;
+			entity.getComponent(PositionInLevelComponent.class).y = 6;
 			break;
 		}
 
