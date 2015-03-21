@@ -11,6 +11,7 @@ import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent.species;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
+import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 import de.hochschuletrier.gdw.ws1415.game.utils.PlayerMovement;
 
 public class GameLap {
@@ -57,6 +58,8 @@ public class GameLap {
 
 	public static void nextPlayer(PooledEngine engine) {
 		currentPlayerInList = ++currentPlayerInList % playerList.size();
+		currentPlayer = playerList.get(currentPlayerInList);
+		System.out.println(currentPlayerInList + " | ");
 		System.out.println(currentPlayer.getComponent(PlayerInformationComponent.class).playerNumber);
 		@SuppressWarnings("unchecked")
 		ImmutableArray<Entity> arrows = engine.getEntitiesFor(Family.all(SpeciesComponent.class, PositionComponent.class, TextureComponent.class).exclude(PlayerInformationComponent.class).get());
@@ -69,7 +72,16 @@ public class GameLap {
 				tmp.getComponent(TextureComponent.class).visible = true;
 				tmp.getComponent(InputComponent.class).active = true;
 			}
+			else if(tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW) {
+				tmp.getComponent(TextureComponent.class).visible = true;
+				tmp.getComponent(InputComponent.class).active = true;
+			}
+			else if(tmp.getComponent(SpeciesComponent.class).isSpecies == species.MOVEMENT_ARROW) {
+				tmp.getComponent(TextureComponent.class).visible = false;
+				tmp.getComponent(InputComponent.class).active = false;
+			}
 		}
+		GameBoardInformation.nextTileEntity = LvlGenerator.createTile(engine, -5.2f, 0f);
 	}
 
 	public static void PlayerMoveStep(PooledEngine engine) {
@@ -84,7 +96,8 @@ public class GameLap {
 			if (tmp.getComponent(SpeciesComponent.class).isSpecies == null) {
 				throw new NullPointerException("isSpecies in SpeciesComponent ist null");
 			}	// Wenn es ein normaler Arrow ist
-			else if (tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW || tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW) {
+			else if (tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW 
+					|| tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW) {
 				tmp.getComponent(TextureComponent.class).visible = false;
 				tmp.getComponent(InputComponent.class).active = false;
 			}	// Wenn es ein MoveArrow ist 

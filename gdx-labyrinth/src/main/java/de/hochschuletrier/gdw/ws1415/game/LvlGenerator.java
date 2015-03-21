@@ -26,27 +26,31 @@ public class LvlGenerator {
 	public static float map_x = 0;
 	public static float map_y = 0;
 
+	private static AssetManagerX assetManager = null;
+	
 	public static void generate(AssetManagerX assetManager, PooledEngine engine) {
 
+		LvlGenerator.assetManager = assetManager;
+		
 		map_x = Gdx.graphics.getWidth() * GameBoardInformation.GAME_MENU_WIDTH
 				+ GameBoardInformation.ARROWS_WIDTH;
 
 		map_y = GameBoardInformation.ARROWS_HEIGHT;
 
 		if (GameConstants.p1present) {
-			createPlayer(engine, assetManager, GameConstants.playerNames[0], Color.RED, 1);
+			createPlayer(engine, GameConstants.playerNames[0], Color.RED, 1);
 		}
 
 		if (GameConstants.p2present) {
-			createPlayer(engine, assetManager, GameConstants.playerNames[1], Color.GREEN, 2);
+			createPlayer(engine, GameConstants.playerNames[1], Color.GREEN, 2);
 		}
 
 		if (GameConstants.p3present) {
-			createPlayer(engine, assetManager, GameConstants.playerNames[2], Color.BLUE, 3);
+			createPlayer(engine, GameConstants.playerNames[2], Color.BLUE, 3);
 		}
 
 		if (GameConstants.p4present) {
-			createPlayer(engine, assetManager, GameConstants.playerNames[3], Color.YELLOW, 4);
+			createPlayer(engine, GameConstants.playerNames[3], Color.YELLOW, 4);
 		}
 
 		Entity entity = engine.createEntity();
@@ -85,51 +89,50 @@ public class LvlGenerator {
 		// LevelGeneration
 		for (int y = 0; y < GameBoardInformation.NUMBER_OF_TILE; y++) {
 			for (int x = 0; x < GameBoardInformation.NUMBER_OF_TILE; x++) {
-				createTile(assetManager, engine, x, y);
+				createTile(engine, x, y);
 			}
 		}
 
-		GameBoardInformation.nextTileEntity = createTile(assetManager, engine,
+		GameBoardInformation.nextTileEntity = createTile(engine,
 				-5.2f, 0f);
 		
 		// Rotation Button
-		rotationButton(engine, assetManager);
+		rotationButton(engine);
 		
 		// Movement Button
-		createMovementArray(engine, assetManager);
+		createMovementArray(engine);
 
 		// arrowTop
 		for (int i = 0; i < 7; i++) {
 			if (i != 3)
-				createArrow(engine, assetManager, i
+				createArrow(engine, i
 						* GameBoardInformation.TILE_SIZE + map_x, map_y
 						- GameBoardInformation.TILE_SIZE, 270f, i, -1);
 		}
 		// arrowLeft
 		for (int i = 0; i < 7; i++) {
 			if (i != 3)
-				createArrow(engine, assetManager, map_x
+				createArrow(engine, map_x
 						- GameBoardInformation.TILE_SIZE, map_y + i
 						* GameBoardInformation.TILE_SIZE, 180f, -1, i);
 		}
 		// arrowRight
 		for (int i = 0; i < 7; i++) {
 			if (i != 3)
-				createArrow(engine, assetManager, map_x
+				createArrow(engine, map_x
 						+ GameBoardInformation.TILE_SIZE * 7, map_y + i
 						* GameBoardInformation.TILE_SIZE, 0f, 7, i);
 		}
 		// arrowBottom
 		for (int i = 0; i < 7; i++) {
 			if (i != 3)
-				createArrow(engine, assetManager, i
+				createArrow(engine, i
 						* GameBoardInformation.TILE_SIZE + map_x, map_y + 7
 						* GameBoardInformation.TILE_SIZE, 90f, i, 7);
 		}
 	}
 
-	public static Entity createTile(AssetManagerX assetManager,
-			PooledEngine engine, float x, float y) {
+	public static Entity createTile(PooledEngine engine, float x, float y) {
 
 
 		// Entity entity = engine.createEntity();
@@ -250,8 +253,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		return entity;
 	}
 
-	public static void createArrow(PooledEngine engine,
-			AssetManagerX assetManager, float x, float y, float rotation,
+	public static void createArrow(PooledEngine engine, float x, float y, float rotation,
 			int xInlvl, int yInlvl) {
 
 		Entity entity = engine.createEntity();
@@ -294,7 +296,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 
 	}
 
-	public static void createPlayer(PooledEngine engine, AssetManagerX assetManager, String name,
+	public static void createPlayer(PooledEngine engine, String name,
 			Color color, int playerNumber) {
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(PlayerInformationComponent.class));
@@ -321,6 +323,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 			entity.getComponent(PositionComponent.class).y = map_y;
 			entity.getComponent(PositionInLevelComponent.class).x = 6;
 			entity.getComponent(PositionInLevelComponent.class).y = 0;
+			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager.getTexture("GREEN_ARROW");
 			break;
 		case 3:
 			entity.getComponent(PositionComponent.class).x = map_x;
@@ -345,7 +348,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		engine.addEntity(entity);
 	}
 	
-	private static void rotationButton(PooledEngine engine, AssetManagerX assetManager) {
+	private static void rotationButton(PooledEngine engine) {
 		Entity rotationArrow = engine.createEntity();
 		rotationArrow.add(engine.createComponent(PositionComponent.class));
 		rotationArrow.add(engine.createComponent(InputComponent.class));
@@ -383,7 +386,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 
 	}
 	
-	public static void createMovementArray(PooledEngine engine, AssetManagerX assetManager) {
+	public static void createMovementArray(PooledEngine engine) {
 		for(int i = 0; i < 4; i++) {
 			Entity movementArrow = engine.createEntity();
 			movementArrow.add(engine.createComponent(PositionComponent.class));

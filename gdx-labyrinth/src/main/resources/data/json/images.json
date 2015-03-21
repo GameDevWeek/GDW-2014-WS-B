@@ -33,5 +33,6 @@
     "ladescreen": "data/images/ladescreen.png",
     "rotation_Button": "data/images/ROTATION_BUTTON.png",  
     
-    "RED_ARROW": "data/images/ArrowRed.png"
+    "RED_ARROW": "data/images/ArrowRed.png",
+    "GREEN_ARROW": "data/images/ArrowGreen.png"
 }
