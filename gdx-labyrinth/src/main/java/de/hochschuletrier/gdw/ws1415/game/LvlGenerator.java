@@ -14,8 +14,10 @@ import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent.species;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
 public class LvlGenerator {
@@ -252,6 +254,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		entity.add(engine.createComponent(TextureComponent.class));
 		entity.add(engine.createComponent(InputComponent.class));
 		entity.add(engine.createComponent(PositionInLevelComponent.class));
+		entity.add(engine.createComponent(SpeciesComponent.class));
 
 		entity.getComponent(PositionComponent.class).x = x;
 		entity.getComponent(PositionComponent.class).y = y;
@@ -261,7 +264,9 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		entity.getComponent(PositionInLevelComponent.class).y = yInlvl;
 
 		entity.getComponent(InputComponent.class).active = true;
-
+		
+		entity.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ARROW;
+		
 		switch ((int) rotation) {
 
 		case 90:

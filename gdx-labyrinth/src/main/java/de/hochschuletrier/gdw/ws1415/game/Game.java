@@ -85,7 +85,10 @@ public class Game {
 		addSystems();
 
 		LvlGenerator.generate(assetManager, engine);
-
+		
+		// Alle Player müssen davor erzeugt werden !! 
+		GameLap.playerList = engine.getEntitiesFor(Family.all(PlayerInformationComponent.class).get());
+		
 		inputManager.init();
 
 		MovementUtil.init(engine,
@@ -106,6 +109,12 @@ public class Game {
 
 	public void update(float delta) {
 		Main.getInstance().screenCamera.bind();
+		
+		// nur wenn condition geändert wurde
+		if (GameLap.isChanged) {
+			GameLap.newCondition(engine);
+		}
+		
 		engine.update(delta);
 	}
 

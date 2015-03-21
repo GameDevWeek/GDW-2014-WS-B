@@ -9,6 +9,8 @@ public class TextureComponent extends Component implements Poolable {
 	public Texture texture;
 	public Texture background;
 	public float scale = 1f;
+	
+	public boolean visible = true;
 
 	@Override
 	public void reset() {
