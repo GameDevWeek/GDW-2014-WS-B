@@ -62,7 +62,7 @@ public class PlayerMovement {
 		}
 		return tileOfPlayer;
 	}
-		
+
 	public static int checkUp(Entity player, PooledEngine engine) {
 		Entity currentTile = PlayerMovement.getTileOfPlayer(player, engine);
 		Entity nextTile;
@@ -81,17 +81,22 @@ public class PlayerMovement {
 		int[] nextRotationData;
 
 		while (nextTilePosY >= 0) {
-			nextTilePosX = currentTilePosX;
-			nextTilePosY = currentTilePosY - 1;
-
 			nextTile = PlayerMovement.getTileByPos(nextTilePosX, nextTilePosY,
 					engine);
 
 			currentRotationData = currentTile.getComponent(TileComponent.class).rotationData;
 			nextRotationData = nextTile.getComponent(TileComponent.class).rotationData;
+			System.out
+					.print("Current: "
+							+ currentTile.getComponent(TileComponent.class).rotationData[0]
+							+ " Next: "
+							+ nextTile.getComponent(TileComponent.class).rotationData[2]
+							+ "\n");
 
 			if ((currentRotationData[0] == 1) && (nextRotationData[2] == 1)) {
 				moveCount++;
+			} else {
+				break;
 			}
 
 			currentTile = nextTile;
@@ -119,16 +124,24 @@ public class PlayerMovement {
 		int[] nextRotationData;
 
 		while (nextTilePosX <= 6) {
-			
+
 			nextTile = PlayerMovement.getTileByPos(nextTilePosX, nextTilePosY,
 					engine);
-			
+
 			currentRotationData = currentTile.getComponent(TileComponent.class).rotationData;
 			nextRotationData = nextTile.getComponent(TileComponent.class).rotationData;
-			
+			System.out
+					.print("Current: "
+							+ currentTile.getComponent(TileComponent.class).rotationData[1]
+							+ " Next: "
+							+ nextTile.getComponent(TileComponent.class).rotationData[3]
+							+ "\n");
+
 			if ((currentRotationData[1] == 1) && (nextRotationData[3] == 1)) {
 				moveCount++;
-			}	
+			} else {
+				break;
+			}
 
 			currentTile = nextTile;
 			nextTilePosX += 1;
@@ -155,17 +168,22 @@ public class PlayerMovement {
 		int[] nextRotationData;
 
 		while (nextTilePosY <= 6) {
-			nextTilePosX = currentTilePosX;
-			nextTilePosY = currentTilePosY + 1;
-
 			nextTile = PlayerMovement.getTileByPos(nextTilePosX, nextTilePosY,
 					engine);
 
 			currentRotationData = currentTile.getComponent(TileComponent.class).rotationData;
 			nextRotationData = nextTile.getComponent(TileComponent.class).rotationData;
+			System.out
+					.print("Current: "
+							+ currentTile.getComponent(TileComponent.class).rotationData[2]
+							+ " Next: "
+							+ nextTile.getComponent(TileComponent.class).rotationData[0]
+							+ "\n");
 
 			if ((currentRotationData[2] == 1) && (nextRotationData[0] == 1)) {
 				moveCount++;
+			} else {
+				break;
 			}
 
 			currentTile = nextTile;
@@ -193,17 +211,18 @@ public class PlayerMovement {
 		int[] nextRotationData;
 
 		while (nextTilePosX >= 0) {
-			nextTilePosX = currentTilePosX - 1;
-			nextTilePosY = currentTilePosY;
-
 			nextTile = PlayerMovement.getTileByPos(nextTilePosX, nextTilePosY,
 					engine);
 
 			currentRotationData = currentTile.getComponent(TileComponent.class).rotationData;
 			nextRotationData = nextTile.getComponent(TileComponent.class).rotationData;
+			System.out.print("Current: " + currentTile.getComponent(TileComponent.class).rotationData[3] + " Next: " + nextTile.getComponent(TileComponent.class).rotationData[1] + "\n");
 
 			if ((currentRotationData[3] == 1) && (nextRotationData[1] == 1)) {
 				moveCount++;
+			}
+			else {
+				break;
 			}
 
 			currentTile = nextTile;
@@ -212,23 +231,24 @@ public class PlayerMovement {
 
 		return moveCount;
 	}
-	
-	public static HashMap<MovementDestinations, Integer> checkPaths(Entity player, PooledEngine engine) {
-		
-		//check Up
-		int upDistance = PlayerMovement.checkUp(player, engine);		
-		//checkRight
-		int rightDistance = PlayerMovement.checkRight(player, engine);	
-		//checkDown
-		int downDistance = PlayerMovement.checkDown(player, engine);	
-		//checkLeft
+
+	public static HashMap<MovementDestinations, Integer> checkPaths(
+			Entity player, PooledEngine engine) {
+
+		// check Up
+		int upDistance = PlayerMovement.checkUp(player, engine);
+		// checkRight
+		int rightDistance = PlayerMovement.checkRight(player, engine);
+		// checkDown
+		int downDistance = PlayerMovement.checkDown(player, engine);
+		// checkLeft
 		int leftDistance = PlayerMovement.checkLeft(player, engine);
-		
+
 		HashMap<MovementDestinations, Integer> hash = new HashMap<MovementDestinations, Integer>();
-		hash.put(MovementDestinations.UP,new Integer(upDistance));
-		hash.put(MovementDestinations.RIGHT,new Integer(rightDistance));
-		hash.put(MovementDestinations.DOWN,new Integer(downDistance));
-		hash.put(MovementDestinations.LEFT,new Integer(leftDistance));
+		hash.put(MovementDestinations.UP, new Integer(upDistance));
+		hash.put(MovementDestinations.RIGHT, new Integer(rightDistance));
+		hash.put(MovementDestinations.DOWN, new Integer(downDistance));
+		hash.put(MovementDestinations.LEFT, new Integer(leftDistance));
 		return hash;
 	}
 }
