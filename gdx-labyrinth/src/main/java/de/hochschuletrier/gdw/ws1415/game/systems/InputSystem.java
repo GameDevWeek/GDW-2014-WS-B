@@ -43,11 +43,16 @@ public class InputSystem extends IteratingSystem {
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y
 									+ GameBoardInformation.TILE_SIZE)) {
-
-						MovementUtil
-								.moveH(entity
-										.getComponent(PositionInLevelComponent.class).y,
-										-1f);
+						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
+							
+						}
+						else {
+							MovementUtil
+							.moveH(entity
+									.getComponent(PositionInLevelComponent.class).y,
+									-1f);
+						}
+						
 					}
 					break;
 				case 90:
@@ -61,10 +66,15 @@ public class InputSystem extends IteratingSystem {
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y
 									+ GameBoardInformation.TILE_SIZE)) {
-						MovementUtil
+						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
+							
+						}
+						else {
+							MovementUtil
 								.moveV(entity
 										.getComponent(PositionInLevelComponent.class).x,
 										-1f);
+						}
 					}
 					break;
 				case 180:
@@ -78,10 +88,15 @@ public class InputSystem extends IteratingSystem {
 									- GameBoardInformation.TILE_SIZE && Input_Puffer.click
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y)) {
-						MovementUtil
+						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
+							
+						}
+						else {
+							MovementUtil
 								.moveH(entity
 										.getComponent(PositionInLevelComponent.class).y,
 										1f);
+						}
 					}
 					break;
 				case 270:
@@ -95,10 +110,15 @@ public class InputSystem extends IteratingSystem {
 							&& Input_Puffer.click.get(i).y >= entity
 									.getComponent(PositionComponent.class).y
 									- GameBoardInformation.TILE_SIZE) {
-						MovementUtil
+						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
+							
+						}
+						else {
+							MovementUtil
 								.moveV(entity
 										.getComponent(PositionInLevelComponent.class).x,
 										1f);
+						}
 					}
 				}
 			}

@@ -91,6 +91,9 @@ public class LvlGenerator {
 
 		GameBoardInformation.nextTileEntity = createTile(assetManager, engine,
 				-5.2f, 0f);
+		
+		// Rotation Button
+		rotationButton(engine, assetManager);
 
 		// arrowTop
 		for (int i = 0; i < 7; i++) {
@@ -311,5 +314,37 @@ public class LvlGenerator {
 		}
 
 		engine.addEntity(entity);
+	}
+	
+	private static void rotationButton(PooledEngine engine, AssetManagerX assetManager) {
+		Entity rotationArrow = engine.createEntity();
+		rotationArrow.add(engine.createComponent(PositionComponent.class));
+		rotationArrow.add(engine.createComponent(InputComponent.class));
+		rotationArrow.add(engine.createComponent(TextureComponent.class));
+
+		rotationArrow.getComponent(TextureComponent.class).texture = assetManager.getTexture("rotation_Button");
+		rotationArrow.getComponent(PositionComponent.class).x = 50;
+		rotationArrow.getComponent(PositionComponent.class).y = 100;
+		
+		rotationArrow.getComponent(PositionComponent.class).rotation = 0;
+		
+		rotationArrow.getComponent(InputComponent.class).action = InputComponent.clickAction.ROTATION;
+		
+		engine.addEntity(rotationArrow);
+		
+		Entity rotationArrow2 = engine.createEntity();
+		rotationArrow2.add(engine.createComponent(PositionComponent.class));
+		rotationArrow2.add(engine.createComponent(InputComponent.class));
+		rotationArrow2.add(engine.createComponent(TextureComponent.class));
+
+		rotationArrow2.getComponent(TextureComponent.class).texture = assetManager.getTexture("rotation_Button");
+		rotationArrow2.getComponent(PositionComponent.class).x = 200;
+		rotationArrow2.getComponent(PositionComponent.class).y = 130;
+		
+		rotationArrow2.getComponent(PositionComponent.class).rotation = 180;
+		
+		rotationArrow2.getComponent(InputComponent.class).action = InputComponent.clickAction.ROTATION;
+		engine.addEntity(rotationArrow2);
+
 	}
 }

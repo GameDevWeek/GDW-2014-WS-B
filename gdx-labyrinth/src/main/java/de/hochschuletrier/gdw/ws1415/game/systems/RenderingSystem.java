@@ -43,8 +43,8 @@ public class RenderingSystem extends IteratingSystem {
 		DrawUtil.draw(entity.getComponent(TextureComponent.class).texture,
 				entity.getComponent(PositionComponent.class).x,
 				entity.getComponent(PositionComponent.class).y, 0, 0,
-				GameBoardInformation.TILE_SIZE_TEXTURE,
-				GameBoardInformation.TILE_SIZE_TEXTURE,
+				entity.getComponent(TextureComponent.class).texture.getWidth(),
+				entity.getComponent(TextureComponent.class).texture.getHeight(),
 				GameBoardInformation.GAME_SCALE,
 				GameBoardInformation.GAME_SCALE,
 				entity.getComponent(PositionComponent.class).rotation);

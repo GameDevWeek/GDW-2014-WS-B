@@ -5,7 +5,12 @@ import com.badlogic.gdx.utils.Pool;
 
 public class InputComponent extends Component implements Pool.Poolable {
 
+	public enum clickAction {
+		ROTATION, TILE
+	}
+	
 	public boolean active;
+	public clickAction action = clickAction.TILE;
 
 	@Override
 	public void reset() {
