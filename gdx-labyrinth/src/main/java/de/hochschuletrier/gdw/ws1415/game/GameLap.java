@@ -56,6 +56,7 @@ public class GameLap {
 		for(Entity tmp : arrows) {
 			if(tmp.getComponent(SpeciesComponent.class).isSpecies != null && 
 					tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW) {
+				tmp.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
 				tmp.getComponent(TextureComponent.class).visible = true;
 				tmp.getComponent(InputComponent.class).active = true;
 			}
@@ -74,7 +75,6 @@ public class GameLap {
 			}
 			else if(tmp.getComponent(SpeciesComponent.class).isSpecies != null && 
 					tmp.getComponent(SpeciesComponent.class).isSpecies == species.MOVEMENT_ARROW) {
-				System.out.println(anzMovementArrows);
 				switch(anzMovementArrows) {
 //					case 0: if(PlayerMovement.checkLeft(currentPlayer, engine) > 0) {
 //								tmp.getComponent(TextureComponent.class).visible = true;
@@ -89,7 +89,7 @@ public class GameLap {
 //								tmp.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y;
 //								tmp.getComponent(PositionComponent.class).rotation = 90;
 //							}
-					case 2: System.out.println("TEST");
+					case 2: 
 						if(PlayerMovement.checkRight(currentPlayer, engine) > 0) {
 						
 						tmp.getComponent(TextureComponent.class).visible = true;
@@ -97,6 +97,7 @@ public class GameLap {
 						tmp.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x + 30;
 						tmp.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y - 30;
 						tmp.getComponent(PositionComponent.class).rotation = 180;
+						tmp.getComponent(InputComponent.class).active = true;
 						anzMovementArrows++;
 					}
 //					case 3: if(PlayerMovement.checkDown(currentPlayer, engine) > 0) {

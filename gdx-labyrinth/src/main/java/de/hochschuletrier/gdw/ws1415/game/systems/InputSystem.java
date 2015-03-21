@@ -9,6 +9,8 @@ import de.hochschuletrier.gdw.ws1415.game.MovementUtil;
 import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent.species;
 import de.hochschuletrier.gdw.ws1415.game.input.Input_Puffer;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
@@ -29,7 +31,7 @@ public class InputSystem extends IteratingSystem {
 	protected void processEntity(Entity entity, float deltaTime) {
 		if(entity.getComponent(InputComponent.class).active == false) {
 			return;
-		}
+		}		
 		
 		// check if something was clicked !!
 		for (int i = 0; i < Input_Puffer.click.size(); i++) {
@@ -48,19 +50,20 @@ public class InputSystem extends IteratingSystem {
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y
 									+ GameBoardInformation.TILE_SIZE)) {
-						GameLap.nextCondition();
-						MovementUtil
-								.moveH(entity
-										.getComponent(PositionInLevelComponent.class).y,
-										-1f);
+						
+//						MovementUtil
+//								.moveH(entity
+//										.getComponent(PositionInLevelComponent.class).y,
+//										-1f);
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
 							
 						}
-						else {
-							MovementUtil
-							.moveH(entity
-									.getComponent(PositionInLevelComponent.class).y,
-									-1f);
+						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
+							System.out.println("LAUFEN");
+						}
+						else{
+							GameLap.nextCondition();
+							MovementUtil.moveH(entity.getComponent(PositionInLevelComponent.class).y,-1f);
 						}
 					}
 					break;
@@ -78,6 +81,9 @@ public class InputSystem extends IteratingSystem {
 						GameLap.nextCondition();
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
 							
+						}
+						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
+							System.out.println("LAUFEN");
 						}
 						else {
 							MovementUtil
@@ -102,6 +108,9 @@ public class InputSystem extends IteratingSystem {
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
 							
 						}
+						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
+							System.out.println("LAUFEN");
+						}
 						else {
 							MovementUtil
 								.moveH(entity
@@ -124,6 +133,9 @@ public class InputSystem extends IteratingSystem {
 						GameLap.nextCondition();
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
 							
+						}
+						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
+							System.out.println("LAUFEN");
 						}
 						else {
 							MovementUtil

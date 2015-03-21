@@ -286,9 +286,9 @@ private static Entity createTile(PooledEngine engine, Texture background,
 			break;
 		}
 
-		entity.getComponent(TextureComponent.class).scale = GameBoardInformation.GAME_SCALE;
+		entity.getComponent(TextureComponent.class).scale = 1.0f;
 		entity.getComponent(TextureComponent.class).texture = assetManager
-				.getTexture("arrow");
+				.getTexture("RED_ARROW");
 
 		engine.addEntity(entity);
 
