@@ -72,7 +72,7 @@ public class GameLap {
 				tmp.getComponent(TextureComponent.class).visible = true;
 				tmp.getComponent(InputComponent.class).active = true;
 			}
-			else if(tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW) {
+			else if(tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW_RIGHT || tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW_LEFT) {
 				tmp.getComponent(TextureComponent.class).visible = true;
 				tmp.getComponent(InputComponent.class).active = true;
 			}
@@ -98,7 +98,8 @@ public class GameLap {
 				throw new NullPointerException("isSpecies in SpeciesComponent ist null");
 			}	// Wenn es ein normaler Arrow ist
 			else if (tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW 
-					|| tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW) {
+					|| tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW_LEFT
+					|| tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW_RIGHT) {
 				tmp.getComponent(TextureComponent.class).visible = false;
 				tmp.getComponent(InputComponent.class).active = false;
 			}	// Wenn es ein MoveArrow ist 

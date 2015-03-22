@@ -3,17 +3,17 @@ package de.hochschuletrier.gdw.ws1415.game.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 
-import de.hochschuletrier.gdw.ws1415.game.GameLap;
+import de.hochschuletrier.gdw.ws1415.game.LvlGenerator;
 import de.hochschuletrier.gdw.ws1415.game.MovementUtil;
-import de.hochschuletrier.gdw.ws1415.game.components.AnimationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.DirectionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent.species;
+import de.hochschuletrier.gdw.ws1415.game.components.RotationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
+import de.hochschuletrier.gdw.ws1415.game.input.Game_Input_Processor;
 import de.hochschuletrier.gdw.ws1415.game.input.Input_Puffer;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
@@ -53,8 +53,36 @@ public class InputSystem extends IteratingSystem {
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y
 									+ entity.getComponent(TextureComponent.class).texture.getHeight())) {
-						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
-							
+						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION_RIGHT){
+							switch((int)GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation) {
+							case 0: 
+								GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;	
+							break;
+							case 90: 
+								GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x -= GameBoardInformation.TILE_SIZE;	
+								break;
+							case 180: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y -= GameBoardInformation.TILE_SIZE;
+									break;
+							case 270: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
+							}
+							 float tmp = GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate;
+							 if(tmp < 0) {
+								 tmp += 360;
+							 }
+							 GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = tmp;
+						}
+						else if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION_LEFT){
+							switch((int)GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation) {
+							case 0: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
+									break;
+							case 90: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;
+									break;
+							case 180: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x -= GameBoardInformation.TILE_SIZE;
+									break;
+							case 270: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y -= GameBoardInformation.TILE_SIZE;
+							}
+							float tmp = GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate;
+							 GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = tmp % 360;
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
 							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
@@ -75,8 +103,29 @@ public class InputSystem extends IteratingSystem {
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y
 									+ entity.getComponent(TextureComponent.class).texture.getHeight())) {
-						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
-							
+						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION_RIGHT){
+							switch((int)GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation) {
+							case 0: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;
+									break;
+							case 90: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
+									break;
+							case 180: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y -= GameBoardInformation.TILE_SIZE;
+									break;
+							case 270: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x -= GameBoardInformation.TILE_SIZE;
+							}
+							GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = Math.abs(GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate);
+						}
+						else if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION_LEFT){
+							switch((int)GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation) {
+							case 0: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
+									break;
+							case 90: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;
+									break;
+							case 180: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x -= GameBoardInformation.TILE_SIZE;
+									break;
+							case 270: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y -= GameBoardInformation.TILE_SIZE;
+							}
+							GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = Math.abs(GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate);
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
 							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
@@ -97,8 +146,29 @@ public class InputSystem extends IteratingSystem {
 									- entity.getComponent(TextureComponent.class).texture.getHeight() && Input_Puffer.click
 									.get(i).y <= entity
 									.getComponent(PositionComponent.class).y)) {
-						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
-							
+						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION_RIGHT){
+							switch((int)GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation) {
+							case 0: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;
+									break;
+							case 90: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
+									break;
+							case 180: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y -= GameBoardInformation.TILE_SIZE;
+									break;
+							case 270: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x -= GameBoardInformation.TILE_SIZE;
+							}
+							GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = Math.abs(GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate);
+						}
+						else if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION_LEFT){
+							switch((int)GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation) {
+							case 0: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
+									break;
+							case 90: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;
+									break;
+							case 180: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x -= GameBoardInformation.TILE_SIZE;
+									break;
+							case 270: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y -= GameBoardInformation.TILE_SIZE;
+							}
+							GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = Math.abs(GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate);
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
 							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
@@ -119,8 +189,29 @@ public class InputSystem extends IteratingSystem {
 							&& Input_Puffer.click.get(i).y >= entity
 									.getComponent(PositionComponent.class).y
 									- entity.getComponent(TextureComponent.class).texture.getHeight()) {
-						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION){
-							
+						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION_RIGHT){
+							switch((int)GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation) {
+							case 0: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;
+									break;
+							case 90: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
+									break;
+							case 180: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y -= GameBoardInformation.TILE_SIZE;
+									break;
+							case 270: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x -= GameBoardInformation.TILE_SIZE;
+							}
+							GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = Math.abs(GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate);
+						}
+						else if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION_LEFT){
+							switch((int)GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation) {
+							case 0: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
+									break;
+							case 90: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;
+									break;
+							case 180: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x -= GameBoardInformation.TILE_SIZE;
+									break;
+							case 270: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y -= GameBoardInformation.TILE_SIZE;
+							}
+							GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = Math.abs(GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate);
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
 							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);

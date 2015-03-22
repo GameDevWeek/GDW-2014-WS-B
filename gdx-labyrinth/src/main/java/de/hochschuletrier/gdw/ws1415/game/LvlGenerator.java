@@ -15,6 +15,7 @@ import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.RotationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.SpeciesComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
@@ -361,17 +362,19 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		rotationArrow.add(engine.createComponent(InputComponent.class));
 		rotationArrow.add(engine.createComponent(TextureComponent.class));
 		rotationArrow.add(engine.createComponent(SpeciesComponent.class));
+		rotationArrow.add(engine.createComponent(RotationComponent.class));
 
-		rotationArrow.getComponent(TextureComponent.class).texture = assetManager.getTexture("rotation_Button");
+		rotationArrow.getComponent(TextureComponent.class).texture = assetManager.getTexture("ROTATION_Button_LEFT");
 		rotationArrow.getComponent(PositionComponent.class).x = 50;
-		rotationArrow.getComponent(PositionComponent.class).y = 100;
+		rotationArrow.getComponent(PositionComponent.class).y = 95;
 		
 		rotationArrow.getComponent(PositionComponent.class).rotation = 0;
+		rotationArrow.getComponent(RotationComponent.class).rotate = 90.0f;
 		
-		rotationArrow.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ROTATION_ARROW;
+		rotationArrow.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ROTATION_ARROW_LEFT;
 		
-		rotationArrow.getComponent(InputComponent.class).action = InputComponent.clickAction.ROTATION;
-		
+		rotationArrow.getComponent(InputComponent.class).action = InputComponent.clickAction.ROTATION_LEFT;
+		rotationArrow.getComponent(InputComponent.class).active = true;
 		engine.addEntity(rotationArrow);
 		
 		Entity rotationArrow2 = engine.createEntity();
@@ -379,16 +382,19 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		rotationArrow2.add(engine.createComponent(InputComponent.class));
 		rotationArrow2.add(engine.createComponent(TextureComponent.class));
 		rotationArrow2.add(engine.createComponent(SpeciesComponent.class));
+		rotationArrow2.add(engine.createComponent(RotationComponent.class));
 
-		rotationArrow2.getComponent(TextureComponent.class).texture = assetManager.getTexture("rotation_Button");
-		rotationArrow2.getComponent(PositionComponent.class).x = 200;
-		rotationArrow2.getComponent(PositionComponent.class).y = 130;
+		rotationArrow2.getComponent(TextureComponent.class).texture = assetManager.getTexture("ROTATION_Button_RIGHT");
+		rotationArrow2.getComponent(PositionComponent.class).x = 180;
+		rotationArrow2.getComponent(PositionComponent.class).y = 100;
 		
-		rotationArrow2.getComponent(PositionComponent.class).rotation = 180;
+		rotationArrow2.getComponent(PositionComponent.class).rotation = 0;
+		rotationArrow2.getComponent(RotationComponent.class).rotate = -90.0f;
 		
-		rotationArrow2.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ROTATION_ARROW;
+		rotationArrow2.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ROTATION_ARROW_RIGHT;
 		
-		rotationArrow2.getComponent(InputComponent.class).action = InputComponent.clickAction.ROTATION;
+		rotationArrow2.getComponent(InputComponent.class).action = InputComponent.clickAction.ROTATION_RIGHT;
+		rotationArrow2.getComponent(InputComponent.class).active = true;
 		engine.addEntity(rotationArrow2);
 
 	}
