@@ -105,9 +105,7 @@ public class InputSystem extends IteratingSystem {
 							GameLap.hideMovementArrows();
 							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
 						}
-						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MENU){
-						    MenuManager menuManager = new MenuManager(Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT, null);
-						    
+						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MENU){						    
 						    Main.getInstance().changeState(new MainMenuState(Main.getInstance().getAssetManager()));
 						}
 						else{

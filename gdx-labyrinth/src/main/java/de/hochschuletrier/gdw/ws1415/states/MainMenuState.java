@@ -56,7 +56,6 @@ public class MainMenuState extends BaseGameState {
                 return super.keyUp(keycode);
             }
         };
-        System.out.println("TEST");
         Main.inputMultiplexer = new InputMultiplexer();
         Gdx.input.setInputProcessor(Main.inputMultiplexer);
         Main.inputMultiplexer.addProcessor(inputForwarder);
