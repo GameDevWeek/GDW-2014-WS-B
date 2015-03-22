@@ -129,9 +129,7 @@ public class GameLap {
 		}
 	}
 	private static boolean checkMoveDown(Entity moveArrow, PooledEngine engine) {
-		System.out.println(currentPlayer.getComponent(PositionInLevelComponent.class).x + " | "  + currentPlayer.getComponent(PositionInLevelComponent.class).y);
 		int tmp = PlayerMovement.checkDown(currentPlayer, engine);
-		System.out.println("DOWN : " + tmp);
 		if (tmp > 0) {
 			moveArrow.getComponent(TextureComponent.class).visible = true;
 			moveArrow.getComponent(InputComponent.class).active = true;
@@ -149,7 +147,6 @@ public class GameLap {
 	
 	private static boolean checkMoveRight(Entity moveArrow, PooledEngine engine) {
 		int tmp = PlayerMovement.checkRight(currentPlayer, engine);
-		System.out.println("RIGHT : " + tmp);
 		if (tmp > 0) {
 			moveArrow.getComponent(TextureComponent.class).visible = true;
 			moveArrow.getComponent(InputComponent.class).active = true;
@@ -166,7 +163,6 @@ public class GameLap {
 	
 	private static boolean checkMoveUp(Entity moveArrow, PooledEngine engine) {
 		int tmp = PlayerMovement.checkUp(currentPlayer, engine);
-		System.out.println("UP : " + tmp);
 		if(tmp > 0) {
 			moveArrow.getComponent(TextureComponent.class).visible = true;
 			moveArrow.getComponent(InputComponent.class).active = true;
@@ -183,7 +179,6 @@ public class GameLap {
 	
 	private static boolean checkMoveLeft(Entity moveArrow, PooledEngine engine) {
 		int tmp = PlayerMovement.checkLeft(currentPlayer, engine);
-		System.out.println("LEFT : " + tmp);
 		if(tmp > 0) {
 			moveArrow.getComponent(TextureComponent.class).visible = true;
 			moveArrow.getComponent(InputComponent.class).active = true;

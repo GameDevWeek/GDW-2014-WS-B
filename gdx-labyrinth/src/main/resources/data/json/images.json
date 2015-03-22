@@ -40,6 +40,8 @@
     
     "RED_ARROW": "data/images/ArrowRed.png",
     "GREEN_ARROW": "data/images/ArrowGreen.png", 
+    "BLUE_ARROW": "data/images/ArrowBlue.png",
+    "YELLOW_ARROW": "data/images/ArrowYellow.png",
     
     "RED_PLAYER": "data/images/Player_RED.png",
     "GREEN_PLAYER": "data/images/Player_GREEN.png",
