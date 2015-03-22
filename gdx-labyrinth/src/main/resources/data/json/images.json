@@ -43,10 +43,10 @@
     "BLUE_ARROW": "data/images/ArrowBlue.png",
     "YELLOW_ARROW": "data/images/ArrowYellow.png",
     
-    "RED_PLAYER": "data/images/Player_RED.png",
-    "GREEN_PLAYER": "data/images/Player_GREEN.png",
-    "BLUE_PLAYER": "data/images/Player_BLUE.png",
-    "YELLOW_PLAYER": "data/images/Player_YELLOW.png",
+    "RED_PLAYER": "data/images/ICON_RED_PLAYER.png",
+    "GREEN_PLAYER": "data/images/ICON_GREEN_PLAYER.png",
+    "BLUE_PLAYER": "data/images/ICON_BLUE_PLAYER.png",
+    "YELLOW_PLAYER": "data/images/ICON_YELLOW_PLAYER.png",
     
     "menuscreen": "data/images/Menuscreen.png",
     "background": "data/images/global_background.png",
