@@ -30,6 +30,7 @@ public class MenuPage extends Group {
     protected int buttonCount = 2;
     protected DecoImage player3, player4;
     protected Label p3, p4;
+    protected boolean hovered = true;
     //private com.badlogic.gdx.audio.Sound sound;
     
     public MenuPage(Skin skin) {
@@ -60,7 +61,7 @@ public class MenuPage extends Group {
 //        addActor(button);
 //    }
     
-    protected final void addCenteredImage(int x, int y, int width, int height, DecoImage button, Runnable runnable){
+    protected final void addCenteredImage(int x, int y, int width, int height, DecoImage button, Runnable runnable, int index){
         button.setPosition(x , y - height / 2); //vorher noch x+width
         
         button.setTouchable(Touchable.enabled);
@@ -70,6 +71,15 @@ public class MenuPage extends Group {
                 runnable.run();
             }
         });
+        switch(index){
+        case 1: addHover(button, new DecoImage(assetManager.getTexture("start_hover")));
+        break;
+        case 2: addHover(button, new DecoImage(assetManager.getTexture("option_hover")));
+        break;
+        case 3: addHover(button, new DecoImage(assetManager.getTexture("credits_hover")));
+        break;
+        }
+        
         addHoverSound(button);
         addClickSound(button);
         addActor(button);
@@ -94,6 +104,7 @@ public class MenuPage extends Group {
             }
         });   
         addHoverSound(button);
+        addHover(button, new DecoImage(assetManager.getTexture("play_hover")));
         addClickSound(button);
     }
     
@@ -101,6 +112,8 @@ public class MenuPage extends Group {
         button.setPosition(x, y - height ); //vorher x-width
         
         addActor(button);
+        
+        DecoImage hover = new DecoImage(assetManager.getTexture("beenden_hover"));
         button.setTouchable(Touchable.enabled);
         button.addListener(new InputListener(){
             @Override
@@ -109,7 +122,7 @@ public class MenuPage extends Group {
                 return true;
             }
         });   
-        
+        addHover(button, hover);
         addHoverSound(button);
         addClickSound(button);
     }
@@ -131,7 +144,7 @@ public class MenuPage extends Group {
         button.setPosition(x, y); 
         button.setTouchable(Touchable.enabled);
         //addHoverSound(button);
-        //addClickSound(button);
+        addClickSound(button);
         addActor(button);
         createLabel(x, y, width, height, index).setText(name);
     }
@@ -139,7 +152,9 @@ public class MenuPage extends Group {
     protected final void addP34Button(int x, int y, int width, int height, DecoImage button, String name, int index){
         button.setPosition(x, y); 
         button.setTouchable(Touchable.enabled);
+    
         addHoverSound(button);
+       
         addClickSound(button);
         addActor(button);
         //createLabel(x, y, width, height, index).setText(name); 
@@ -241,6 +256,7 @@ public class MenuPage extends Group {
         button.setPosition(x - 80, y-height/2);
         button.setTouchable(Touchable.enabled);
         addHoverSound(button);
+        addHover(button, new DecoImage(assetManager.getTexture("add_hover")));
         addClickSound(button);
         button.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
@@ -269,7 +285,6 @@ public class MenuPage extends Group {
     protected final void removePlayer(int x, int y, int width, int height, DecoImage button, Runnable runnable){
         button.setPosition(x - 80, y -170);
         button.setTouchable(Touchable.enabled);
-        addHoverSound(button);
         addClickSound(button);
         button.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
@@ -288,14 +303,18 @@ public class MenuPage extends Group {
                 return true;
             }
         });
+        addHoverSound(button);
+        addHover(button, new DecoImage(assetManager.getTexture("remove_hover")));
         addActor(button);
     }
     
     protected final void addHoverSound(DecoImage button){
+
         button.addListener(new InputListener(){
+           
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){
                // sound = assetManager.getSound("click");
-                SoundEmitter.playGlobal(assetManager.getSound("hover"), false);
+                    SoundEmitter.playGlobal(assetManager.getSound("hover"), false);
             }
         });
     }
@@ -308,5 +327,23 @@ public class MenuPage extends Group {
                 return true;
             }
         });
+    }
+    
+    protected final void addHover(DecoImage button, DecoImage hover){
+        button.addListener(new InputListener(){
+            
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor){                
+                hover.setPosition(button.getX(), button.getY());
+                addActor(hover);  
+            }
+        });
+        button.addListener(new InputListener(){
+                public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor){
+                    removeActor(hover);
+                    addActor(button);
+                    hovered = true;
+                }
+            });
+        
     }
 }

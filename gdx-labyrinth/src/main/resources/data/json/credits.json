@@ -35,16 +35,21 @@
         "player": {
             "type": "linear",
             "destinations": [
-                {"x": -60, "y": 300, "speed": 250 },
-                {"x": 550, "y": 400, "speed": 250 },
-                {"x": 60, "y": 118, "speed": 250 },
-                {"x": -60, "y": 118, "speed": 250 }
+                {"x": 1200, "y": 550, "speed": 250 },
+                {"x": 550, "y": 300, "speed": 250 },
+                {"x": 220, "y": 400, "speed": 250 },
+                {"x": 30, "y": 118, "speed": 250 },
+                {"x": 200, "y": 50, "speed": 250 },
+                {"x": 550, "y": 100, "speed": 250 },
+                {"x": 700, "y": 250, "speed": 250 },
+                {"x": 1000, "y": 400, "speed": 250 },
+                {"x": 1200, "y": 550, "speed": 250 }
             ]
         }
     },
     "queues": {
         "texts": {
-            "layer": 0,
+            "layer": 1,
             "time": 0,
             "items" : [
                 { "type": "text", "style" : "title", "path": "middle", "text": "Organisation", "delay": "100" },
@@ -54,6 +59,7 @@
                 { "type": "text", "style" : "title", "path": "middle", "text": "Design", "delay": "1150" },
                 { "type": "text", "style" : "name", "path": "right", "text": "Natalie Carl", "delay": "750" },
                 { "type": "text", "style" : "name", "path": "right", "text": "Saskia Hohmann", "delay": "750" },
+                { "type": "text", "style" : "name", "path": "right", "text": "Lynn Friedrich", "delay": "750" },
                 
                 { "type": "text", "style" : "title", "path": "middle", "text": "Sound", "delay": "1150" },
                 { "type": "text", "style" : "name", "path": "right", "text": "Manuel Neugebauer", "delay": "750" },
@@ -61,7 +67,8 @@
                 { "type": "text", "style" : "name", "path": "right", "text": "Noah Plingen", "delay": "750" },
                 
                 { "type": "text", "style" : "title", "path": "middle", "text": "Menu und HUD", "delay": "1150" },
-                { "type": "text", "style" : "name", "path": "right", "text": "Vanessa Hoff", "delay": "750" },         
+                { "type": "text", "style" : "name", "path": "right", "text": "Vanessa Hoff", "delay": "750" },  
+                { "type": "text", "style" : "name", "path": "right", "text": "Martin Keren", "delay": "750" },       
                 
                 { "type": "text", "style" : "title", "path": "middle", "text": "Gameplay", "delay": "1150" },
                 { "type": "text", "style" : "name", "path": "right", "text": "Tobias Meier", "delay": "750" },
@@ -70,19 +77,19 @@
             ]
         },
         "animations": {
-            "layer": 1,
+            "layer": 0,
             "time": 0,
             "items" : [
-                { "type": "texture", "path": "player", "resource": "back", "scale": "0.35", "oriented": "false", "delay": "0" },
-                { "type": "animation", "path": "player", "resource": "back", "scale": "0.4", "angle": "-90", "oriented": "true", "delay": "500" },
-                { "type": "animation", "path": "player", "resource": "back", "scale": "0.53", "angle": "-90", "oriented": "true", "delay": "500" }
-            ]
+                { "type": "texture", "path": "player", "resource": "fisch", "scale": "0.35", "oriented": "false", "delay": "500" },
+                { "type": "animation", "path": "player", "resource": "fisch", "scale": "0.45", "angle": "-90", "oriented": "true", "delay": "500" },
+                { "type": "animation", "path": "player", "resource": "fisch", "scale": "0.53", "angle": "-90", "oriented": "true", "delay": "500" } 
+             ]
         },
         "mega": {
             "layer": 2,
             "time": 0,
             "items" : [
-                { "type": "animation", "resource": "back", "scale": "2.8", "angle": "180", "x": "824", "y": "758", "delay": "0" }
+                { "type": "animation", "resource": "fisch", "scale": "2.8", "angle": "180", "x": "824", "y": "758", "delay": "0" }
             ]
         }
     }
