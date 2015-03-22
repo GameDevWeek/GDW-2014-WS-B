@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 
+import de.hochschuletrier.gdw.ws1415.Main;
 import de.hochschuletrier.gdw.ws1415.game.GameLap;
 import de.hochschuletrier.gdw.ws1415.game.MovementUtil;
 import de.hochschuletrier.gdw.ws1415.game.components.DirectionComponent;
@@ -15,6 +16,7 @@ import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.Input_Puffer;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
+import de.hochschuletrier.gdw.ws1415.states.MainMenuState;
 
 public class InputSystem extends IteratingSystem {
 
@@ -37,7 +39,6 @@ public class InputSystem extends IteratingSystem {
 		
 		// check if something was clicked !!
 		for (int i = 0; i < Input_Puffer.click.size(); i++) {
-
 			if (GameBoardInformation.CLICKABLE) {
 
 				switch ((int) entity.getComponent(PositionComponent.class).rotation) {
