@@ -44,15 +44,15 @@ public class MenuPageRoot extends MenuPage {
         //if(type == Type.MAINMENU){
             //addCenteredPlayButton(menuManager.getWidth() - 365, x, y - yStep * (i), 40, start, () -> {});
             //addCenteredPlayButton(menuManager.getWidth() - 365, 450, 280, 40, start, () -> {});
-            addPageEntry(menuManager, x, y - yStep * i, start, new MenuPageGame(skin, menuManager));
-            addPageEntry(menuManager, x, y - yStep * (i+2), options, new MenuPageOptions(skin, menuManager));
-            addPageEntry(menuManager, x, y - yStep * (i+4), credits, new MenuPageCredits(skin, menuManager));
+            addPageEntry(menuManager, x, y - yStep * i, start, new MenuPageGame(skin, menuManager), 1);
+            addPageEntry(menuManager, x, y - yStep * (i+2), options, new MenuPageOptions(skin, menuManager), 2);
+            addPageEntry(menuManager, x, y - yStep * (i+4), credits, new MenuPageCredits(skin, menuManager), 3);
             addCenteredExitButton(menuManager.getWidth()- 669, 40, 280, 40, exit, () -> System.exit(0));
         //}
     }
 
-    protected final void addPageEntry(MenuManager menuManager, int x, int y, DecoImage button, MenuPage page){
+    protected final void addPageEntry(MenuManager menuManager, int x, int y, DecoImage button, MenuPage page, int index){
         menuManager.addLayer(page);
-        addCenteredImage(x,y,280, 40, button, () -> menuManager.pushPage(page));
+        addCenteredImage(x,y,280, 40, button, () -> menuManager.pushPage(page), index);
     }
 }

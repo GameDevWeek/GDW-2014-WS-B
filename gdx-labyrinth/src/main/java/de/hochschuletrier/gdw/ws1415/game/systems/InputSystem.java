@@ -3,7 +3,10 @@ package de.hochschuletrier.gdw.ws1415.game.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Input;
 
+import de.hochschuletrier.gdw.commons.gdx.input.InputForwarder;
+import de.hochschuletrier.gdw.commons.gdx.menu.MenuManager;
 import de.hochschuletrier.gdw.ws1415.Main;
 import de.hochschuletrier.gdw.ws1415.game.GameLap;
 import de.hochschuletrier.gdw.ws1415.game.MovementUtil;
@@ -16,6 +19,8 @@ import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.Input_Puffer;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
+import de.hochschuletrier.gdw.ws1415.states.GameplayState;
+import de.hochschuletrier.gdw.ws1415.states.LoadGameState;
 import de.hochschuletrier.gdw.ws1415.states.MainMenuState;
 
 public class InputSystem extends IteratingSystem {
@@ -98,6 +103,9 @@ public class InputSystem extends IteratingSystem {
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
 							GameLap.hideMovementArrows();
 							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
+						}
+						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MENU){						    
+						    Main.getInstance().changeState(new MainMenuState(Main.getInstance().getAssetManager()));
 						}
 						else{
 							GameLap.hideRotationArrows();

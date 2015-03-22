@@ -17,6 +17,7 @@
     "LeftMenuBG": "data/images/LeftMenuBG.png",
     "logo": "data/images/logo.png",
     "background_menu": "data/images/background_menu.png",
+    
     "beenden_button": "data/images/quitgme.png",
     "credits_button": "data/images/credits.png",
     "optionen_button": "data/images/options.png",
@@ -24,7 +25,17 @@
     "play_button": "data/images/startgame.png",
     "addplayer": "data/images/addplayer.png",
     "remove": "data/images/remove.png",
-    "crosshair" : "data/images/crosshair.png",
+    
+    "beenden_hover": "data/images/quitgme_hl.png",
+    "credits_hover": "data/images/credits_hl.png",
+    "option_hover": "data/images/options_hl.png",
+    "start_hover": "data/images/newgame_hl.png",
+    "play_hover": "data/images/startgame_hl.png",
+    "add_hover": "data/images/addplayer_hl.png",
+    "remove_hover": "data/images/remove_hl.png",
+    
+    "zahnrad": "data/images/zahnrad.png", 
+    "fisch" : "data/images/Fisch.png",
     "player": "data/images/player.png",
     "player_RED": "data/images/PLAYER_RED.png",
     "player_GREEN": "data/images/PLAYER_GREEN.png",
