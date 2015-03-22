@@ -450,9 +450,9 @@ public class LvlGenerator {
 		rotationArrow2.getComponent(TextureComponent.class).texture = assetManager
 				.getTexture("ROTATION_Button_RIGHT");
 		rotationArrow2.getComponent(PositionComponent.class).x = 180;
-		rotationArrow2.getComponent(PositionComponent.class).y = 100;
+		rotationArrow2.getComponent(PositionComponent.class).y = 127;
 
-		rotationArrow2.getComponent(PositionComponent.class).rotation = 0;
+		rotationArrow2.getComponent(PositionComponent.class).rotation = 270;
 		rotationArrow2.getComponent(RotationComponent.class).rotate = -90.0f;
 
 		rotationArrow2.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ROTATION_ARROW_RIGHT;
