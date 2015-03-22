@@ -277,16 +277,19 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		entity.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ARROW;
 		
 		switch ((int) rotation) {
-
+		case 0: 
+			entity.getComponent(PositionComponent.class).y += 0.3f * GameBoardInformation.TILE_SIZE;
+			break;
 		case 90:
-			entity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
+			entity.getComponent(PositionComponent.class).x += 0.7f * GameBoardInformation.TILE_SIZE;
 			break;
 		case 180:
 			entity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
-			entity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;
+			entity.getComponent(PositionComponent.class).y += 0.7f * GameBoardInformation.TILE_SIZE;
 			break;
 		case 270:
 			entity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;
+			entity.getComponent(PositionComponent.class).x += 0.3f * GameBoardInformation.TILE_SIZE;
 			break;
 		}
 

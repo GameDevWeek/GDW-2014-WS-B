@@ -135,7 +135,7 @@ public class GameLap {
 			moveArrow.getComponent(InputComponent.class).active = true;
 			moveArrow.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
 			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x + 20;
-			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y + 100;
+			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y + 80;
 			moveArrow.getComponent(PositionComponent.class).rotation = 270;
 			moveArrow.getComponent(DirectionComponent.class).direction = MovementDestinations.DOWN;
 			moveArrow.getComponent(DirectionComponent.class).steps = tmp;
@@ -151,7 +151,7 @@ public class GameLap {
 			moveArrow.getComponent(TextureComponent.class).visible = true;
 			moveArrow.getComponent(InputComponent.class).active = true;
 			moveArrow.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
-			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x + 100;
+			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x + 80;
 			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y + 43;
 			moveArrow.getComponent(PositionComponent.class).rotation = 180;
 			moveArrow.getComponent(DirectionComponent.class).direction = MovementDestinations.RIGHT;
@@ -168,7 +168,7 @@ public class GameLap {
 			moveArrow.getComponent(InputComponent.class).active = true;
 			moveArrow.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
 			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x + 45;
-			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y - 39;
+			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y - 19;
 			moveArrow.getComponent(PositionComponent.class).rotation = 90;
 			moveArrow.getComponent(DirectionComponent.class).direction = MovementDestinations.UP;
 			moveArrow.getComponent(DirectionComponent.class).steps = tmp;
@@ -183,7 +183,7 @@ public class GameLap {
 			moveArrow.getComponent(TextureComponent.class).visible = true;
 			moveArrow.getComponent(InputComponent.class).active = true;
 			moveArrow.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
-			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x - 38;
+			moveArrow.getComponent(PositionComponent.class).x = currentPlayer.getComponent(PositionComponent.class).x - 18;
 			moveArrow.getComponent(PositionComponent.class).y = currentPlayer.getComponent(PositionComponent.class).y + 17;
 			moveArrow.getComponent(DirectionComponent.class).direction = MovementDestinations.LEFT;
 			moveArrow.getComponent(DirectionComponent.class).steps = tmp;
