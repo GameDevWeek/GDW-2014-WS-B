@@ -18,6 +18,9 @@ import de.hochschuletrier.gdw.ws1415.game.utils.MovementDestinations;
 import de.hochschuletrier.gdw.ws1415.game.utils.PlayerMovement;
 
 public class GameLap {
+	
+	// new Build push
+	
 	public enum conditions {
 		TILE, PLAYER
 	}
