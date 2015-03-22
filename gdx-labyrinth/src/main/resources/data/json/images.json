@@ -34,6 +34,20 @@
     "woodplank": "data/images/woodplank.png",
     "pfeil_rechts": "data/images/Pfeil_rund_rechtsrum.png",
     "ladescreen": "data/images/ladescreen.png",
+    
+    "ROTATION_Button_LEFT": "data/images/ROTATION_BUTTON_LEFT.png",  
+    "ROTATION_Button_RIGHT": "data/images/ROTATION_BUTTON_RIGHT.png",  
+    
+    "RED_ARROW": "data/images/ArrowRed.png",
+    "GREEN_ARROW": "data/images/ArrowGreen.png", 
+    "BLUE_ARROW": "data/images/ArrowBlue.png",
+    "YELLOW_ARROW": "data/images/ArrowYellow.png",
+    
+    "RED_PLAYER": "data/images/ICON_RED_PLAYER.png",
+    "GREEN_PLAYER": "data/images/ICON_GREEN_PLAYER.png",
+    "BLUE_PLAYER": "data/images/ICON_BLUE_PLAYER.png",
+    "YELLOW_PLAYER": "data/images/ICON_YELLOW_PLAYER.png",
+    
     "menuscreen": "data/images/Menuscreen.png",
     "background": "data/images/global_background.png",
     "back": "data/images/MENU.png"

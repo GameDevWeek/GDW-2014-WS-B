@@ -23,28 +23,16 @@ public class RenderingSystem extends IteratingSystem {
 	}
 
 	@Override
-	public void update(float deltaTime) {
-
-		// VIELLEICHT GARNICHT MEHR NÖTIG, WEIL FESTER BILDSCHIRM
-		// float scale_width = Gdx.graphics.getWidth() *
-		// GameBoardInformation.GAME_SCREEN_WIDTH *
-		// GameBoardInformation.TILDE_FIELD /
-		// GameBoardInformation.NUMBER_OF_TILE / 100;
-		// float scale_height = Gdx.graphics.getHeight() *
-		// GameBoardInformation.TILDE_FIELD /
-		// GameBoardInformation.NUMBER_OF_TILE / 100;
-		// scale = Math.max(scale_width, scale_height);
-		super.update(deltaTime);
-	}
-
-	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
-
+		if(entity.getComponent(TextureComponent.class).visible == false) {
+			return;
+		}
+		
 		DrawUtil.draw(entity.getComponent(TextureComponent.class).texture,
 				entity.getComponent(PositionComponent.class).x,
 				entity.getComponent(PositionComponent.class).y, 0, 0,
-				GameBoardInformation.TILE_SIZE_TEXTURE,
-				GameBoardInformation.TILE_SIZE_TEXTURE,
+				entity.getComponent(TextureComponent.class).texture.getWidth(),
+				entity.getComponent(TextureComponent.class).texture.getHeight(),
 				GameBoardInformation.GAME_SCALE,
 				GameBoardInformation.GAME_SCALE,
 				entity.getComponent(PositionComponent.class).rotation);
