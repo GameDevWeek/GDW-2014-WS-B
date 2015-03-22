@@ -232,7 +232,7 @@ public class MovementUtil {
 						movementComponent.destinationY = GameLap.currentPlayer.getComponent(PositionComponent.class).y;
 																										
 						break;
-			case UP: 	if (GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).x == 3 && GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).y >= 3 && GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).y + steps <= 3) {
+			case UP: 	if (GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).x == 3 && GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).y >= 3 && GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).y - steps <= 3) {
 							steps = Math.abs(3 - GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).y);
 							System.out.println("GEWONNEN");
 						}
@@ -242,7 +242,7 @@ public class MovementUtil {
 																										- steps * GameBoardInformation.TILE_SIZE;
 					
 						break;
-			case LEFT: 	if (GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).y == 3 && GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).x >= 3 && GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).x + steps <= 3) {
+			case LEFT: 	if (GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).y == 3 && GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).x >= 3 && GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).x - steps <= 3) {
 							steps = Math.abs(3 - GameLap.currentPlayer.getComponent(PositionInLevelComponent.class).x);
 							System.out.println("GEWONNEN");
 						}
