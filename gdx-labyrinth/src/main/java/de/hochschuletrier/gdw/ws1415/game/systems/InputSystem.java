@@ -3,9 +3,8 @@ package de.hochschuletrier.gdw.ws1415.game.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
 
-import de.hochschuletrier.gdw.ws1415.game.LvlGenerator;
+import de.hochschuletrier.gdw.ws1415.game.GameLap;
 import de.hochschuletrier.gdw.ws1415.game.MovementUtil;
 import de.hochschuletrier.gdw.ws1415.game.components.DirectionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
@@ -14,7 +13,6 @@ import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.RotationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
-import de.hochschuletrier.gdw.ws1415.game.input.Game_Input_Processor;
 import de.hochschuletrier.gdw.ws1415.game.input.Input_Puffer;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
@@ -97,9 +95,11 @@ public class InputSystem extends IteratingSystem {
 							GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[0] = puffer;
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
+							GameLap.hideMovementArrows();
 							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
 						}
 						else{
+							GameLap.hideRotationArrows();
 							MovementUtil.moveH(entity.getComponent(PositionInLevelComponent.class).y,-1f);
 						}
 					}
@@ -140,9 +140,11 @@ public class InputSystem extends IteratingSystem {
 							GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = Math.abs(GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate);
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
+							GameLap.hideMovementArrows();
 							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
 						}
 						else {
+							GameLap.hideRotationArrows();
 							MovementUtil.moveV(entity.getComponent(PositionInLevelComponent.class).x,-1f);
 						}
 					}
@@ -183,9 +185,11 @@ public class InputSystem extends IteratingSystem {
 							GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = Math.abs(GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate);
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
+							GameLap.hideMovementArrows();
 							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
 						}
 						else {
+							GameLap.hideRotationArrows();
 							MovementUtil.moveH(entity.getComponent(PositionInLevelComponent.class).y,1f);
 						}
 					}
@@ -226,9 +230,11 @@ public class InputSystem extends IteratingSystem {
 							GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = Math.abs(GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate);
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
+							GameLap.hideMovementArrows();
 							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
 						}
 						else {
+							GameLap.hideRotationArrows();
 							MovementUtil.moveV(entity.getComponent(PositionInLevelComponent.class).x,1f);
 						}
 					}

@@ -89,6 +89,9 @@ public class Game {
 		// Alle Player müssen davor erzeugt werden !! 
 		GameLap.playerList = engine.getEntitiesFor(Family.all(PlayerInformationComponent.class).get());
 		GameLap.currentPlayer = GameLap.playerList.first();
+		GameLap.engine = engine;
+		
+		GameLap.settingsForNextPlayer(engine);
 		
 		inputManager.init();
 
