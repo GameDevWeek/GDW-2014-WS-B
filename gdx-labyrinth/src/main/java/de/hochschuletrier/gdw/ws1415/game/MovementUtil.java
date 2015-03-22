@@ -21,7 +21,6 @@ public class MovementUtil {
 			AssetManagerX assetManager) {
 		tileEntities = tE;
 		MovementUtil.engine = engine;
-		System.out.println(tileEntities.size());
 		MovementUtil.assetManager = assetManager;
 	}
 

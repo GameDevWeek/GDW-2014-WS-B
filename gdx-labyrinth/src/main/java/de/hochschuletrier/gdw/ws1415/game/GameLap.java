@@ -31,6 +31,8 @@ public class GameLap {
 	public static Entity currentPlayer;
 
 	public static boolean isChanged = false;
+	
+	public static PooledEngine engine;
 
 	/** WIRD VON DEN SYSTEMEN AUFGERUFEN !! */
 	public static void nextCondition() {
@@ -58,9 +60,14 @@ public class GameLap {
 		}		
 	}
 
-	public static void nextPlayer(PooledEngine engine) {
+	private static void nextPlayer(PooledEngine engine) {
 		currentPlayerInList = ++currentPlayerInList % playerList.size();
 		currentPlayer = playerList.get(currentPlayerInList);
+		settingsForNextPlayer(engine);
+	}
+	
+	/** NUR PUBLIC WEIL GAME ES EINMAL INITIALISIEREN MUSS */
+	public static void settingsForNextPlayer(PooledEngine engine) {
 		@SuppressWarnings("unchecked")
 		ImmutableArray<Entity> arrows = engine.getEntitiesFor(Family.all(SpeciesComponent.class, PositionComponent.class, TextureComponent.class).exclude(PlayerInformationComponent.class).get());
 		for(Entity tmp : arrows) {
@@ -68,23 +75,57 @@ public class GameLap {
 				throw new NullPointerException();
 			}
 			else if(tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW) {
-				tmp.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
-				tmp.getComponent(TextureComponent.class).visible = true;
-				tmp.getComponent(InputComponent.class).active = true;
+				boolean arrow_clickable = true;
+				for(Entity player : playerList) {
+					if(player.getComponent(PositionInLevelComponent.class).x == tmp.getComponent(PositionInLevelComponent.class).x
+							|| player.getComponent(PositionInLevelComponent.class).y == tmp.getComponent(PositionInLevelComponent.class).y) {
+						arrow_clickable = false;
+					}
+				}
+				if(arrow_clickable) {
+					tmp.getComponent(TextureComponent.class).texture = currentPlayer.getComponent(PlayerInformationComponent.class).arrow;
+					tmp.getComponent(TextureComponent.class).visible = true;
+					tmp.getComponent(InputComponent.class).active = true;
+				}	
 			}
 			else if(tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW_RIGHT || tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW_LEFT) {
 				tmp.getComponent(TextureComponent.class).visible = true;
 				tmp.getComponent(InputComponent.class).active = true;
 			}
+		}
+		GameBoardInformation.nextTileEntity = LvlGenerator.createTile(engine, -5.2f, 0f);
+	}
+	
+	public static void hideMovementArrows() {
+		@SuppressWarnings("unchecked")
+		ImmutableArray<Entity> arrows = engine.getEntitiesFor(Family.all(SpeciesComponent.class, PositionComponent.class, TextureComponent.class).exclude(PlayerInformationComponent.class).get());
+		for(Entity tmp : arrows) {
+			if (tmp.getComponent(SpeciesComponent.class).isSpecies == null) {
+				throw new NullPointerException();
+			}
 			else if(tmp.getComponent(SpeciesComponent.class).isSpecies == species.MOVEMENT_ARROW) {
 				tmp.getComponent(TextureComponent.class).visible = false;
 				tmp.getComponent(InputComponent.class).active = false;
 			}
-		}
-		GameBoardInformation.nextTileEntity = LvlGenerator.createTile(engine, -5.2f, 0f);
+		}		
+	}
+	
+	public static void hideRotationArrows() {
+		@SuppressWarnings("unchecked")
+		ImmutableArray<Entity> arrows = engine.getEntitiesFor(Family.all(SpeciesComponent.class, PositionComponent.class, TextureComponent.class).exclude(PlayerInformationComponent.class).get());
+		for(Entity tmp : arrows) {
+			if (tmp.getComponent(SpeciesComponent.class).isSpecies == null) {
+				throw new NullPointerException();
+			}
+			else if(tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW_LEFT
+					|| tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW_RIGHT) {
+				tmp.getComponent(TextureComponent.class).visible = false;
+				tmp.getComponent(InputComponent.class).active = false;
+			}
+		}		
 	}
 
-	public static void PlayerMoveStep(PooledEngine engine) {
+	private static void PlayerMoveStep(PooledEngine engine) {
 		@SuppressWarnings("unchecked")
 		ImmutableArray<Entity> arrows = engine.getEntitiesFor(Family
 				.all(SpeciesComponent.class, PositionComponent.class,
@@ -97,9 +138,7 @@ public class GameLap {
 			if (tmp.getComponent(SpeciesComponent.class).isSpecies == null) {
 				throw new NullPointerException("isSpecies in SpeciesComponent ist null");
 			}	// Wenn es ein normaler Arrow ist
-			else if (tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW 
-					|| tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW_LEFT
-					|| tmp.getComponent(SpeciesComponent.class).isSpecies == species.ROTATION_ARROW_RIGHT) {
+			else if (tmp.getComponent(SpeciesComponent.class).isSpecies == species.ARROW) {
 				tmp.getComponent(TextureComponent.class).visible = false;
 				tmp.getComponent(InputComponent.class).active = false;
 			}	// Wenn es ein MoveArrow ist 

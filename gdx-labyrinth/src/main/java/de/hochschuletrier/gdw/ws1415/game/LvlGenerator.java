@@ -95,8 +95,9 @@ public class LvlGenerator {
 			}
 		}
 
-		GameBoardInformation.nextTileEntity = createTile(engine,
-				-5.2f, 0f);
+		// wird mit GameLap initialisiert.
+//		GameBoardInformation.nextTileEntity = createTile(engine,
+//				-5.2f, 0f);
 		
 		// Rotation Button
 		rotationButton(engine);
@@ -289,7 +290,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		entity.getComponent(PositionInLevelComponent.class).x = xInlvl;
 		entity.getComponent(PositionInLevelComponent.class).y = yInlvl;
 
-		entity.getComponent(InputComponent.class).active = true;
+		entity.getComponent(InputComponent.class).active = false;
 		
 		entity.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ARROW;
 		
@@ -313,6 +314,7 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		entity.getComponent(TextureComponent.class).scale = 1.0f;
 		entity.getComponent(TextureComponent.class).texture = assetManager
 				.getTexture("RED_ARROW");
+		entity.getComponent(TextureComponent.class).visible = false;
 
 		engine.addEntity(entity);
 
