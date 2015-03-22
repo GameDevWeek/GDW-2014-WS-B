@@ -2,11 +2,14 @@ package de.hochschuletrier.gdw.ws1415.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import de.hochschuletrier.gdw.commons.gdx.audio.MusicManager;
 import de.hochschuletrier.gdw.commons.gdx.audio.SoundEmitter;
@@ -21,6 +24,7 @@ public class MenuPageOptions extends MenuPage {
     private final Label soundLabel, musicLabel;
     private final Slider soundSlider, musicSlider;
     private final TextButton soundMuteButton, musicMuteButton;
+    private final DecoImage musicSet, soundSet;
 //    private final TextButton fullscreenButton;
 
     public MenuPageOptions(Skin skin, MenuManager menuManager){
@@ -32,19 +36,25 @@ public class MenuPageOptions extends MenuPage {
 //        createLabel(100, y).setText("Vollbild Modus:");
 //        fullscreenButton = createToggleButton(440, y, "Aus", this::onFullscreenChanged);    
 //        y -= 50;
-        
-        createLabel(100,y).setText("Sound: ");
-        soundSlider = createSlider(170, y, this::onSoundVolumeChanged);
-        soundLabel = createLabel(380, y);
-        soundMuteButton = createToggleButton(440, y, "Aus", this::onSoundMuteChanged);
+        soundSet = new DecoImage(assetManager.getTexture("back"));
+        soundSet.setPosition(440, y);
+        addActor(soundSet);
+      
+        createLabel(100,y+10).setText("Sound: ");
+        soundSlider = createSlider(170, y+10, this::onSoundVolumeChanged);
+        soundLabel = createLabel(380, y+10);
+        soundMuteButton = createToggleButton(427, y+14, "off", this::onSoundMuteChanged);
         y-=50;
         
-        createLabel(100,y).setText("Musik: ");
-        musicSlider = createSlider(170, y, this::onMusicVolumeChanged);
-        musicLabel = createLabel(380, y);
-        musicMuteButton = createToggleButton(440, y, "Aus", this::onMusicMuteChanged);
+        musicSet = new DecoImage(assetManager.getTexture("back"));
+        musicSet.setPosition(440, y-20);
+        addActor(musicSet);
+        
+        createLabel(100,y-10).setText("Musik: ");
+        musicSlider = createSlider(170, y-10, this::onMusicVolumeChanged);
+        musicLabel = createLabel(380, y-10);
 
-        //addCenteredButton(menuManager.getWidth() - 100, 54, 100, 40, "Zurück", () -> menuManager.popPage());
+        musicMuteButton = createToggleButton(427, y-4, "off", this::onMusicMuteChanged);
         
         DecoImage back = new DecoImage(assetManager.getTexture("back"));
         back.setPosition(25, 530);
@@ -53,7 +63,8 @@ public class MenuPageOptions extends MenuPage {
     }
     
     private TextButton createToggleButton(int x, int y, String text, Runnable runnable) {
-        TextButton button = new TextButton(text, skin, "toggle");
+        TextButton button = new TextButton(text, skin, "mainMenu");
+        //TextButton button = new TextButton(text, skin);
         button.setBounds(x, y, 100, 30);
         addActor(button);
 
@@ -67,7 +78,8 @@ public class MenuPageOptions extends MenuPage {
     }
     
     private Label createLabel(int x, int y) {
-        Label label = new Label("", skin);
+        Label label = new Label("0%", skin);
+        //Label label = new Label("", skin);
         label.setBounds(x, y, 60, 30);
         addActor(label);
         return label;
@@ -114,13 +126,13 @@ public class MenuPageOptions extends MenuPage {
     
     private void onSoundMuteChanged() {
         boolean soundOn = soundMuteButton.isChecked();
-        soundMuteButton.setText(soundOn ? "An" : "Aus");
+        soundMuteButton.setText(soundOn ? "on" : "off");
         SoundEmitter.setMuted(!soundOn);
     }
 
     private void onMusicMuteChanged() {
         boolean musicOn = musicMuteButton.isChecked();
-        musicMuteButton.setText(musicOn ? "An" : "Aus");
+        musicMuteButton.setText(musicOn ? "on" : "off");
         MusicManager.setMuted(!musicOn);
     }
 

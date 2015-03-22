@@ -73,16 +73,16 @@
             "layer": 1,
             "time": 0,
             "items" : [
-                { "type": "texture", "path": "player", "resource": "crosshair", "scale": "0.35", "oriented": "false", "delay": "0" },
-                { "type": "animation", "path": "player", "resource": "crosshair", "scale": "0.4", "angle": "-90", "oriented": "true", "delay": "500" },
-                { "type": "animation", "path": "player", "resource": "crosshair", "scale": "0.53", "angle": "-90", "oriented": "true", "delay": "500" }
+                { "type": "texture", "path": "player", "resource": "back", "scale": "0.35", "oriented": "false", "delay": "0" },
+                { "type": "animation", "path": "player", "resource": "back", "scale": "0.4", "angle": "-90", "oriented": "true", "delay": "500" },
+                { "type": "animation", "path": "player", "resource": "back", "scale": "0.53", "angle": "-90", "oriented": "true", "delay": "500" }
             ]
         },
         "mega": {
             "layer": 2,
             "time": 0,
             "items" : [
-                { "type": "animation", "resource": "crosshair", "scale": "2.8", "angle": "180", "x": "824", "y": "758", "delay": "0" }
+                { "type": "animation", "resource": "back", "scale": "2.8", "angle": "180", "x": "824", "y": "758", "delay": "0" }
             ]
         }
     }
