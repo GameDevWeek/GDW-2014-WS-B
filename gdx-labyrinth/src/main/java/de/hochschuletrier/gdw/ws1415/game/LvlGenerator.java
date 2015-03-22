@@ -144,51 +144,53 @@ public class LvlGenerator {
 
 		int random = rnd.nextInt(4);
 
-		if ((x != 3) || (y != 3)) {
-
-			switch (random) {
-
-			case 0:
-				int[] rotationDataCross = { 1, 1, 1, 1 };
-				return createTile(engine, assetManager.getTexture("backgroundStone"),
-						x, y, rotationDataCross,
-						// assetManager.getTexture("cross"),
-						assetManager.getTexture("crossStone"));
-
-			case 1:
-				int[] rotationDataT = { 1, 1, 0, 1 };
-				return createTile(engine, assetManager.getTexture("backgroundStone"),
-						x, y, rotationDataT,
-						// assetManager.getTexture("tShapePurple"),
-						// assetManager.getTexture("tShapeYellow"),
-						assetManager.getTexture("tShapeStone"));
-
-			case 2:
-				int[] rotationDataL = { 1, 1, 0, 0 };
-				return createTile(engine, assetManager.getTexture("backgroundStone"),
-						x, y, rotationDataL,
-						// assetManager.getTexture("lShapeGreen"),
-						// assetManager.getTexture("lShapeBrown")
-						assetManager.getTexture("lShapeStone"));
-
-			case 3:
-				int[] rotationDataStraight = { 1, 0, 1, 0 };
-				return createTile(engine, assetManager.getTexture("backgroundStone"),
-						x, y, rotationDataStraight,
-						// assetManager.getTexture("straightRed"),
-						// assetManager.getTexture("straightWhite"),
-						assetManager.getTexture("straightStone"));
-			default:
-				return null;
-			}
-		} else {
-			int[] rotationDataStraightDef = { 1, 1, 1, 1 };
-			return createTile(engine, assetManager.getTexture("backgroundStone"), x,
-					y, rotationDataStraightDef,
-					// assetManager.getTexture("straightRed"),
-					// assetManager.getTexture("straightWhite"),
-					assetManager.getTexture("crossStone"));
+		if (x == 3 && y == 3) {
+			random = 0;			
+		} 
+		else if ((x == 0 && y == 0) || (x == 0 && y == 6) || (x == 6 && y == 0) || (x == 6 && y == 6)) {
+			random = 2;
 		}
+			
+		switch (random) {
+
+		case 0:
+			int[] rotationDataCross = { 1, 1, 1, 1 };
+			return createTile(engine, assetManager.getTexture("backgroundStone"),
+					x, y, rotationDataCross,
+					// assetManager.getTexture("cross"),
+					assetManager.getTexture("crossStone"));
+			case 1:
+					int[] rotationDataT = { 1, 1, 0, 1 };
+					return 	createTile(engine, assetManager.getTexture("backgroundStone"),
+							x, y, rotationDataT,
+							// assetManager.getTexture("tShapePurple"),
+							// assetManager.getTexture("tShapeYellow"),
+							assetManager.getTexture("tShapeStone"));
+			case 2:
+					int[] rotationDataL = { 1, 1, 0, 0 };
+					return createTile(engine, assetManager.getTexture("backgroundStone"),
+							x, y, rotationDataL,
+							// assetManager.getTexture("lShapeGreen"),
+							// assetManager.getTexture("lShapeBrown")
+							assetManager.getTexture("lShapeStone"));
+			case 3:
+					int[] rotationDataStraight = { 1, 0, 1, 0 };
+					return createTile(engine, assetManager.getTexture("backgroundStone"),
+							x, y, rotationDataStraight,
+							// assetManager.getTexture("straightRed"),
+							// assetManager.getTexture("straightWhite"),
+							assetManager.getTexture("straightStone"));
+			default:
+					return null;
+		} 
+//		else {
+//			int[] rotationDataStraightDef = { 1, 1, 1, 1 };
+//			return createTile(engine, assetManager.getTexture("backgroundStone"), x,
+//					y, rotationDataStraightDef,
+//					// assetManager.getTexture("straightRed"),
+//					// assetManager.getTexture("straightWhite"),
+//					assetManager.getTexture("crossStone"));
+//		}
 	}
 
 private static Entity createTile(PooledEngine engine, Texture background,
@@ -203,6 +205,21 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		entity.add(engine.createComponent(TileComponent.class));
 
 		int rotation = rnd.nextInt(4);
+	
+		if (x == 0 && y == 0) {
+			rotation = 1;
+		}
+		else if (x == 0 && y == 6) {
+			rotation = 0;
+		}
+		else if (x == 6 && y == 0) {
+			rotation = 2;
+		}
+		else if (x == 6 && y == 6) {
+			rotation = 3;
+		}
+		
+		
 		entity.getComponent(TileComponent.class).rotationData = rotationData;
 		entity.getComponent(PositionComponent.class).rotation = rotation * 90f;
 		entity.getComponent(TileComponent.class).rotate(rotation * 90f);
