@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Texture;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.game.components.BackgroundComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.DirectionComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.ItemComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.InputComponent.clickAction;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
@@ -30,11 +31,11 @@ public class LvlGenerator {
 	public static float map_y = 0;
 
 	private static AssetManagerX assetManager = null;
-	
+
 	public static void generate(AssetManagerX assetManager, PooledEngine engine) {
 
 		LvlGenerator.assetManager = assetManager;
-		
+
 		map_x = Gdx.graphics.getWidth() * GameBoardInformation.GAME_MENU_WIDTH
 				+ GameBoardInformation.ARROWS_WIDTH;
 
@@ -90,6 +91,22 @@ public class LvlGenerator {
 		zahnrad.getComponent(InputComponent.class).action = clickAction.MENU;
         engine.addEntity(zahnrad);
 
+		Entity goal = engine.createEntity();
+		goal.add(engine.createComponent(PositionComponent.class));
+		goal.add(engine.createComponent(PositionInLevelComponent.class));
+		goal.add(engine.createComponent(TextureComponent.class));
+		goal.add(engine.createComponent(ItemComponent.class));
+
+		goal.getComponent(PositionInLevelComponent.class).x = 3;
+		goal.getComponent(PositionInLevelComponent.class).y = 3;
+		goal.getComponent(PositionComponent.class).x = map_x + 3
+				* GameBoardInformation.TILE_SIZE + 8;
+		goal.getComponent(PositionComponent.class).y = map_y + 3
+				* GameBoardInformation.TILE_SIZE + 8;
+		goal.getComponent(TextureComponent.class).texture = assetManager
+				.getTexture("ziel");
+		engine.addEntity(goal);
+
 		Entity menu_Background = engine.createEntity();
 		menu_Background.add(engine.createComponent(BackgroundComponent.class));
 		menu_Background.add(engine.createComponent(PositionComponent.class));
@@ -116,47 +133,42 @@ public class LvlGenerator {
 		}
 
 		// wird mit GameLap initialisiert.
-//		GameBoardInformation.nextTileEntity = createTile(engine,
-//				-5.2f, 0f);
-		
+		// GameBoardInformation.nextTileEntity = createTile(engine,
+		// -5.2f, 0f);
+
 		// Rotation Button
 		rotationButton(engine);
-		
+
 		// Movement Button
 		createMovementArray(engine);
 
 		// arrowTop
 		for (int i = 0; i < 7; i++) {
 			if (i != 3)
-				createArrow(engine, i
-						* GameBoardInformation.TILE_SIZE + map_x, map_y
-						- GameBoardInformation.TILE_SIZE, 270f, i, -1);
+				createArrow(engine, i * GameBoardInformation.TILE_SIZE + map_x,
+						map_y - GameBoardInformation.TILE_SIZE, 270f, i, -1);
 		}
 		// arrowLeft
 		for (int i = 0; i < 7; i++) {
 			if (i != 3)
-				createArrow(engine, map_x
-						- GameBoardInformation.TILE_SIZE, map_y + i
-						* GameBoardInformation.TILE_SIZE, 180f, -1, i);
+				createArrow(engine, map_x - GameBoardInformation.TILE_SIZE,
+						map_y + i * GameBoardInformation.TILE_SIZE, 180f, -1, i);
 		}
 		// arrowRight
 		for (int i = 0; i < 7; i++) {
 			if (i != 3)
-				createArrow(engine, map_x
-						+ GameBoardInformation.TILE_SIZE * 7, map_y + i
-						* GameBoardInformation.TILE_SIZE, 0f, 7, i);
+				createArrow(engine, map_x + GameBoardInformation.TILE_SIZE * 7,
+						map_y + i * GameBoardInformation.TILE_SIZE, 0f, 7, i);
 		}
 		// arrowBottom
 		for (int i = 0; i < 7; i++) {
 			if (i != 3)
-				createArrow(engine, i
-						* GameBoardInformation.TILE_SIZE + map_x, map_y + 7
-						* GameBoardInformation.TILE_SIZE, 90f, i, 7);
+				createArrow(engine, i * GameBoardInformation.TILE_SIZE + map_x,
+						map_y + 7 * GameBoardInformation.TILE_SIZE, 90f, i, 7);
 		}
 	}
 
 	public static Entity createTile(PooledEngine engine, float x, float y) {
-
 
 		// Entity entity = engine.createEntity();
 		// entity.add(engine.createComponent(PositionComponent.class));
@@ -166,57 +178,61 @@ public class LvlGenerator {
 		int random = rnd.nextInt(4);
 
 		if (x == 3 && y == 3) {
-			random = 0;			
-		} 
-		else if ((x == 0 && y == 0) || (x == 0 && y == 6) || (x == 6 && y == 0) || (x == 6 && y == 6)) {
+			random = 0;
+		} else if ((x == 0 && y == 0) || (x == 0 && y == 6)
+				|| (x == 6 && y == 0) || (x == 6 && y == 6)) {
 			random = 2;
 		}
-			
+
 		switch (random) {
 
 		case 0:
 			int[] rotationDataCross = { 1, 1, 1, 1 };
-			return createTile(engine, assetManager.getTexture("backgroundStone"),
-					x, y, rotationDataCross,
+			return createTile(engine,
+					assetManager.getTexture("backgroundStone"), x, y,
+					rotationDataCross,
 					// assetManager.getTexture("cross"),
 					assetManager.getTexture("crossStone"));
-			case 1:
-					int[] rotationDataT = { 1, 1, 0, 1 };
-					return 	createTile(engine, assetManager.getTexture("backgroundStone"),
-							x, y, rotationDataT,
-							// assetManager.getTexture("tShapePurple"),
-							// assetManager.getTexture("tShapeYellow"),
-							assetManager.getTexture("tShapeStone"));
-			case 2:
-					int[] rotationDataL = { 1, 1, 0, 0 };
-					return createTile(engine, assetManager.getTexture("backgroundStone"),
-							x, y, rotationDataL,
-							// assetManager.getTexture("lShapeGreen"),
-							// assetManager.getTexture("lShapeBrown")
-							assetManager.getTexture("lShapeStone"));
-			case 3:
-					int[] rotationDataStraight = { 1, 0, 1, 0 };
-					return createTile(engine, assetManager.getTexture("backgroundStone"),
-							x, y, rotationDataStraight,
-							// assetManager.getTexture("straightRed"),
-							// assetManager.getTexture("straightWhite"),
-							assetManager.getTexture("straightStone"));
-			default:
-					return null;
-		} 
-//		else {
-//			int[] rotationDataStraightDef = { 1, 1, 1, 1 };
-//			return createTile(engine, assetManager.getTexture("backgroundStone"), x,
-//					y, rotationDataStraightDef,
-//					// assetManager.getTexture("straightRed"),
-//					// assetManager.getTexture("straightWhite"),
-//					assetManager.getTexture("crossStone"));
-//		}
+		case 1:
+			int[] rotationDataT = { 1, 1, 0, 1 };
+			return createTile(engine,
+					assetManager.getTexture("backgroundStone"), x, y,
+					rotationDataT,
+					// assetManager.getTexture("tShapePurple"),
+					// assetManager.getTexture("tShapeYellow"),
+					assetManager.getTexture("tShapeStone"));
+		case 2:
+			int[] rotationDataL = { 1, 1, 0, 0 };
+			return createTile(engine,
+					assetManager.getTexture("backgroundStone"), x, y,
+					rotationDataL,
+					// assetManager.getTexture("lShapeGreen"),
+					// assetManager.getTexture("lShapeBrown")
+					assetManager.getTexture("lShapeStone"));
+		case 3:
+			int[] rotationDataStraight = { 1, 0, 1, 0 };
+			return createTile(engine,
+					assetManager.getTexture("backgroundStone"), x, y,
+					rotationDataStraight,
+					// assetManager.getTexture("straightRed"),
+					// assetManager.getTexture("straightWhite"),
+					assetManager.getTexture("straightStone"));
+		default:
+			return null;
+		}
+		// else {
+		// int[] rotationDataStraightDef = { 1, 1, 1, 1 };
+		// return createTile(engine, assetManager.getTexture("backgroundStone"),
+		// x,
+		// y, rotationDataStraightDef,
+		// // assetManager.getTexture("straightRed"),
+		// // assetManager.getTexture("straightWhite"),
+		// assetManager.getTexture("crossStone"));
+		// }
 	}
 
-private static Entity createTile(PooledEngine engine, Texture background,
+	private static Entity createTile(PooledEngine engine, Texture background,
 			float x, float y, int[] rotationData, Texture... texture) {
-
 
 		Entity entity = engine.createEntity();
 		int tmp = rnd.nextInt(texture.length);
@@ -226,21 +242,17 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		entity.add(engine.createComponent(TileComponent.class));
 
 		int rotation = rnd.nextInt(4);
-	
+
 		if (x == 0 && y == 0) {
 			rotation = 1;
-		}
-		else if (x == 0 && y == 6) {
+		} else if (x == 0 && y == 6) {
 			rotation = 0;
-		}
-		else if (x == 6 && y == 0) {
+		} else if (x == 6 && y == 0) {
 			rotation = 2;
-		}
-		else if (x == 6 && y == 6) {
+		} else if (x == 6 && y == 6) {
 			rotation = 3;
 		}
-		
-		
+
 		entity.getComponent(TileComponent.class).rotationData = rotationData;
 		entity.getComponent(PositionComponent.class).rotation = rotation * 90f;
 		entity.getComponent(TileComponent.class).rotate(rotation * 90f);
@@ -293,8 +305,8 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		return entity;
 	}
 
-	public static void createArrow(PooledEngine engine, float x, float y, float rotation,
-			int xInlvl, int yInlvl) {
+	public static void createArrow(PooledEngine engine, float x, float y,
+			float rotation, int xInlvl, int yInlvl) {
 
 		Entity entity = engine.createEntity();
 		entity.add(engine.createComponent(PositionComponent.class));
@@ -311,11 +323,11 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		entity.getComponent(PositionInLevelComponent.class).y = yInlvl;
 
 		entity.getComponent(InputComponent.class).active = false;
-		
+
 		entity.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ARROW;
-		
+
 		switch ((int) rotation) {
-		case 0: 
+		case 0:
 			entity.getComponent(PositionComponent.class).y += 0.3f * GameBoardInformation.TILE_SIZE;
 			break;
 		case 90:
@@ -351,15 +363,17 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		entity.getComponent(PlayerInformationComponent.class).name = name;
 		entity.getComponent(PlayerInformationComponent.class).color = color;
 		entity.getComponent(PlayerInformationComponent.class).playerNumber = playerNumber;
-		
+
 		switch (playerNumber) {
 		case 1:
 			entity.getComponent(PositionComponent.class).x = map_x;
 			entity.getComponent(PositionComponent.class).y = map_y;
 			entity.getComponent(PositionInLevelComponent.class).x = 0;
 			entity.getComponent(PositionInLevelComponent.class).y = 0;
-			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager.getTexture("RED_ARROW");
-			entity.getComponent(TextureComponent.class).texture = assetManager.getTexture("RED_PLAYER");
+			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager
+					.getTexture("RED_ARROW");
+			entity.getComponent(TextureComponent.class).texture = assetManager
+					.getTexture("RED_PLAYER");
 			break;
 		case 2:
 			entity.getComponent(PositionComponent.class).x = map_x
@@ -368,8 +382,10 @@ private static Entity createTile(PooledEngine engine, Texture background,
 			entity.getComponent(PositionComponent.class).y = map_y;
 			entity.getComponent(PositionInLevelComponent.class).x = 6;
 			entity.getComponent(PositionInLevelComponent.class).y = 0;
-			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager.getTexture("GREEN_ARROW");
-			entity.getComponent(TextureComponent.class).texture = assetManager.getTexture("GREEN_PLAYER");
+			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager
+					.getTexture("GREEN_ARROW");
+			entity.getComponent(TextureComponent.class).texture = assetManager
+					.getTexture("GREEN_PLAYER");
 			break;
 		case 3:
 			entity.getComponent(PositionComponent.class).x = map_x;
@@ -378,8 +394,10 @@ private static Entity createTile(PooledEngine engine, Texture background,
 					* GameBoardInformation.TILE_SIZE;
 			entity.getComponent(PositionInLevelComponent.class).x = 0;
 			entity.getComponent(PositionInLevelComponent.class).y = 6;
-			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager.getTexture("BLUE_ARROW");
-			entity.getComponent(TextureComponent.class).texture = assetManager.getTexture("BLUE_PLAYER");
+			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager
+					.getTexture("BLUE_ARROW");
+			entity.getComponent(TextureComponent.class).texture = assetManager
+					.getTexture("BLUE_PLAYER");
 			break;
 		case 4:
 			entity.getComponent(PositionComponent.class).x = map_x
@@ -390,14 +408,16 @@ private static Entity createTile(PooledEngine engine, Texture background,
 					* GameBoardInformation.TILE_SIZE;
 			entity.getComponent(PositionInLevelComponent.class).x = 6;
 			entity.getComponent(PositionInLevelComponent.class).y = 6;
-			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager.getTexture("YELLOW_ARROW");
-			entity.getComponent(TextureComponent.class).texture = assetManager.getTexture("YELLOW_PLAYER");
+			entity.getComponent(PlayerInformationComponent.class).arrow = assetManager
+					.getTexture("YELLOW_ARROW");
+			entity.getComponent(TextureComponent.class).texture = assetManager
+					.getTexture("YELLOW_PLAYER");
 			break;
 		}
 
 		engine.addEntity(entity);
 	}
-	
+
 	private static void rotationButton(PooledEngine engine) {
 		Entity rotationArrow = engine.createEntity();
 		rotationArrow.add(engine.createComponent(PositionComponent.class));
@@ -406,19 +426,20 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		rotationArrow.add(engine.createComponent(SpeciesComponent.class));
 		rotationArrow.add(engine.createComponent(RotationComponent.class));
 
-		rotationArrow.getComponent(TextureComponent.class).texture = assetManager.getTexture("ROTATION_Button_LEFT");
+		rotationArrow.getComponent(TextureComponent.class).texture = assetManager
+				.getTexture("ROTATION_Button_LEFT");
 		rotationArrow.getComponent(PositionComponent.class).x = 50;
 		rotationArrow.getComponent(PositionComponent.class).y = 95;
-		
+
 		rotationArrow.getComponent(PositionComponent.class).rotation = 0;
 		rotationArrow.getComponent(RotationComponent.class).rotate = 90.0f;
-		
+
 		rotationArrow.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ROTATION_ARROW_LEFT;
-		
+
 		rotationArrow.getComponent(InputComponent.class).action = InputComponent.clickAction.ROTATION_LEFT;
 		rotationArrow.getComponent(InputComponent.class).active = true;
 		engine.addEntity(rotationArrow);
-		
+
 		Entity rotationArrow2 = engine.createEntity();
 		rotationArrow2.add(engine.createComponent(PositionComponent.class));
 		rotationArrow2.add(engine.createComponent(InputComponent.class));
@@ -426,34 +447,35 @@ private static Entity createTile(PooledEngine engine, Texture background,
 		rotationArrow2.add(engine.createComponent(SpeciesComponent.class));
 		rotationArrow2.add(engine.createComponent(RotationComponent.class));
 
-		rotationArrow2.getComponent(TextureComponent.class).texture = assetManager.getTexture("ROTATION_Button_RIGHT");
+		rotationArrow2.getComponent(TextureComponent.class).texture = assetManager
+				.getTexture("ROTATION_Button_RIGHT");
 		rotationArrow2.getComponent(PositionComponent.class).x = 180;
 		rotationArrow2.getComponent(PositionComponent.class).y = 100;
-		
+
 		rotationArrow2.getComponent(PositionComponent.class).rotation = 0;
 		rotationArrow2.getComponent(RotationComponent.class).rotate = -90.0f;
-		
+
 		rotationArrow2.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.ROTATION_ARROW_RIGHT;
-		
+
 		rotationArrow2.getComponent(InputComponent.class).action = InputComponent.clickAction.ROTATION_RIGHT;
 		rotationArrow2.getComponent(InputComponent.class).active = true;
 		engine.addEntity(rotationArrow2);
 
 	}
-	
+
 	public static void createMovementArray(PooledEngine engine) {
-		for(int i = 0; i < 4; i++) {
+		for (int i = 0; i < 4; i++) {
 			Entity movementArrow = engine.createEntity();
 			movementArrow.add(engine.createComponent(PositionComponent.class));
 			movementArrow.add(engine.createComponent(InputComponent.class));
 			movementArrow.add(engine.createComponent(TextureComponent.class));
 			movementArrow.add(engine.createComponent(SpeciesComponent.class));
 			movementArrow.add(engine.createComponent(DirectionComponent.class));
-			
+
 			movementArrow.getComponent(SpeciesComponent.class).isSpecies = SpeciesComponent.species.MOVEMENT_ARROW;
-			
+
 			movementArrow.getComponent(TextureComponent.class).visible = false;
-			
+
 			movementArrow.getComponent(InputComponent.class).action = InputComponent.clickAction.MOVEMENT;
 			engine.addEntity(movementArrow);
 		}

@@ -61,6 +61,8 @@
     
     "menuscreen": "data/images/Menuscreen.png",
     "background": "data/images/global_background.png",
-    "back": "data/images/MENU.png"
+    "back": "data/images/MENU.png",
+    
+    "ziel": "data/images/Ziel.png"
    
 }
