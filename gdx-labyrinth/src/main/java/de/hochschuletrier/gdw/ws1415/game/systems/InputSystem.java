@@ -13,6 +13,7 @@ import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.RotationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.Game_Input_Processor;
 import de.hochschuletrier.gdw.ws1415.game.input.Input_Puffer;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
@@ -70,6 +71,11 @@ public class InputSystem extends IteratingSystem {
 								 tmp += 360;
 							 }
 							 GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = tmp;
+							 int puffer = GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[0];
+							 for (int s = 0; s < GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData.length - 1; s++) {
+								 GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[s] = GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[s + 1];
+							 }
+							 GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[3] = puffer;
 						}
 						else if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION_LEFT){
 							switch((int)GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation) {
@@ -82,7 +88,13 @@ public class InputSystem extends IteratingSystem {
 							case 270: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y -= GameBoardInformation.TILE_SIZE;
 							}
 							float tmp = GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate;
-							 GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = tmp % 360;
+							GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = tmp % 360;
+							
+							int puffer = GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[3];
+							for (int s = GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData.length - 1; s > 0; s--) {
+								GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[s] = GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[s - 1];
+							}
+							GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[0] = puffer;
 						}
 						else if (entity.getComponent(InputComponent.class).action == InputComponent.clickAction.MOVEMENT){
 							MovementUtil.playerMovement(entity.getComponent(DirectionComponent.class).steps, entity.getComponent(DirectionComponent.class).direction);
