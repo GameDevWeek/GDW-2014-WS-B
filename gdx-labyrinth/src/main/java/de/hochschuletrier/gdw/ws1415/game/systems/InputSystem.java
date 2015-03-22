@@ -216,15 +216,26 @@ public class InputSystem extends IteratingSystem {
 									- entity.getComponent(TextureComponent.class).texture.getHeight()) {
 						if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION_RIGHT){
 							switch((int)GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation) {
-							case 0: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;
-									break;
-							case 90: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
-									break;
+							case 0: 
+								GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y += GameBoardInformation.TILE_SIZE;	
+							break;
+							case 90: 
+								GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x -= GameBoardInformation.TILE_SIZE;	
+								break;
 							case 180: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).y -= GameBoardInformation.TILE_SIZE;
 									break;
-							case 270: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x -= GameBoardInformation.TILE_SIZE;
+							case 270: GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).x += GameBoardInformation.TILE_SIZE;
 							}
-							GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = Math.abs(GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate);
+							 float tmp = GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation + entity.getComponent(RotationComponent.class).rotate;
+							 if(tmp < 0) {
+								 tmp += 360;
+							 }
+							 GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation = tmp;
+							 int puffer = GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[0];
+							 for (int s = 0; s < GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData.length - 1; s++) {
+								 GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[s] = GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[s + 1];
+							 }
+							 GameBoardInformation.nextTileEntity.getComponent(TileComponent.class).rotationData[3] = puffer;
 						}
 						else if(entity.getComponent(InputComponent.class).action == InputComponent.clickAction.ROTATION_LEFT){
 							switch((int)GameBoardInformation.nextTileEntity.getComponent(PositionComponent.class).rotation) {

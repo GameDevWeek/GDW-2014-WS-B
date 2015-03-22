@@ -10,11 +10,11 @@ import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.utils.GameBoardInformation;
 
-public class BackgroundRenderingSystem extends IteratingSystem {
+public class BackBackgroundRenderingSystem extends IteratingSystem {
 
 	@SuppressWarnings("unchecked")
-	public BackgroundRenderingSystem(int priority) {
-		super(Family.all(BackgroundComponent.class, PositionComponent.class).exclude(TextureComponent.class)
+	public BackBackgroundRenderingSystem(int priority) {
+		super(Family.all(BackgroundComponent.class, PositionComponent.class, TextureComponent.class)
 				.get(), priority);
 	}
 

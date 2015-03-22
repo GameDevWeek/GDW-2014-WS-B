@@ -12,11 +12,11 @@ import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
+import de.hochschuletrier.gdw.ws1415.game.systems.BackBackgroundRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.BackgroundRenderingSystem;
-import de.hochschuletrier.gdw.ws1415.game.systems.ItemRendererSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
+import de.hochschuletrier.gdw.ws1415.game.systems.ItemRendererSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.LevelHandlingSystem;
-import de.hochschuletrier.gdw.ws1415.game.systems.NextTileBgRenderSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.PlayerInformationRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.PlayerRenderingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.RenderingSystem;
@@ -47,6 +47,11 @@ public class Game {
 
 	private final PlayerRenderingSystem playerRenderingSystem = new PlayerRenderingSystem(
 			GameConstants.PRIORITY_RENDERING + 2);
+	
+	private final BackBackgroundRenderingSystem backBackgroundRenderingSystem = new BackBackgroundRenderingSystem(
+			GameConstants.PRIORITY_RENDERING_BACKGROUND - 1);
+	
+
 
 	// Manager
 	private final InputManager inputManager = new InputManager();
@@ -107,6 +112,7 @@ public class Game {
 		engine.addSystem(levelHandlingsystem);
 
 		engine.addSystem(playerRenderingSystem);
+		engine.addSystem(backBackgroundRenderingSystem);
 	}
 
 	public void update(float delta) {

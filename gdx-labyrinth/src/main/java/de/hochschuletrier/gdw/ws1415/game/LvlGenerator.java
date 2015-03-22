@@ -72,6 +72,21 @@ public class LvlGenerator {
 
 		engine.addEntity(entity);
 		
+		Entity backBackground = engine.createEntity();
+		backBackground.add(engine.createComponent(BackgroundComponent.class));
+		backBackground.add(engine.createComponent(PositionComponent.class));
+		backBackground.add(engine.createComponent(TextureComponent.class));
+
+		backBackground.getComponent(BackgroundComponent.class).texture = assetManager
+				.getTexture("background");
+		backBackground.getComponent(PositionComponent.class).x = 0;
+		backBackground.getComponent(PositionComponent.class).y = 0;
+		backBackground.getComponent(BackgroundComponent.class).width = 1412;
+		backBackground.getComponent(BackgroundComponent.class).height = 900;
+		backBackground.getComponent(BackgroundComponent.class).scale_width = 0.75f;
+		backBackground.getComponent(BackgroundComponent.class).scale_height = 0.7f;
+		engine.addEntity(backBackground);
+		
 		Entity menuButton = engine.createEntity();
 		menuButton.add(engine.createComponent(TextureComponent.class));
 		menuButton.add(engine.createComponent(PositionComponent.class));
