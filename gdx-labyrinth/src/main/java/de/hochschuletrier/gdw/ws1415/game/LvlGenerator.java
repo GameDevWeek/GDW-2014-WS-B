@@ -12,6 +12,7 @@ import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.game.components.BackgroundComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.DirectionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.InputComponent.clickAction;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionInLevelComponent;
@@ -69,6 +70,25 @@ public class LvlGenerator {
 		entity.getComponent(BackgroundComponent.class).scale_height = GameBoardInformation.GAME_SCALE;
 
 		engine.addEntity(entity);
+		
+		Entity menuButton = engine.createEntity();
+		menuButton.add(engine.createComponent(TextureComponent.class));
+		menuButton.add(engine.createComponent(PositionComponent.class));
+		menuButton.getComponent(TextureComponent.class).texture = assetManager.getTexture("back");
+		menuButton.getComponent(PositionComponent.class).x = 190;
+		menuButton.getComponent(PositionComponent.class).y = 20;
+		engine.addEntity(menuButton);
+		
+		Entity zahnrad = engine.createEntity();
+		zahnrad.add(engine.createComponent(TextureComponent.class));
+		zahnrad.add(engine.createComponent(PositionComponent.class));
+		zahnrad.add(engine.createComponent(InputComponent.class));
+		zahnrad.getComponent(TextureComponent.class).texture = assetManager.getTexture("zahnrad");
+		zahnrad.getComponent(PositionComponent.class).x = 200;
+		zahnrad.getComponent(PositionComponent.class).y = 26;
+		zahnrad.getComponent(InputComponent.class).active = true;
+		zahnrad.getComponent(InputComponent.class).action = clickAction.MENU;
+        engine.addEntity(zahnrad);
 
 		Entity menu_Background = engine.createEntity();
 		menu_Background.add(engine.createComponent(BackgroundComponent.class));

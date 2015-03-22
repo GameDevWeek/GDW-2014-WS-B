@@ -52,7 +52,7 @@ public class Main extends StateBasedGame {
     public final DevConsole console = new DevConsole(16);
     private final DevConsoleView consoleView = new DevConsoleView(console);
     private Skin skin;
-    public static final InputMultiplexer inputMultiplexer = new InputMultiplexer();
+    public static InputMultiplexer inputMultiplexer = new InputMultiplexer();
     private final CVarEnum<SoundDistanceModel> distanceModel = new CVarEnum("snd_distanceModel", SoundDistanceModel.INVERSE, SoundDistanceModel.class, 0, "sound distance model");
     private final CVarEnum<SoundEmitter.Mode> emitterMode = new CVarEnum("snd_mode", SoundEmitter.Mode.STEREO, SoundEmitter.Mode.class, 0, "sound mode");
 

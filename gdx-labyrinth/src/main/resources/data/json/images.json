@@ -34,6 +34,7 @@
     "add_hover": "data/images/addplayer_hl.png",
     "remove_hover": "data/images/remove_hl.png",
     
+    "zahnrad": "data/images/zahnrad.png", 
     "fisch" : "data/images/Fisch.png",
     "player": "data/images/player.png",
     "player_RED": "data/images/PLAYER_RED.png",

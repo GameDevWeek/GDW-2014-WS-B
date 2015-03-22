@@ -2,6 +2,7 @@ package de.hochschuletrier.gdw.ws1415.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -55,7 +56,9 @@ public class MainMenuState extends BaseGameState {
                 return super.keyUp(keycode);
             }
         };
-
+        System.out.println("TEST");
+        Main.inputMultiplexer = new InputMultiplexer();
+        Gdx.input.setInputProcessor(Main.inputMultiplexer);
         Main.inputMultiplexer.addProcessor(inputForwarder);
     }
 
