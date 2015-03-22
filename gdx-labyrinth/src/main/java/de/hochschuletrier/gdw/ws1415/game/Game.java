@@ -13,7 +13,7 @@ import de.hochschuletrier.gdw.ws1415.game.components.TextureComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.TileComponent;
 import de.hochschuletrier.gdw.ws1415.game.input.InputManager;
 import de.hochschuletrier.gdw.ws1415.game.systems.BackgroundRenderingSystem;
-import de.hochschuletrier.gdw.ws1415.game.systems.GoalRendererSystem;
+import de.hochschuletrier.gdw.ws1415.game.systems.ItemRendererSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.InputSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.LevelHandlingSystem;
 import de.hochschuletrier.gdw.ws1415.game.systems.NextTileBgRenderSystem;
@@ -39,7 +39,7 @@ public class Game {
 
 	private final LevelHandlingSystem levelHandlingsystem = new LevelHandlingSystem(
 			GameConstants.PRIORITY_LEVEL_HANDLING);
-	private final GoalRendererSystem goalRendererSystem = new GoalRendererSystem(
+	private final ItemRendererSystem goalRendererSystem = new ItemRendererSystem(
 			GameConstants.PRIORITY_RENDERING + 1);
 
 	private final BackgroundRenderingSystem backgroundRenderingSystem = new BackgroundRenderingSystem(

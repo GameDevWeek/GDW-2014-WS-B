@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.Texture;
 import de.hochschuletrier.gdw.commons.gdx.assets.AssetManagerX;
 import de.hochschuletrier.gdw.ws1415.game.components.BackgroundComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.DirectionComponent;
-import de.hochschuletrier.gdw.ws1415.game.components.GoalComponent;
+import de.hochschuletrier.gdw.ws1415.game.components.ItemComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.InputComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PlayerInformationComponent;
 import de.hochschuletrier.gdw.ws1415.game.components.PositionComponent;
@@ -75,7 +75,7 @@ public class LvlGenerator {
 		goal.add(engine.createComponent(PositionComponent.class));
 		goal.add(engine.createComponent(PositionInLevelComponent.class));
 		goal.add(engine.createComponent(TextureComponent.class));
-		goal.add(engine.createComponent(GoalComponent.class));
+		goal.add(engine.createComponent(ItemComponent.class));
 
 		goal.getComponent(PositionInLevelComponent.class).x = 3;
 		goal.getComponent(PositionInLevelComponent.class).y = 3;
